@@ -1,0 +1,7 @@
+{
+  "schema_version": "rehostrace.bluetooth-composition/v1",
+  "composition_id": "public.bluetooth.cross-profile.concurrent-v1",
+  "branches": ["classic-avdtp", "classic-sdp", "le-att-gatt"],
+  "random_seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+  "claim_boundary": "The branches share controller readiness but otherwise model independent connections. Linearization coverage demonstrates order robustness of the declared semantic and transport projection state only; it does not reproduce radio, controller-firmware, Android scheduler, or stock-device timing."
+}

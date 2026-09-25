@@ -1,0 +1,79 @@
+{
+  "schema_version": "rehostrace.schedule-constraints/v1",
+  "synthesis_id": "public.seeded.lock-handoff.constraints",
+  "schedule_id": "public.seeded.lock-handoff",
+  "disclosure": "public-synthetic",
+  "timeout_ms": 5000,
+  "signal_order": [
+    "a.waiting",
+    "b.lock-pre",
+    "a.released",
+    "b.object-held",
+    "a.list-held",
+    "second-free"
+  ],
+  "identity": {
+    "capture": "arg0",
+    "policy": "same-across-points"
+  },
+  "points": [
+    {
+      "id": "a.object-released",
+      "selector": {
+        "kind": "symbol",
+        "symbol": "rehostrace_seed_a_object_released"
+      },
+      "description": "Actor A released the object lock before taking the global lock"
+    },
+    {
+      "id": "b.object-lock-pre",
+      "selector": {
+        "kind": "symbol",
+        "symbol": "rehostrace_seed_b_object_lock_pre"
+      },
+      "description": "Actor B holds the global lock and is about to take the object lock"
+    },
+    {
+      "id": "b.object-held",
+      "selector": {
+        "kind": "symbol",
+        "symbol": "rehostrace_seed_b_object_held"
+      }
+    },
+    {
+      "id": "a.list-held",
+      "selector": {
+        "kind": "symbol",
+        "symbol": "rehostrace_seed_a_list_held"
+      }
+    },
+    {
+      "id": "free.pre",
+      "selector": {
+        "kind": "symbol",
+        "symbol": "rehostrace_seed_free_pre"
+      }
+    }
+  ],
+  "milestones": [
+    {"signal": "a.waiting", "point": "a.object-released", "phase": "enter"},
+    {"signal": "b.lock-pre", "point": "b.object-lock-pre", "phase": "enter"},
+    {"signal": "a.released", "point": "a.object-released", "phase": "release"},
+    {"signal": "b.object-held", "point": "b.object-held", "phase": "enter"},
+    {"signal": "a.list-held", "point": "a.list-held", "phase": "enter"}
+  ],
+  "gates": [
+    {"after_signal": "b.lock-pre", "before_release_of": "a.object-released"},
+    {"after_signal": "a.released", "before_release_of": "b.object-lock-pre"},
+    {"after_signal": "a.list-held", "before_release_of": "b.object-held"}
+  ],
+  "counters": [
+    {
+      "id": "free.entries",
+      "point": "free.pre",
+      "threshold": 2,
+      "emit_at_threshold": "second-free"
+    }
+  ],
+  "claim_boundary": "This public schedule describes an intentionally vulnerable seeded module. It is not a product offset map or evidence of a vendor vulnerability."
+}

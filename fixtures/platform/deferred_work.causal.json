@@ -1,0 +1,49 @@
+{
+  "schema_version": "rehostrace.causal/v2",
+  "trace_id": "public.deferred-work.control",
+  "disclosure": "public-synthetic",
+  "origin": {"kind": "synthetic", "producer": "rehostrace-deferred-work-fixture", "redactions": []},
+  "clock_domains": [
+    {"id": "host.monotonic", "unit": "ns", "synchronized": false}
+  ],
+  "actors": [
+    {"id": "fixture.control", "kind": "thread"},
+    {"id": "fixture.queue", "kind": "thread"},
+    {"id": "fixture.remove", "kind": "device"}
+  ],
+  "resources": [
+    {"id": "object.1", "kind": "deferred-object", "identity": "logical"}
+  ],
+  "events": [
+    {
+      "id": "e.fixture-ready",
+      "actor": "fixture.control",
+      "kind": "link.state",
+      "boundary": {"domain": "generic.deferred-work", "operation": "fixture.ready", "direction": "internal"},
+      "parents": [],
+      "subject": "object.1",
+      "clock": {"domain": "host.monotonic", "value": 1000},
+      "attributes": {"state": "ready"}
+    },
+    {
+      "id": "e.queue-work",
+      "actor": "fixture.queue",
+      "kind": "boundary.input",
+      "boundary": {"domain": "generic.deferred-work", "operation": "work.queue", "direction": "target-in"},
+      "parents": ["e.fixture-ready"],
+      "subject": "object.1",
+      "clock": {"domain": "host.monotonic", "value": 2000},
+      "attributes": {"queue": "system-workqueue"}
+    },
+    {
+      "id": "e.remove-object",
+      "actor": "fixture.remove",
+      "kind": "boundary.input",
+      "boundary": {"domain": "generic.deferred-work", "operation": "object.remove", "direction": "target-in"},
+      "parents": ["e.fixture-ready"],
+      "subject": "object.1",
+      "clock": {"domain": "host.monotonic", "value": 2100},
+      "attributes": {"teardown": true}
+    }
+  ]
+}

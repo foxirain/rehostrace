@@ -1,0 +1,35 @@
+{
+  "schema_version": "rehostrace.binding/v1",
+  "binding_id": "public.seeded.concurrent-reset",
+  "trace_sha256": "d00ac0364c3156e19c65e7279b85db5ce1d4feef6860653be43d8b1cf5e968b8",
+  "schedule_sha256": "605a918376288ddab1ced8392bfaf07f43abcd828c0dd44bf8458013c8e86f2e",
+  "adapter": "public.seeded.char-device",
+  "actions": [
+    {
+      "id": "actor.a",
+      "event_id": "e.tx-disconnect",
+      "endpoint": "/dev/rehostrace_seeded",
+      "launch_group": "competing-reset",
+      "payload": {
+        "encoding": "utf8",
+        "data": "A",
+        "length": 1,
+        "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"
+      }
+    },
+    {
+      "id": "actor.b",
+      "event_id": "e.link-loss-irq",
+      "endpoint": "/dev/rehostrace_seeded",
+      "launch_group": "competing-reset",
+      "start_after_signal": "a.waiting",
+      "payload": {
+        "encoding": "utf8",
+        "data": "B",
+        "length": 1,
+        "sha256": "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c"
+      }
+    }
+  ],
+  "claim_boundary": "This binding replays a two-action concurrent projection of the public synthetic trace. It does not model radio, firmware, DMA, interrupt timing, or a product transport."
+}

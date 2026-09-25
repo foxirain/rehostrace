@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:evidence-transfer-bridge:v1",
+  "title": "RehostRace causal-to-lifetime evidence-transfer bridge",
+  "type": "object",
+  "required": ["schema_version", "bridge_id", "status", "sources", "causal_pair", "lifetime_evidence", "transfer", "claim_boundary", "integrity"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "rehostrace.evidence-transfer-bridge/v1"},
+    "bridge_id": {"$ref": "#/$defs/id"},
+    "status": {"const": "passed"},
+    "sources": {"type": "object"},
+    "causal_pair": {"type": "object"},
+    "lifetime_evidence": {"type": "object"},
+    "transfer": {"type": "object"},
+    "claim_boundary": {"type": "string", "minLength": 1},
+    "integrity": {
+      "type": "object",
+      "required": ["content_sha256"],
+      "additionalProperties": false,
+      "properties": {"content_sha256": {"$ref": "#/$defs/sha256"}}
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:schedule-constraints:v1",
+  "title": "RehostRace semantic lifetime schedule constraints",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "synthesis_id",
+    "schedule_id",
+    "disclosure",
+    "timeout_ms",
+    "signal_order",
+    "identity",
+    "points",
+    "milestones",
+    "gates",
+    "counters",
+    "claim_boundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "rehostrace.schedule-constraints/v1"},
+    "synthesis_id": {"$ref": "#/$defs/id"},
+    "schedule_id": {"$ref": "#/$defs/id"},
+    "disclosure": {
+      "enum": ["public-synthetic", "private-product", "vendor-approved"]
+    },
+    "timeout_ms": {"type": "integer", "minimum": 1, "maximum": 600000},
+    "signal_order": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 31,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/id"}
+    },
+    "identity": {
+      "type": "object",
+      "required": ["capture", "policy"],
+      "additionalProperties": false,
+      "properties": {
+        "capture": {"enum": ["arg0", "arg1", "arg2", "arg3", "return"]},
+        "policy": {"enum": ["same-across-points", "per-point", "none"]}
+      }
+    },
+    "points": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "selector"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "selector": {"type": "object"},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "milestones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["signal", "point", "phase"],
+        "additionalProperties": false,
+        "properties": {
+          "signal": {"$ref": "#/$defs/id"},
+          "point": {"$ref": "#/$defs/id"},
+          "phase": {"enum": ["enter", "release"]}
+        }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["after_signal", "before_release_of"],
+        "additionalProperties": false,
+        "properties": {
+          "after_signal": {"$ref": "#/$defs/id"},
+          "before_release_of": {"$ref": "#/$defs/id"}
+        }
+      }
+    },
+    "counters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "point", "threshold", "emit_at_threshold"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "point": {"$ref": "#/$defs/id"},
+          "threshold": {"type": "integer", "minimum": 1},
+          "emit_at_threshold": {"$ref": "#/$defs/id"}
+        }
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"
+    }
+  }
+}

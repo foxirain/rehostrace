@@ -1,0 +1,32 @@
+{
+  "schema_version": "rehostrace.oracle/v1",
+  "oracle_id": "public.seeded.double-free",
+  "identity": {
+    "capture": "object",
+    "relation": "equal",
+    "points": [
+      "a.object-released",
+      "b.object-lock-pre",
+      "b.object-held",
+      "a.list-held",
+      "free.pre"
+    ]
+  },
+  "required_points": [
+    {"id": "a.object-released", "min_hits": 1, "max_hits": 1},
+    {"id": "b.object-lock-pre", "min_hits": 1, "max_hits": 1},
+    {"id": "b.object-held", "min_hits": 1, "max_hits": 1},
+    {"id": "a.list-held", "min_hits": 1, "max_hits": 1},
+    {"id": "free.pre", "min_hits": 2, "max_hits": 2}
+  ],
+  "counters": [
+    {"id": "free.entries", "minimum": 2, "maximum": 2}
+  ],
+  "forbidden_events": ["gate.timeout", "object.mismatch"],
+  "sanitizer": {
+    "required": true,
+    "kinds": ["double-free", "invalid-free"],
+    "required_frames": ["seeded_reset", "seeded_write"]
+  },
+  "claim_boundary": "A positive verdict validates the public seeded fixture's lifetime oracle only; it does not transfer to a proprietary target."
+}

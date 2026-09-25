@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:lifetime-discovery:v1",
+  "title": "RehostRace source-free lifetime candidate discovery",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "discovery_id",
+    "inputs",
+    "analysis_contract",
+    "binary_cfg",
+    "boundary",
+    "lifetime_paths",
+    "discovered_points",
+    "observation_points",
+    "candidate_precedence_edges",
+    "claim_boundary",
+    "integrity"
+  ],
+  "properties": {
+    "schema_version": {"const": "rehostrace.lifetime-discovery/v1"},
+    "discovery_id": {"type": "string"},
+    "inputs": {"type": "object"},
+    "analysis_contract": {"type": "object"},
+    "binary_cfg": {"type": "object"},
+    "boundary": {"type": "object"},
+    "lifetime_paths": {"type": "array", "minItems": 2},
+    "discovered_points": {"type": "array", "minItems": 2},
+    "observation_points": {"type": "array", "minItems": 3},
+    "candidate_precedence_edges": {"type": "array", "minItems": 1},
+    "claim_boundary": {"type": "string", "minLength": 1},
+    "integrity": {"type": "object"}
+  }
+}

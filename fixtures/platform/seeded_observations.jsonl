@@ -1,0 +1,8 @@
+{"type":"point","point":"a.object-released","phase":"enter","captures":{"object":"public-object-token-1"}}
+{"type":"point","point":"b.object-lock-pre","phase":"enter","captures":{"object":"public-object-token-1"}}
+{"type":"point","point":"b.object-held","phase":"enter","captures":{"object":"public-object-token-1"}}
+{"type":"point","point":"a.list-held","phase":"enter","captures":{"object":"public-object-token-1"}}
+{"type":"point","point":"free.pre","phase":"enter","captures":{"object":"public-object-token-1"}}
+{"type":"point","point":"free.pre","phase":"enter","captures":{"object":"public-object-token-1"}}
+{"type":"counter","name":"free.entries","value":2}
+{"type":"sanitizer","kind":"double-free","frames":["seeded_reset","seeded_write","kfree"]}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.gatt.v1",
+  "protocol": "gatt",
+  "layer": "application",
+  "requires": ["public.bluetooth.hci-core.v1", "public.bluetooth.att.v1"],
+  "selectors": [
+    {"operation": "gatt.procedure.start", "required_attributes": ["handle", "bearer_cid", "procedure_id", "procedure"]},
+    {"operation": "gatt.procedure.complete", "required_attributes": ["handle", "bearer_cid", "procedure_id", "procedure", "result"]}
+  ]
+}

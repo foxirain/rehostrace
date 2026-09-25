@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:observer-calibration:v1",
+  "title": "RehostRace held-out observer-effect calibration result",
+  "type": "object",
+  "required": ["schema_version", "calibration_id", "status", "sources", "design", "training", "holdout", "acceptance", "checks", "claim_boundary", "integrity"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "rehostrace.observer-calibration/v1"},
+    "calibration_id": {"$ref": "#/$defs/id"},
+    "status": {"enum": ["passed", "failed"]},
+    "sources": {"type": "object"},
+    "design": {"type": "object"},
+    "training": {"type": "object"},
+    "holdout": {"type": "object"},
+    "acceptance": {"type": "object"},
+    "checks": {"type": "object"},
+    "claim_boundary": {"type": "string", "minLength": 1},
+    "integrity": {
+      "type": "object",
+      "required": ["content_sha256"],
+      "additionalProperties": false,
+      "properties": {"content_sha256": {"$ref": "#/$defs/sha256"}}
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

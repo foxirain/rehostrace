@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:comparative-evaluation:v1",
+  "title": "RehostRace executable comparative evaluation",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "evaluation_id",
+    "fixture_id",
+    "executable_strategies",
+    "cross_pattern_validation",
+    "literature_context",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "rehostrace.comparative-evaluation/v1"},
+    "evaluation_id": {"type": "string", "minLength": 1},
+    "fixture_id": {"type": "string", "minLength": 1},
+    "executable_strategies": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "id", "result_kind", "result_key", "source_result",
+          "source_receipt", "representative_receipt", "capabilities"
+        ]
+      }
+    },
+    "cross_pattern_validation": {"type": "object"},
+    "literature_context": {"type": "array", "minItems": 1},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  }
+}

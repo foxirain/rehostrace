@@ -1,0 +1,66 @@
+{
+  "schema_version": "rehostrace.evidence-transfer-policy/v1",
+  "bridge_id": "public.seeded.causal-lifetime-transfer.v1",
+  "trace_sha256": "d00ac0364c3156e19c65e7279b85db5ce1d4feef6860653be43d8b1cf5e968b8",
+  "pair": [
+    {
+      "role": "tx-reset-origin",
+      "event_id": "e.tx-disconnect",
+      "operation": "disconnect.request"
+    },
+    {
+      "role": "link-loss-reset-origin",
+      "event_id": "e.link-loss-irq",
+      "operation": "link-loss"
+    }
+  ],
+  "requirements": {
+    "single_receipt": {
+      "required_oracle_checks": [
+        "identity:equal",
+        "point:free.pre",
+        "runtime:boundary_projection_complete",
+        "runtime:no_timeouts",
+        "sanitizer:frames",
+        "sanitizer:kind"
+      ],
+      "required_fidelity_dimensions": {
+        "causal_boundary_projection": "demonstrated",
+        "kasan_oracle": "demonstrated",
+        "same_object_lifetime_violation": "demonstrated"
+      },
+      "identity_token_count": 1
+    },
+    "campaign": {
+      "expected_runs": 20,
+      "expected_positive": 20,
+      "required_oracle_checks": [
+        "all_trial_receipts_rehashed",
+        "all_trials_positive",
+        "artifact_identity_stable",
+        "zero_inconclusive"
+      ]
+    }
+  },
+  "transfer": {
+    "allowed_claims": [
+      "artifact.reproducibility",
+      "mechanism.causal-projection",
+      "finding.same-object-lifetime"
+    ],
+    "asserted_claims": [
+      "artifact.reproducibility",
+      "mechanism.causal-projection",
+      "finding.same-object-lifetime"
+    ],
+    "forbidden_claims": [
+      "target.vendor-vulnerability",
+      "stock.remote-reachability",
+      "stock.harmful-consequence",
+      "stock.race-probability",
+      "impact.exploitability",
+      "impact.code-execution"
+    ]
+  },
+  "claim_boundary": "This public bridge proves causal-pair projection and repeated same-object lifetime evidence for an intentionally vulnerable redistributable fixture. It does not transfer any vendor, stock, RF, or exploitability claim."
+}

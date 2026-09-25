@@ -1,0 +1,11 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.att.v1",
+  "protocol": "att",
+  "layer": "link",
+  "requires": ["public.bluetooth.hci-core.v1"],
+  "selectors": [
+    {"operation": "att.request", "required_attributes": ["handle", "direction", "wire_cid", "bearer_cid", "transaction_id", "procedure_id", "method", "sdu_id", "payload_hex"]},
+    {"operation": "att.response", "required_attributes": ["handle", "direction", "wire_cid", "bearer_cid", "transaction_id", "procedure_id", "method", "sdu_id", "payload_hex"]}
+  ]
+}

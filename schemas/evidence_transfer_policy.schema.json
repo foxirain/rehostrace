@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:evidence-transfer-policy:v1",
+  "title": "RehostRace causal-to-lifetime evidence-transfer policy",
+  "type": "object",
+  "required": ["schema_version", "bridge_id", "trace_sha256", "pair", "requirements", "transfer", "claim_boundary"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "rehostrace.evidence-transfer-policy/v1"},
+    "bridge_id": {"$ref": "#/$defs/id"},
+    "trace_sha256": {"$ref": "#/$defs/sha256"},
+    "pair": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["role", "event_id", "operation"],
+        "additionalProperties": false,
+        "properties": {
+          "role": {"$ref": "#/$defs/id"},
+          "event_id": {"$ref": "#/$defs/id"},
+          "operation": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "requirements": {
+      "type": "object",
+      "required": ["single_receipt", "campaign"],
+      "additionalProperties": false,
+      "properties": {
+        "single_receipt": {
+          "type": "object",
+          "required": ["required_oracle_checks", "required_fidelity_dimensions", "identity_token_count"],
+          "additionalProperties": false,
+          "properties": {
+            "required_oracle_checks": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "required_fidelity_dimensions": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string", "minLength": 1}},
+            "identity_token_count": {"type": "integer", "minimum": 1}
+          }
+        },
+        "campaign": {
+          "type": "object",
+          "required": ["expected_runs", "expected_positive", "required_oracle_checks"],
+          "additionalProperties": false,
+          "properties": {
+            "expected_runs": {"type": "integer", "minimum": 1},
+            "expected_positive": {"type": "integer", "minimum": 1},
+            "required_oracle_checks": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+          }
+        }
+      }
+    },
+    "transfer": {"$ref": "#/$defs/transfer"},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "claim": {"type": "string", "minLength": 1},
+    "transfer": {
+      "type": "object",
+      "required": ["allowed_claims", "asserted_claims", "forbidden_claims"],
+      "additionalProperties": false,
+      "properties": {
+        "allowed_claims": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/claim"}},
+        "asserted_claims": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/claim"}},
+        "forbidden_claims": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/claim"}}
+      }
+    }
+  }
+}

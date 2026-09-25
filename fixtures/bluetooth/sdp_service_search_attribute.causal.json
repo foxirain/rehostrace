@@ -1,0 +1,165 @@
+{
+  "schema_version": "rehostrace.causal/v2",
+  "trace_id": "public.bluetooth.sdp-service-search-attribute.control",
+  "disclosure": "public-synthetic",
+  "origin": {"kind": "synthetic", "producer": "rehostrace-bluetooth-sdp-fixture", "redactions": []},
+  "clock_domains": [
+    {"id": "host.sequence", "unit": "sequence", "synchronized": false},
+    {"id": "controller.sequence", "unit": "sequence", "synchronized": false}
+  ],
+  "actors": [
+    {"id": "host.stack", "kind": "host"},
+    {"id": "controller.irq", "kind": "interrupt"}
+  ],
+  "resources": [
+    {"id": "controller.public", "kind": "synthetic-bluetooth-controller", "identity": "logical"},
+    {"id": "connection.public", "kind": "synthetic-acl-connection", "identity": "logical"},
+    {"id": "channel.sdp", "kind": "synthetic-l2cap-channel", "identity": "logical"}
+  ],
+  "events": [
+    {
+      "id": "e00.controller-ready", "actor": "controller.irq", "kind": "link.state",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.controller.ready", "direction": "target-in"},
+      "parents": [], "subject": "controller.public", "clock": {"domain": "controller.sequence", "value": 1},
+      "attributes": {"command_credits": 1}
+    },
+    {
+      "id": "e01.connection-complete", "actor": "controller.irq", "kind": "link.state",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.connection.complete", "direction": "target-in"},
+      "parents": ["e00.controller-ready"], "subject": "connection.public", "clock": {"domain": "controller.sequence", "value": 2},
+      "attributes": {"status": 0, "handle": 66, "address_token": "public-sdp-peer-1", "link_type": "acl"}
+    },
+    {
+      "id": "e02.connect-acl", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-out"},
+      "parents": ["e01.connection-complete"], "subject": "connection.public", "clock": {"domain": "host.sequence", "value": 1},
+      "attributes": {"handle": 66, "direction": "host-to-controller", "packet_boundary": "complete", "fragment_length": 8, "sdu_id": "sdu.sdp-connect", "cid": 1, "sdu_length": 8}
+    },
+    {
+      "id": "e03.connect-request", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "l2cap.connection.request", "direction": "target-out"},
+      "parents": ["e02.connect-acl"], "subject": "channel.sdp", "clock": {"domain": "host.sequence", "value": 2},
+      "attributes": {"handle": 66, "direction": "host-to-controller", "identifier": 1, "local_cid": 64, "psm": 1, "sdu_id": "sdu.sdp-connect"}
+    },
+    {
+      "id": "e04.connect-response-acl", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-in"},
+      "parents": ["e03.connect-request"], "subject": "connection.public", "clock": {"domain": "controller.sequence", "value": 3},
+      "attributes": {"handle": 66, "direction": "controller-to-host", "packet_boundary": "complete", "fragment_length": 12, "sdu_id": "sdu.sdp-connect-response", "cid": 1, "sdu_length": 12}
+    },
+    {
+      "id": "e05.connect-response", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "l2cap.connection.response", "direction": "target-in"},
+      "parents": ["e04.connect-response-acl"], "subject": "channel.sdp", "clock": {"domain": "controller.sequence", "value": 4},
+      "attributes": {"handle": 66, "direction": "controller-to-host", "identifier": 1, "local_cid": 64, "remote_cid": 65, "result": "success", "sdu_id": "sdu.sdp-connect-response"}
+    },
+    {
+      "id": "e06.local-config-acl", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-out"},
+      "parents": ["e05.connect-response"], "subject": "connection.public", "clock": {"domain": "host.sequence", "value": 3},
+      "attributes": {"handle": 66, "direction": "host-to-controller", "packet_boundary": "complete", "fragment_length": 8, "sdu_id": "sdu.sdp-local-config", "cid": 1, "sdu_length": 8}
+    },
+    {
+      "id": "e07.local-config-request", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "l2cap.config.request", "direction": "target-out"},
+      "parents": ["e06.local-config-acl"], "subject": "channel.sdp", "clock": {"domain": "host.sequence", "value": 4},
+      "attributes": {"handle": 66, "direction": "host-to-controller", "identifier": 2, "local_cid": 64, "initiator": "local", "sdu_id": "sdu.sdp-local-config"}
+    },
+    {
+      "id": "e08.local-config-response-acl", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-in"},
+      "parents": ["e07.local-config-request"], "subject": "connection.public", "clock": {"domain": "controller.sequence", "value": 5},
+      "attributes": {"handle": 66, "direction": "controller-to-host", "packet_boundary": "complete", "fragment_length": 10, "sdu_id": "sdu.sdp-local-config-response", "cid": 1, "sdu_length": 10}
+    },
+    {
+      "id": "e09.local-config-response", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "l2cap.config.response", "direction": "target-in"},
+      "parents": ["e08.local-config-response-acl"], "subject": "channel.sdp", "clock": {"domain": "controller.sequence", "value": 6},
+      "attributes": {"handle": 66, "direction": "controller-to-host", "identifier": 2, "local_cid": 64, "initiator": "local", "result": "success", "sdu_id": "sdu.sdp-local-config-response"}
+    },
+    {
+      "id": "e10.peer-config-acl", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-in"},
+      "parents": ["e09.local-config-response"], "subject": "connection.public", "clock": {"domain": "controller.sequence", "value": 7},
+      "attributes": {"handle": 66, "direction": "controller-to-host", "packet_boundary": "complete", "fragment_length": 8, "sdu_id": "sdu.sdp-peer-config", "cid": 1, "sdu_length": 8}
+    },
+    {
+      "id": "e11.peer-config-request", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "l2cap.config.request", "direction": "target-in"},
+      "parents": ["e10.peer-config-acl"], "subject": "channel.sdp", "clock": {"domain": "controller.sequence", "value": 8},
+      "attributes": {"handle": 66, "direction": "controller-to-host", "identifier": 3, "local_cid": 64, "initiator": "peer", "sdu_id": "sdu.sdp-peer-config"}
+    },
+    {
+      "id": "e12.peer-config-response-acl", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-out"},
+      "parents": ["e11.peer-config-request"], "subject": "connection.public", "clock": {"domain": "host.sequence", "value": 5},
+      "attributes": {"handle": 66, "direction": "host-to-controller", "packet_boundary": "complete", "fragment_length": 10, "sdu_id": "sdu.sdp-peer-config-response", "cid": 1, "sdu_length": 10}
+    },
+    {
+      "id": "e13.peer-config-response", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "l2cap.config.response", "direction": "target-out"},
+      "parents": ["e12.peer-config-response-acl"], "subject": "channel.sdp", "clock": {"domain": "host.sequence", "value": 6},
+      "attributes": {"handle": 66, "direction": "host-to-controller", "identifier": 3, "local_cid": 64, "initiator": "peer", "result": "success", "sdu_id": "sdu.sdp-peer-config-response"}
+    },
+    {
+      "id": "e14.channel-open", "actor": "host.stack", "kind": "link.state",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "l2cap.channel.open", "direction": "internal"},
+      "parents": ["e13.peer-config-response"], "subject": "channel.sdp", "clock": {"domain": "host.sequence", "value": 7},
+      "attributes": {"handle": 66, "local_cid": 64}
+    },
+    {
+      "id": "e15.sdp-request-acl", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-out"},
+      "parents": ["e14.channel-open"], "subject": "connection.public", "clock": {"domain": "host.sequence", "value": 8},
+      "attributes": {"handle": 66, "direction": "host-to-controller", "packet_boundary": "complete", "fragment_length": 20, "sdu_id": "sdu.sdp-request", "cid": 65, "sdu_length": 20}
+    },
+    {
+      "id": "e16.sdp-request", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "sdp.request", "direction": "target-out"},
+      "parents": ["e15.sdp-request-acl"], "subject": "channel.sdp", "clock": {"domain": "host.sequence", "value": 9},
+      "attributes": {"handle": 66, "direction": "host-to-controller", "wire_cid": 65, "local_cid": 64, "transaction_id": 1, "pdu": "service-search-attribute", "sdu_id": "sdu.sdp-request", "payload_hex": "060001000f3503191002008035050a0000ffff00"}
+    },
+    {
+      "id": "e17.sdp-response-acl", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-in"},
+      "parents": ["e16.sdp-request"], "subject": "connection.public", "clock": {"domain": "controller.sequence", "value": 9},
+      "attributes": {"handle": 66, "direction": "controller-to-host", "packet_boundary": "complete", "fragment_length": 10, "sdu_id": "sdu.sdp-response", "cid": 64, "sdu_length": 10}
+    },
+    {
+      "id": "e18.sdp-response", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "sdp.response", "direction": "target-in"},
+      "parents": ["e17.sdp-response-acl"], "subject": "channel.sdp", "clock": {"domain": "controller.sequence", "value": 10},
+      "attributes": {"handle": 66, "direction": "controller-to-host", "wire_cid": 64, "local_cid": 64, "transaction_id": 1, "pdu": "service-search-attribute", "sdu_id": "sdu.sdp-response", "payload_hex": "07000100050002350000"}
+    },
+    {
+      "id": "e19.disconnect-acl", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-out"},
+      "parents": ["e18.sdp-response"], "subject": "connection.public", "clock": {"domain": "host.sequence", "value": 10},
+      "attributes": {"handle": 66, "direction": "host-to-controller", "packet_boundary": "complete", "fragment_length": 8, "sdu_id": "sdu.sdp-disconnect", "cid": 1, "sdu_length": 8}
+    },
+    {
+      "id": "e20.disconnect-request", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "l2cap.disconnect.request", "direction": "target-out"},
+      "parents": ["e19.disconnect-acl"], "subject": "channel.sdp", "clock": {"domain": "host.sequence", "value": 11},
+      "attributes": {"handle": 66, "direction": "host-to-controller", "identifier": 4, "local_cid": 64, "sdu_id": "sdu.sdp-disconnect"}
+    },
+    {
+      "id": "e21.disconnect-response-acl", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-in"},
+      "parents": ["e20.disconnect-request"], "subject": "connection.public", "clock": {"domain": "controller.sequence", "value": 11},
+      "attributes": {"handle": 66, "direction": "controller-to-host", "packet_boundary": "complete", "fragment_length": 8, "sdu_id": "sdu.sdp-disconnect-response", "cid": 1, "sdu_length": 8}
+    },
+    {
+      "id": "e22.disconnect-response", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "l2cap.disconnect.response", "direction": "target-in"},
+      "parents": ["e21.disconnect-response-acl"], "subject": "channel.sdp", "clock": {"domain": "controller.sequence", "value": 12},
+      "attributes": {"handle": 66, "direction": "controller-to-host", "identifier": 4, "local_cid": 64, "sdu_id": "sdu.sdp-disconnect-response"}
+    },
+    {
+      "id": "e23.disconnection-complete", "actor": "controller.irq", "kind": "link.state",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.disconnection.complete", "direction": "target-in"},
+      "parents": ["e22.disconnect-response"], "subject": "connection.public", "clock": {"domain": "controller.sequence", "value": 13},
+      "attributes": {"status": 0, "handle": 66, "reason": 19}
+    }
+  ]
+}

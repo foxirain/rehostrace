@@ -1,0 +1,19 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.hci-core.v1",
+  "protocol": "hci",
+  "layer": "controller",
+  "requires": [],
+  "selectors": [
+    {"operation": "hci.controller.ready", "required_attributes": ["command_credits"]},
+    {"operation": "hci.command.sent", "required_attributes": ["command_id", "opcode"]},
+    {"operation": "hci.command.status", "required_attributes": ["command_id", "opcode", "status", "command_credits"]},
+    {"operation": "hci.command.complete", "required_attributes": ["command_id", "opcode", "status", "command_credits"]},
+    {"operation": "hci.connection.complete", "required_attributes": ["status", "handle", "address_token", "link_type"]},
+    {"operation": "hci.le.connection.complete", "required_attributes": ["status", "handle", "address_token", "role", "peer_address_type", "peer_address_token", "peer_address_hex", "connection_interval", "connection_latency", "supervision_timeout", "clock_accuracy"]},
+    {"operation": "hci.authentication.complete", "required_attributes": ["status", "handle"]},
+    {"operation": "hci.encryption.change", "required_attributes": ["status", "handle", "enabled"]},
+    {"operation": "hci.acl.fragment", "required_attributes": ["handle", "direction", "packet_boundary", "fragment_length"]},
+    {"operation": "hci.disconnection.complete", "required_attributes": ["status", "handle", "reason"]}
+  ]
+}

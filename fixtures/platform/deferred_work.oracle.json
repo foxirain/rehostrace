@@ -1,0 +1,23 @@
+{
+  "schema_version": "rehostrace.oracle/v1",
+  "oracle_id": "public.deferred-work.use-after-free",
+  "identity": {
+    "capture": "object",
+    "relation": "equal",
+    "points": ["worker.access-pre", "worker.access-done", "teardown.free-pre", "teardown.free-done"]
+  },
+  "required_points": [
+    {"id": "worker.access-pre", "min_hits": 1, "max_hits": 1},
+    {"id": "worker.access-done", "min_hits": 1, "max_hits": 1},
+    {"id": "teardown.free-pre", "min_hits": 1, "max_hits": 1},
+    {"id": "teardown.free-done", "min_hits": 1, "max_hits": 1}
+  ],
+  "counters": [],
+  "forbidden_events": ["gate.timeout", "object.mismatch"],
+  "sanitizer": {
+    "required": true,
+    "kinds": ["invalid-access"],
+    "required_frames": ["deferred_worker"]
+  },
+  "claim_boundary": "A positive verdict validates only the public deferred-work fixture UAF."
+}

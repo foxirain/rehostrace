@@ -1,0 +1,28 @@
+{
+  "schema_version": "rehostrace.replay-ablation/v1",
+  "ablation_id": "public.seeded.causal-vs-total-order",
+  "trace_sha256": "d00ac0364c3156e19c65e7279b85db5ce1d4feef6860653be43d8b1cf5e968b8",
+  "binding_sha256": "cf36a8bb80f495a4898c293265831bae6b74c0ed006d84096d780d8849a5d0cc",
+  "policies": [
+    {
+      "id": "causal-dag",
+      "kind": "causal-dag"
+    },
+    {
+      "id": "fixed-a-then-b",
+      "kind": "fixed-total-order",
+      "action_order": ["actor.a", "actor.b"]
+    },
+    {
+      "id": "fixed-b-then-a",
+      "kind": "fixed-total-order",
+      "action_order": ["actor.b", "actor.a"]
+    },
+    {
+      "id": "naive-timestamp",
+      "kind": "naive-timestamp",
+      "acknowledge_cross_domain_unsoundness": true
+    }
+  ],
+  "claim_boundary": "This ablation measures how replay-order policy changes an intentionally vulnerable public fixture. Raw values from unsynchronised clock domains are included only as a deliberately unsound baseline and are never treated as causality."
+}

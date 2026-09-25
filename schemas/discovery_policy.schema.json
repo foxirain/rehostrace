@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:discovery-policy:v1",
+  "title": "RehostRace generic lifetime discovery policy",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "policy_id",
+    "primitives",
+    "passive_leaf_max_bytes",
+    "minimum_competing_actions",
+    "claim_boundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "rehostrace.discovery-policy/v1"},
+    "policy_id": {"type": "string"},
+    "primitives": {
+      "type": "object",
+      "required": ["free_sinks", "lock_acquire", "lock_release"],
+      "additionalProperties": false,
+      "properties": {
+        "free_sinks": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "lock_acquire": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "lock_release": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "passive_leaf_max_bytes": {"type": "integer", "minimum": 4, "maximum": 256},
+    "minimum_competing_actions": {"type": "integer", "minimum": 2},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  }
+}

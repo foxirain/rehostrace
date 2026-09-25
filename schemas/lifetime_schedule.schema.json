@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:lifetime-schedule:v1",
+  "title": "RehostRace declarative lifetime schedule",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "schedule_id",
+    "disclosure",
+    "timeout_ms",
+    "signals",
+    "points"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "rehostrace.schedule/v1"},
+    "schedule_id": {"$ref": "#/$defs/id"},
+    "disclosure": {
+      "enum": ["public-synthetic", "private-product", "vendor-approved"]
+    },
+    "timeout_ms": {"type": "integer", "minimum": 1, "maximum": 600000},
+    "signals": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 31,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/id"}
+    },
+    "counters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "threshold", "emit_at_threshold"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "threshold": {"type": "integer", "minimum": 1},
+          "emit_at_threshold": {"$ref": "#/$defs/id"}
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "required": ["capture", "policy"],
+      "additionalProperties": false,
+      "properties": {
+        "capture": {"enum": ["arg0", "arg1", "arg2", "arg3", "return"]},
+        "policy": {"enum": ["same-across-points", "per-point", "none"]}
+      }
+    },
+    "points": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "selector", "emit_on_enter", "wait_for", "emit_on_release"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "selector": {
+            "type": "object",
+            "required": ["kind"],
+            "additionalProperties": false,
+            "properties": {
+              "kind": {"enum": ["symbol", "module-offset", "tracepoint"]},
+              "module": {"type": "string"},
+              "symbol": {"type": "string", "minLength": 1},
+              "offset": {"type": "integer", "minimum": 0},
+              "expected_bytes_sha256": {"$ref": "#/$defs/sha256"}
+            },
+            "allOf": [
+              {
+                "if": {"properties": {"kind": {"enum": ["symbol", "tracepoint"]}}},
+                "then": {"required": ["symbol"]}
+              },
+              {
+                "if": {"properties": {"kind": {"const": "module-offset"}}},
+                "then": {"required": ["module", "offset", "expected_bytes_sha256"]}
+              }
+            ]
+          },
+          "emit_on_enter": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"$ref": "#/$defs/id"}
+          },
+          "wait_for": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"$ref": "#/$defs/id"}
+          },
+          "emit_on_release": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"$ref": "#/$defs/id"}
+          },
+          "counter": {"$ref": "#/$defs/id"},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

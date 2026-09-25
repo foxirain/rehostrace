@@ -1,0 +1,11 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.avdtp-signaling.v1",
+  "protocol": "avdtp",
+  "layer": "application",
+  "requires": ["public.bluetooth.hci-core.v1", "public.bluetooth.l2cap-core.v1"],
+  "selectors": [
+    {"operation": "avdtp.command", "required_attributes": ["handle", "local_cid", "transaction_label", "signal", "sdu_id", "payload_hex"]},
+    {"operation": "avdtp.response", "required_attributes": ["handle", "local_cid", "transaction_label", "signal", "message_type", "sdu_id", "payload_hex"]}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.sdp.v1",
+  "protocol": "sdp",
+  "layer": "application",
+  "requires": ["public.bluetooth.hci-core.v1", "public.bluetooth.l2cap-core.v1"],
+  "selectors": [
+    {"operation": "sdp.request", "required_attributes": ["handle", "direction", "local_cid", "transaction_id", "pdu", "sdu_id", "payload_hex"]},
+    {"operation": "sdp.response", "required_attributes": ["handle", "direction", "local_cid", "transaction_id", "pdu", "sdu_id", "payload_hex"]}
+  ]
+}

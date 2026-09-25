@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this research framework, please cite the software artifact."
+title: "RehostRace Framework"
+version: 0.1.0
+date-released: 2026-09-25
+type: software
+license: GPL-2.0-only
+authors:
+  - name: "RehostRace contributors"
+abstract: "A framework for causality-preserving replay and evidence transfer for asynchronous components."

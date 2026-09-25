@@ -1,0 +1,36 @@
+{
+  "schema_version": "rehostrace.bluetooth-profile-catalog/v1",
+  "catalog_id": "public.bluetooth.profile-catalog.v1",
+  "profiles": [
+    {
+      "id": "classic-avdtp",
+      "transport": "BR/EDR ACL",
+      "trace": "hci_l2cap_avdtp.causal.json",
+      "packs": ["hci_core.pack.json", "l2cap_core.pack.json", "avdtp_signaling.pack.json"],
+      "state_machines": ["HCI", "ACL reassembly", "L2CAP", "AVDTP"]
+    },
+    {
+      "id": "classic-sdp",
+      "transport": "BR/EDR ACL",
+      "trace": "sdp_service_search_attribute.causal.json",
+      "packs": ["hci_core.pack.json", "l2cap_core.pack.json", "sdp.pack.json"],
+      "state_machines": ["HCI", "ACL reassembly", "L2CAP", "SDP"]
+    },
+    {
+      "id": "le-att-gatt",
+      "transport": "LE ACL",
+      "trace": "att_gatt.causal.json",
+      "packs": ["hci_core.pack.json", "att.pack.json", "gatt.pack.json"],
+      "state_machines": ["LE HCI", "ACL reassembly", "ATT", "GATT"]
+    }
+  ],
+  "open_profiles": [
+    {"id": "classic-rfcomm", "reason": "frame/FCS, multiplexer, credit, and DLC lifecycle not implemented"},
+    {"id": "classic-avrcp-a2dp-media", "reason": "AVCTP/AVRCP and AVDTP media/session state not implemented"},
+    {"id": "classic-hfp-hsp", "reason": "RFCOMM AT and synchronous audio state not implemented"},
+    {"id": "le-smp", "reason": "pairing, key distribution, and security state not implemented"},
+    {"id": "le-iso-audio", "reason": "ISO transport and LE Audio profiles not implemented"},
+    {"id": "android-host-stack", "reason": "framework, native daemon, and HAL behavior not rehosted"},
+    {"id": "controller-rf", "reason": "controller firmware, coexistence, DMA timing, and radio are out of host-driver scope"}
+  ]
+}

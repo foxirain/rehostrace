@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:replay-ablation-result:v1",
+  "title": "RehostRace replay-order ablation campaign result",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "ablation_id",
+    "status",
+    "repetitions_per_policy",
+    "conditions",
+    "comparisons",
+    "checks",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "rehostrace.replay-ablation-result/v1"},
+    "ablation_id": {"type": "string"},
+    "status": {"enum": ["passed", "failed", "inconclusive"]},
+    "repetitions_per_policy": {"type": "integer", "minimum": 1},
+    "conditions": {"type": "object"},
+    "comparisons": {"type": "object"},
+    "checks": {"type": "object", "additionalProperties": {"type": "boolean"}},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  }
+}

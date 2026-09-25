@@ -1,0 +1,147 @@
+{
+  "schema_version": "rehostrace.causal/v2",
+  "trace_id": "public.bluetooth.att-gatt.control",
+  "disclosure": "public-synthetic",
+  "origin": {"kind": "synthetic", "producer": "rehostrace-bluetooth-att-gatt-fixture", "redactions": []},
+  "clock_domains": [
+    {"id": "host.sequence", "unit": "sequence", "synchronized": false},
+    {"id": "controller.sequence", "unit": "sequence", "synchronized": false}
+  ],
+  "actors": [
+    {"id": "host.stack", "kind": "host"},
+    {"id": "controller.irq", "kind": "interrupt"}
+  ],
+  "resources": [
+    {"id": "controller.public", "kind": "synthetic-bluetooth-controller", "identity": "logical"},
+    {"id": "connection.le", "kind": "synthetic-le-acl-connection", "identity": "logical"},
+    {"id": "bearer.att", "kind": "synthetic-att-bearer", "identity": "logical"}
+  ],
+  "events": [
+    {
+      "id": "e00.controller-ready", "actor": "controller.irq", "kind": "link.state",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.controller.ready", "direction": "target-in"},
+      "parents": [], "subject": "controller.public", "clock": {"domain": "controller.sequence", "value": 1},
+      "attributes": {"command_credits": 1}
+    },
+    {
+      "id": "e01.connection-complete", "actor": "controller.irq", "kind": "link.state",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.le.connection.complete", "direction": "target-in"},
+      "parents": ["e00.controller-ready"], "subject": "connection.le", "clock": {"domain": "controller.sequence", "value": 2},
+      "attributes": {"status": 0, "handle": 65, "address_token": "public-le-peer-1", "role": "central", "peer_address_type": "public", "peer_address_token": "public-le-peer-address-1", "peer_address_hex": "020000000001", "connection_interval": 24, "connection_latency": 0, "supervision_timeout": 200, "clock_accuracy": 0}
+    },
+    {
+      "id": "e02.mtu-start", "actor": "host.stack", "kind": "custom",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "gatt.procedure.start", "direction": "internal"},
+      "parents": ["e01.connection-complete"], "subject": "bearer.att", "clock": {"domain": "host.sequence", "value": 1},
+      "attributes": {"handle": 65, "bearer_cid": 4, "procedure_id": "gatt.mtu.1", "procedure": "exchange-mtu"}
+    },
+    {
+      "id": "e03.mtu-request-acl", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-out"},
+      "parents": ["e02.mtu-start"], "subject": "connection.le", "clock": {"domain": "host.sequence", "value": 2},
+      "attributes": {"handle": 65, "direction": "host-to-controller", "packet_boundary": "complete", "fragment_length": 3, "sdu_id": "sdu.att.mtu-request", "cid": 4, "sdu_length": 3}
+    },
+    {
+      "id": "e04.mtu-request", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "att.request", "direction": "target-out"},
+      "parents": ["e03.mtu-request-acl"], "subject": "bearer.att", "clock": {"domain": "host.sequence", "value": 3},
+      "attributes": {"handle": 65, "direction": "host-to-controller", "wire_cid": 4, "bearer_cid": 4, "transaction_id": "att.mtu.1", "procedure_id": "gatt.mtu.1", "method": "exchange-mtu", "sdu_id": "sdu.att.mtu-request", "payload_hex": "02f700"}
+    },
+    {
+      "id": "e05.mtu-response-acl", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-in"},
+      "parents": ["e04.mtu-request"], "subject": "connection.le", "clock": {"domain": "controller.sequence", "value": 3},
+      "attributes": {"handle": 65, "direction": "controller-to-host", "packet_boundary": "complete", "fragment_length": 3, "sdu_id": "sdu.att.mtu-response", "cid": 4, "sdu_length": 3}
+    },
+    {
+      "id": "e06.mtu-response", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "att.response", "direction": "target-in"},
+      "parents": ["e05.mtu-response-acl"], "subject": "bearer.att", "clock": {"domain": "controller.sequence", "value": 4},
+      "attributes": {"handle": 65, "direction": "controller-to-host", "wire_cid": 4, "bearer_cid": 4, "transaction_id": "att.mtu.1", "procedure_id": "gatt.mtu.1", "method": "exchange-mtu", "sdu_id": "sdu.att.mtu-response", "payload_hex": "03b900"}
+    },
+    {
+      "id": "e07.mtu-complete", "actor": "host.stack", "kind": "custom",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "gatt.procedure.complete", "direction": "internal"},
+      "parents": ["e06.mtu-response"], "subject": "bearer.att", "clock": {"domain": "host.sequence", "value": 4},
+      "attributes": {"handle": 65, "bearer_cid": 4, "procedure_id": "gatt.mtu.1", "procedure": "exchange-mtu", "result": "success"}
+    },
+    {
+      "id": "e08.discovery-start", "actor": "host.stack", "kind": "custom",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "gatt.procedure.start", "direction": "internal"},
+      "parents": ["e07.mtu-complete"], "subject": "bearer.att", "clock": {"domain": "host.sequence", "value": 5},
+      "attributes": {"handle": 65, "bearer_cid": 4, "procedure_id": "gatt.discovery.1", "procedure": "discover-primary-services"}
+    },
+    {
+      "id": "e09.discovery-request-acl", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-out"},
+      "parents": ["e08.discovery-start"], "subject": "connection.le", "clock": {"domain": "host.sequence", "value": 6},
+      "attributes": {"handle": 65, "direction": "host-to-controller", "packet_boundary": "complete", "fragment_length": 7, "sdu_id": "sdu.att.discovery-request", "cid": 4, "sdu_length": 7}
+    },
+    {
+      "id": "e10.discovery-request", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "att.request", "direction": "target-out"},
+      "parents": ["e09.discovery-request-acl"], "subject": "bearer.att", "clock": {"domain": "host.sequence", "value": 7},
+      "attributes": {"handle": 65, "direction": "host-to-controller", "wire_cid": 4, "bearer_cid": 4, "transaction_id": "att.discovery.1", "procedure_id": "gatt.discovery.1", "method": "read-by-group-type", "sdu_id": "sdu.att.discovery-request", "payload_hex": "100100ffff0028"}
+    },
+    {
+      "id": "e11.discovery-response-acl", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-in"},
+      "parents": ["e10.discovery-request"], "subject": "connection.le", "clock": {"domain": "controller.sequence", "value": 5},
+      "attributes": {"handle": 65, "direction": "controller-to-host", "packet_boundary": "complete", "fragment_length": 8, "sdu_id": "sdu.att.discovery-response", "cid": 4, "sdu_length": 8}
+    },
+    {
+      "id": "e12.discovery-response", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "att.response", "direction": "target-in"},
+      "parents": ["e11.discovery-response-acl"], "subject": "bearer.att", "clock": {"domain": "controller.sequence", "value": 6},
+      "attributes": {"handle": 65, "direction": "controller-to-host", "wire_cid": 4, "bearer_cid": 4, "transaction_id": "att.discovery.1", "procedure_id": "gatt.discovery.1", "method": "read-by-group-type", "sdu_id": "sdu.att.discovery-response", "payload_hex": "1106010005000018"}
+    },
+    {
+      "id": "e13.discovery-complete", "actor": "host.stack", "kind": "custom",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "gatt.procedure.complete", "direction": "internal"},
+      "parents": ["e12.discovery-response"], "subject": "bearer.att", "clock": {"domain": "host.sequence", "value": 8},
+      "attributes": {"handle": 65, "bearer_cid": 4, "procedure_id": "gatt.discovery.1", "procedure": "discover-primary-services", "result": "success"}
+    },
+    {
+      "id": "e14.read-start", "actor": "host.stack", "kind": "custom",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "gatt.procedure.start", "direction": "internal"},
+      "parents": ["e13.discovery-complete"], "subject": "bearer.att", "clock": {"domain": "host.sequence", "value": 9},
+      "attributes": {"handle": 65, "bearer_cid": 4, "procedure_id": "gatt.read.1", "procedure": "read-characteristic"}
+    },
+    {
+      "id": "e15.read-request-acl", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-out"},
+      "parents": ["e14.read-start"], "subject": "connection.le", "clock": {"domain": "host.sequence", "value": 10},
+      "attributes": {"handle": 65, "direction": "host-to-controller", "packet_boundary": "complete", "fragment_length": 3, "sdu_id": "sdu.att.read-request", "cid": 4, "sdu_length": 3}
+    },
+    {
+      "id": "e16.read-request", "actor": "host.stack", "kind": "boundary.output",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "att.request", "direction": "target-out"},
+      "parents": ["e15.read-request-acl"], "subject": "bearer.att", "clock": {"domain": "host.sequence", "value": 11},
+      "attributes": {"handle": 65, "direction": "host-to-controller", "wire_cid": 4, "bearer_cid": 4, "transaction_id": "att.read.1", "procedure_id": "gatt.read.1", "method": "read", "sdu_id": "sdu.att.read-request", "payload_hex": "0a0300"}
+    },
+    {
+      "id": "e17.read-response-acl", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.acl.fragment", "direction": "target-in"},
+      "parents": ["e16.read-request"], "subject": "connection.le", "clock": {"domain": "controller.sequence", "value": 7},
+      "attributes": {"handle": 65, "direction": "controller-to-host", "packet_boundary": "complete", "fragment_length": 7, "sdu_id": "sdu.att.read-response", "cid": 4, "sdu_length": 7}
+    },
+    {
+      "id": "e18.read-response", "actor": "controller.irq", "kind": "boundary.input",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "att.response", "direction": "target-in"},
+      "parents": ["e17.read-response-acl"], "subject": "bearer.att", "clock": {"domain": "controller.sequence", "value": 8},
+      "attributes": {"handle": 65, "direction": "controller-to-host", "wire_cid": 4, "bearer_cid": 4, "transaction_id": "att.read.1", "procedure_id": "gatt.read.1", "method": "read", "sdu_id": "sdu.att.read-response", "payload_hex": "0b5075626c6963"}
+    },
+    {
+      "id": "e19.read-complete", "actor": "host.stack", "kind": "custom",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "gatt.procedure.complete", "direction": "internal"},
+      "parents": ["e18.read-response"], "subject": "bearer.att", "clock": {"domain": "host.sequence", "value": 12},
+      "attributes": {"handle": 65, "bearer_cid": 4, "procedure_id": "gatt.read.1", "procedure": "read-characteristic", "result": "success"}
+    },
+    {
+      "id": "e20.disconnection-complete", "actor": "controller.irq", "kind": "link.state",
+      "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.disconnection.complete", "direction": "target-in"},
+      "parents": ["e19.read-complete"], "subject": "connection.le", "clock": {"domain": "controller.sequence", "value": 9},
+      "attributes": {"status": 0, "handle": 65, "reason": 19}
+    }
+  ]
+}

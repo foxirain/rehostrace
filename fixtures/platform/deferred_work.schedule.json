@@ -1,0 +1,40 @@
+{
+  "schema_version": "rehostrace.schedule/v1",
+  "schedule_id": "public.deferred-work.schedule",
+  "disclosure": "public-synthetic",
+  "timeout_ms": 5000,
+  "signals": ["worker.waiting", "free.pre", "free.done", "worker.done"],
+  "counters": [],
+  "identity": {"capture": "arg0", "policy": "same-across-points"},
+  "points": [
+    {
+      "id": "worker.access-pre",
+      "selector": {"kind": "symbol", "symbol": "rehostrace_deferred_worker_access_pre"},
+      "emit_on_enter": ["worker.waiting"],
+      "wait_for": ["free.done"],
+      "emit_on_release": []
+    },
+    {
+      "id": "worker.access-done",
+      "selector": {"kind": "symbol", "symbol": "rehostrace_deferred_worker_access_done"},
+      "emit_on_enter": ["worker.done"],
+      "wait_for": [],
+      "emit_on_release": []
+    },
+    {
+      "id": "teardown.free-pre",
+      "selector": {"kind": "symbol", "symbol": "rehostrace_deferred_teardown_free_pre"},
+      "emit_on_enter": ["free.pre"],
+      "wait_for": ["worker.done"],
+      "emit_on_release": []
+    },
+    {
+      "id": "teardown.free-done",
+      "selector": {"kind": "symbol", "symbol": "rehostrace_deferred_teardown_free_done"},
+      "emit_on_enter": ["free.done"],
+      "wait_for": [],
+      "emit_on_release": []
+    }
+  ],
+  "claim_boundary": "This public schedule controls an intentionally vulnerable deferred-work fixture and carries no product claim."
+}

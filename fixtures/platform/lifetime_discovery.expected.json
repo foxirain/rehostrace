@@ -1,0 +1,17 @@
+{
+  "schema_version": "rehostrace.discovery-evaluation/v1",
+  "evaluation_id": "public.seeded.accepted-minimum",
+  "provenance": {
+    "search_result": "out/schedule_search/campaign_v3_20/search-result.json",
+    "accepted_candidate": "candidate.b05f7b026b9dcdda",
+    "runs": 20,
+    "positive_runs": 20
+  },
+  "expected_selector_edges": [
+    {
+      "from_symbol": "rehostrace_seed_b_object_lock_pre",
+      "to_symbol": "rehostrace_seed_a_object_released"
+    }
+  ],
+  "claim_boundary": "This held-out evaluator is not passed to discovery. It scores selector-edge recovery after the source-free analysis has completed."
+}

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:lifetime-oracle:v1",
+  "title": "RehostRace lifetime oracle",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "oracle_id",
+    "identity",
+    "required_points",
+    "counters",
+    "forbidden_events",
+    "sanitizer"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "rehostrace.oracle/v1"},
+    "oracle_id": {"$ref": "#/$defs/id"},
+    "identity": {
+      "type": "object",
+      "required": ["capture", "relation", "points"],
+      "additionalProperties": false,
+      "properties": {
+        "capture": {"$ref": "#/$defs/id"},
+        "relation": {"const": "equal"},
+        "points": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/id"}
+        }
+      }
+    },
+    "required_points": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": ["id", "min_hits"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "min_hits": {"type": "integer", "minimum": 1},
+          "max_hits": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "counters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "minimum"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "minimum": {"type": "integer", "minimum": 0},
+          "maximum": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "forbidden_events": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/id"}
+    },
+    "sanitizer": {
+      "type": "object",
+      "required": ["required", "kinds", "required_frames"],
+      "additionalProperties": false,
+      "properties": {
+        "required": {"type": "boolean"},
+        "kinds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/id"}
+        },
+        "required_frames": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"
+    }
+  }
+}

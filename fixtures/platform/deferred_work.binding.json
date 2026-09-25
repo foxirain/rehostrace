@@ -1,0 +1,35 @@
+{
+  "schema_version": "rehostrace.binding/v1",
+  "binding_id": "public.deferred-work.concurrent-teardown",
+  "trace_sha256": "e0811158a7a9122eee991efe3175013afb59235854f3da20cce94f31350b6db5",
+  "schedule_sha256": "4df10423ee95f3e0ff6a1b6c46fa4e500aec0bc9fe4486dae5ee65fdfc16b5ca",
+  "adapter": "public.deferred-work.char-device",
+  "actions": [
+    {
+      "id": "actor.queue",
+      "event_id": "e.queue-work",
+      "endpoint": "/dev/rehostrace_deferred",
+      "launch_group": "queue-vs-teardown",
+      "payload": {
+        "encoding": "utf8",
+        "data": "Q",
+        "length": 1,
+        "sha256": "4ae81572f06e1b88fd5ced7a1a000945432e83e1551e6f721ee9c00b8cc33260"
+      }
+    },
+    {
+      "id": "actor.free",
+      "event_id": "e.remove-object",
+      "endpoint": "/dev/rehostrace_deferred",
+      "launch_group": "queue-vs-teardown",
+      "start_after_signal": "worker.waiting",
+      "payload": {
+        "encoding": "utf8",
+        "data": "F",
+        "length": 1,
+        "sha256": "f67ab10ad4e4c53121b6a5fe4da9c10ddee905b978d3788d2723d7bfacbe28a9"
+      }
+    }
+  ],
+  "claim_boundary": "This binding projects two concurrent synthetic events onto queue and teardown commands; it does not model hardware removal."
+}

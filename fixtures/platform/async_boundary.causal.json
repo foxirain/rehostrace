@@ -1,0 +1,134 @@
+{
+  "schema_version": "rehostrace.causal/v2",
+  "trace_id": "public.async-boundary.control",
+  "disclosure": "public-synthetic",
+  "origin": {
+    "kind": "synthetic",
+    "producer": "rehostrace-public-platform-fixture",
+    "redactions": []
+  },
+  "clock_domains": [
+    {
+      "id": "device.sequence",
+      "unit": "sequence",
+      "synchronized": false,
+      "description": "Synthetic device-side sequence counter"
+    },
+    {
+      "id": "host.monotonic",
+      "unit": "ns",
+      "synchronized": false,
+      "description": "Synthetic host monotonic clock; not an ordering authority"
+    }
+  ],
+  "actors": [
+    {"id": "device.irq", "kind": "interrupt"},
+    {"id": "kernel.workqueue", "kind": "workqueue"},
+    {"id": "target.control", "kind": "thread"},
+    {"id": "target.timer", "kind": "timer"},
+    {"id": "target.tx", "kind": "thread"}
+  ],
+  "resources": [
+    {
+      "id": "connection.1",
+      "kind": "logical-connection",
+      "identity": "logical",
+      "description": "Non-product public connection token"
+    },
+    {
+      "id": "transport.1",
+      "kind": "synthetic-transport",
+      "identity": "logical"
+    }
+  ],
+  "events": [
+    {
+      "id": "e.session-ready",
+      "actor": "target.control",
+      "kind": "link.state",
+      "boundary": {
+        "domain": "generic.async-link",
+        "operation": "session.ready",
+        "direction": "internal"
+      },
+      "parents": [],
+      "subject": "connection.1",
+      "correlation": {"session": "public-session-1"},
+      "clock": {"domain": "host.monotonic", "value": 1000},
+      "attributes": {"state": "ready"}
+    },
+    {
+      "id": "e.timeout",
+      "actor": "target.timer",
+      "kind": "timeout",
+      "boundary": {
+        "domain": "generic.async-link",
+        "operation": "disconnect-timeout.expired",
+        "direction": "internal"
+      },
+      "parents": ["e.session-ready"],
+      "subject": "connection.1",
+      "correlation": {"session": "public-session-1"},
+      "clock": {"domain": "host.monotonic", "value": 3000},
+      "attributes": {"timer": "disconnect"}
+    },
+    {
+      "id": "e.tx-disconnect",
+      "actor": "target.tx",
+      "kind": "boundary.output",
+      "boundary": {
+        "domain": "generic.async-link",
+        "operation": "disconnect.request",
+        "direction": "target-out"
+      },
+      "parents": ["e.timeout"],
+      "subject": "transport.1",
+      "correlation": {"session": "public-session-1"},
+      "clock": {"domain": "host.monotonic", "value": 3200},
+      "attributes": {"reason": "timeout"}
+    },
+    {
+      "id": "e.link-loss-irq",
+      "actor": "device.irq",
+      "kind": "interrupt",
+      "boundary": {
+        "domain": "generic.async-link",
+        "operation": "link-loss",
+        "direction": "target-in"
+      },
+      "parents": ["e.session-ready"],
+      "subject": "transport.1",
+      "correlation": {"session": "public-session-1"},
+      "clock": {"domain": "device.sequence", "value": 9},
+      "attributes": {"reason": "synthetic-peer-loss"}
+    },
+    {
+      "id": "e.reset-queued",
+      "actor": "kernel.workqueue",
+      "kind": "workqueue",
+      "boundary": {
+        "domain": "generic.async-link",
+        "operation": "reset.queued",
+        "direction": "internal"
+      },
+      "parents": ["e.link-loss-irq"],
+      "subject": "connection.1",
+      "correlation": {"session": "public-session-1"},
+      "attributes": {"queue": "link-reset"}
+    },
+    {
+      "id": "e.reset-run",
+      "actor": "kernel.workqueue",
+      "kind": "scheduler.point",
+      "boundary": {
+        "domain": "generic.async-link",
+        "operation": "reset.execute",
+        "direction": "internal"
+      },
+      "parents": ["e.reset-queued"],
+      "subject": "connection.1",
+      "correlation": {"session": "public-session-1"},
+      "attributes": {"semantic_point": "reset-by-link-loss"}
+    }
+  ]
+}

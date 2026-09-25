@@ -1,0 +1,12 @@
+{
+  "schema_version": "rehostrace.discovery-policy/v1",
+  "policy_id": "public.arm64.generic-lifetime-primitives",
+  "primitives": {
+    "free_sinks": ["kfree"],
+    "lock_acquire": ["mutex_lock"],
+    "lock_release": ["mutex_unlock"]
+  },
+  "passive_leaf_max_bytes": 32,
+  "minimum_competing_actions": 2,
+  "claim_boundary": "The policy names generic kernel primitives only. It supplies no target function, marker, offset, semantic point, precedence edge, or action-to-path mapping."
+}

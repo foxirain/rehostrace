@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:evidence-receipt:v1",
+  "title": "RehostRace portable evidence receipt",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "experiment",
+    "status",
+    "inputs",
+    "execution",
+    "oracle",
+    "fidelity",
+    "claim_boundary",
+    "integrity"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "rehostrace.evidence/v1"},
+    "receipt_id": {"$ref": "#/$defs/id"},
+    "experiment": {"type": "string", "minLength": 1},
+    "status": {"enum": ["passed", "failed", "inconclusive"]},
+    "inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["role", "path", "sha256", "disclosure"],
+        "additionalProperties": false,
+        "properties": {
+          "role": {"$ref": "#/$defs/id"},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"$ref": "#/$defs/sha256"},
+          "disclosure": {"enum": ["public", "private-hash-only", "vendor-approved"]}
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "required": ["architecture", "executor", "event_order"],
+      "additionalProperties": true,
+      "properties": {
+        "architecture": {"type": "string", "minLength": 1},
+        "executor": {"type": "string", "minLength": 1},
+        "event_order": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/id"}
+        }
+      }
+    },
+    "oracle": {
+      "type": "object",
+      "required": ["oracle_id", "verdict", "checks"],
+      "additionalProperties": false,
+      "properties": {
+        "oracle_id": {"$ref": "#/$defs/id"},
+        "verdict": {"enum": ["positive", "negative", "inconclusive"]},
+        "checks": {
+          "type": "object",
+          "additionalProperties": {"type": "boolean"}
+        },
+        "identity_tokens": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "fidelity": {
+      "type": "object",
+      "required": ["track", "dimensions", "transfer"],
+      "additionalProperties": false,
+      "properties": {
+        "track": {"$ref": "#/$defs/id"},
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "demonstrated",
+              "modeled",
+              "clean-control",
+              "not-observed",
+              "unavailable",
+              "not-run",
+              "not-applicable"
+            ]
+          }
+        },
+        "transfer": {
+          "type": "object",
+          "required": ["allowed_claims", "forbidden_claims", "asserted_claims"],
+          "additionalProperties": false,
+          "properties": {
+            "allowed_claims": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {"$ref": "#/$defs/claim"}
+            },
+            "forbidden_claims": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {"$ref": "#/$defs/claim"}
+            },
+            "asserted_claims": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {"$ref": "#/$defs/claim"}
+            }
+          }
+        }
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 1},
+    "integrity": {
+      "type": "object",
+      "required": ["content_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "content_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "claim": {
+      "enum": [
+        "artifact.reproducibility",
+        "mechanism.causal-replay",
+        "mechanism.causal-projection",
+        "mechanism.schedule-compilation",
+        "mechanism.schedule-synthesis",
+        "mechanism.schedule-search",
+        "mechanism.schedule-enforcement",
+        "finding.same-object-lifetime",
+        "target.exact-binary-path",
+        "target.vendor-vulnerability",
+        "stock.remote-reachability",
+        "stock.harmful-consequence",
+        "stock.race-probability",
+        "impact.exploitability",
+        "impact.code-execution"
+      ]
+    }
+  }
+}

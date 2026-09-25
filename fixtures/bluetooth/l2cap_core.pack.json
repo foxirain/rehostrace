@@ -1,0 +1,16 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.l2cap-core.v1",
+  "protocol": "l2cap",
+  "layer": "link",
+  "requires": ["public.bluetooth.hci-core.v1"],
+  "selectors": [
+    {"operation": "l2cap.connection.request", "required_attributes": ["handle", "identifier", "local_cid", "psm", "sdu_id"]},
+    {"operation": "l2cap.connection.response", "required_attributes": ["handle", "identifier", "local_cid", "remote_cid", "result", "sdu_id"]},
+    {"operation": "l2cap.config.request", "required_attributes": ["handle", "identifier", "local_cid", "initiator", "sdu_id"]},
+    {"operation": "l2cap.config.response", "required_attributes": ["handle", "identifier", "local_cid", "initiator", "result", "sdu_id"]},
+    {"operation": "l2cap.channel.open", "required_attributes": ["handle", "local_cid"]},
+    {"operation": "l2cap.disconnect.request", "required_attributes": ["handle", "identifier", "local_cid", "sdu_id"]},
+    {"operation": "l2cap.disconnect.response", "required_attributes": ["handle", "identifier", "local_cid", "sdu_id"]}
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "rehostrace.schedule/v1",
+  "schedule_id": "public.seeded.lock-handoff.nogate",
+  "disclosure": "public-synthetic",
+  "timeout_ms": 5000,
+  "signals": [
+    "a.waiting",
+    "b.lock-pre",
+    "a.released",
+    "b.object-held",
+    "a.list-held",
+    "second-free"
+  ],
+  "counters": [
+    {
+      "id": "free.entries",
+      "threshold": 2,
+      "emit_at_threshold": "second-free"
+    }
+  ],
+  "identity": {
+    "capture": "arg0",
+    "policy": "same-across-points"
+  },
+  "points": [
+    {
+      "id": "a.object-released",
+      "selector": {"kind": "symbol", "symbol": "rehostrace_seed_a_object_released"},
+      "emit_on_enter": ["a.waiting"],
+      "wait_for": [],
+      "emit_on_release": ["a.released"],
+      "description": "Actor A released the object lock before taking the global lock"
+    },
+    {
+      "id": "b.object-lock-pre",
+      "selector": {"kind": "symbol", "symbol": "rehostrace_seed_b_object_lock_pre"},
+      "emit_on_enter": ["b.lock-pre"],
+      "wait_for": [],
+      "emit_on_release": [],
+      "description": "Actor B holds the global lock and is about to take the object lock"
+    },
+    {
+      "id": "b.object-held",
+      "selector": {"kind": "symbol", "symbol": "rehostrace_seed_b_object_held"},
+      "emit_on_enter": ["b.object-held"],
+      "wait_for": [],
+      "emit_on_release": []
+    },
+    {
+      "id": "a.list-held",
+      "selector": {"kind": "symbol", "symbol": "rehostrace_seed_a_list_held"},
+      "emit_on_enter": ["a.list-held"],
+      "wait_for": [],
+      "emit_on_release": []
+    },
+    {
+      "id": "free.pre",
+      "selector": {"kind": "symbol", "symbol": "rehostrace_seed_free_pre"},
+      "emit_on_enter": [],
+      "wait_for": [],
+      "emit_on_release": [],
+      "counter": "free.entries"
+    }
+  ],
+  "claim_boundary": "This no-gate public schedule observes the intentionally vulnerable seeded module without forcing a lifetime interleaving. It is not product evidence."
+}

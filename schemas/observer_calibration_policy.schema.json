@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:observer-calibration-policy:v1",
+  "title": "RehostRace observer-effect calibration policy",
+  "type": "object",
+  "required": ["schema_version", "calibration_id", "sources", "design", "acceptance", "claim_boundary"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "rehostrace.observer-calibration-policy/v1"},
+    "calibration_id": {"$ref": "#/$defs/id"},
+    "sources": {
+      "type": "object",
+      "required": ["training_report_sha256", "holdout_report_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "training_report_sha256": {"$ref": "#/$defs/sha256"},
+        "holdout_report_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "design": {
+      "type": "object",
+      "required": ["model", "retrospective", "pre_registered", "training_design", "holdout_design", "confidence_z"],
+      "additionalProperties": false,
+      "properties": {
+        "model": {"const": "multiplicative-relative-risk"},
+        "retrospective": {"type": "boolean"},
+        "pre_registered": {"type": "boolean"},
+        "training_design": {"type": "string", "minLength": 1},
+        "holdout_design": {"type": "string", "minLength": 1},
+        "confidence_z": {"type": "number", "exclusiveMinimum": 1, "exclusiveMaximum": 4}
+      }
+    },
+    "acceptance": {
+      "type": "object",
+      "required": ["max_absolute_error", "require_actual_within_interval", "require_disjoint_campaigns"],
+      "additionalProperties": false,
+      "properties": {
+        "max_absolute_error": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "require_actual_within_interval": {"type": "boolean"},
+        "require_disjoint_campaigns": {"type": "boolean"}
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

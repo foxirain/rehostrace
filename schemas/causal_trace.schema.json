@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:causal-trace:v2",
+  "title": "RehostRace causality-preserving boundary trace",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "trace_id",
+    "disclosure",
+    "origin",
+    "actors",
+    "resources",
+    "events"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "rehostrace.causal/v2"},
+    "trace_id": {"$ref": "#/$defs/id"},
+    "disclosure": {
+      "enum": [
+        "public-synthetic",
+        "public-redacted",
+        "private-product",
+        "vendor-approved"
+      ]
+    },
+    "origin": {
+      "type": "object",
+      "required": ["kind", "producer"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {"enum": ["synthetic", "live-capture", "translated", "replayed"]},
+        "producer": {"type": "string", "minLength": 1},
+        "source_hashes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/sha256"}
+        },
+        "redactions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "clock_domains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "unit", "synchronized"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "unit": {"enum": ["ns", "us", "ms", "ticks", "sequence"]},
+          "synchronized": {"type": "boolean"},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "actors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "kind": {
+            "enum": [
+              "thread",
+              "interrupt",
+              "timer",
+              "workqueue",
+              "firmware",
+              "host",
+              "device",
+              "tool",
+              "unknown"
+            ]
+          },
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "identity"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "kind": {"type": "string", "minLength": 1},
+          "identity": {"enum": ["logical", "hash", "redacted", "opaque"]},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 65536,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "actor",
+          "kind",
+          "boundary",
+          "parents",
+          "attributes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "actor": {"$ref": "#/$defs/id"},
+          "kind": {
+            "enum": [
+              "boundary.input",
+              "boundary.output",
+              "scheduler.point",
+              "lifetime.alloc",
+              "lifetime.free",
+              "interrupt",
+              "workqueue",
+              "timeout",
+              "link.state",
+              "oracle.finding",
+              "custom"
+            ]
+          },
+          "boundary": {
+            "type": "object",
+            "required": ["domain", "operation", "direction"],
+            "additionalProperties": false,
+            "properties": {
+              "domain": {"type": "string", "minLength": 1},
+              "operation": {"type": "string", "minLength": 1},
+              "direction": {
+                "enum": ["target-in", "target-out", "internal", "observation"]
+              }
+            }
+          },
+          "parents": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"$ref": "#/$defs/id"}
+          },
+          "subject": {"$ref": "#/$defs/id"},
+          "correlation": {
+            "type": "object",
+            "additionalProperties": {
+              "type": ["string", "integer", "boolean"]
+            }
+          },
+          "clock": {
+            "type": "object",
+            "required": ["domain", "value"],
+            "additionalProperties": false,
+            "properties": {
+              "domain": {"$ref": "#/$defs/id"},
+              "value": {"type": "integer", "minimum": 0},
+              "uncertainty": {"type": "integer", "minimum": 0}
+            }
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "payload": {
+            "type": "object",
+            "required": ["length", "sha256", "encoding"],
+            "additionalProperties": false,
+            "properties": {
+              "length": {"type": "integer", "minimum": 0},
+              "sha256": {"$ref": "#/$defs/sha256"},
+              "encoding": {"enum": ["omitted", "hex", "base64", "utf8"]},
+              "data": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "required": ["canonical_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "canonical_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

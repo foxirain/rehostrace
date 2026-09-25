@@ -1,0 +1,506 @@
+{
+  "file_count": 100,
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "a140ef671d2e97cc1ced63e5ed3fe83a605816708126ee030daa0aae1bfdfacd",
+      "size": 422
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "31b6db432934abcc27439ea17765e8971b68577643033057d087deefade7a51f",
+      "size": 328
+    },
+    {
+      "path": "CITATION.cff",
+      "sha256": "54134c7b7ef34974a0ce67cbc3be13c1adaf1b35b08c4053dd14aa9271d4081c",
+      "size": 361
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "005f3808f877931f207f1cea18eaf333beeea453e824dc80aab889bc9bae2883",
+      "size": 1045
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+      "size": 18092
+    },
+    {
+      "path": "Makefile",
+      "sha256": "b8d38ea9037d6de3f6c725b646e30de500cb5eeedf4dd49b53a159860d9fabba",
+      "size": 619
+    },
+    {
+      "path": "README.md",
+      "sha256": "772ce01fe80f0d3c39af0c1d6ee28f05f8bd6c04c6725e489f11116028ec5dc3",
+      "size": 3383
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "8115e777209a46402efcd3e2bd327b4ca843bd6dea25ac1bf9967187d5f5ffbf",
+      "size": 993
+    },
+    {
+      "path": "controllers/lifetime_schedule/Makefile",
+      "sha256": "b11e2a059273939832359c06efb75292656391afc16518cad3f3a7bef4f1b98a",
+      "size": 124
+    },
+    {
+      "path": "controllers/lifetime_schedule/rehostrace_lifetime_schedule.c",
+      "sha256": "76f64e080b76a0b1fe1d87f128b27a17eb80b624d64fd542822189d0f439b5bb",
+      "size": 6434
+    },
+    {
+      "path": "controllers/seeded_schedule/Makefile",
+      "sha256": "403f91ce1b87c8779c3004e084f81902bd85b3bb5213c579ac50431a34dad530",
+      "size": 115
+    },
+    {
+      "path": "controllers/seeded_schedule/rehostrace_seeded_schedule.c",
+      "sha256": "91dd24b775a8b8eb67307f719e06ad84d3e3ba1aef034148d4043377ae33e55a",
+      "size": 5564
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "e69c973542e57a2666d0328540e29e2e157ae7b60b80a53a1283736d6bd422bd",
+      "size": 1728
+    },
+    {
+      "path": "docs/CLAIM_MODEL.md",
+      "sha256": "9362a086d2dbbeb0802e83c3937da1c6ceaf831efa57a44016c749ecb256bfd7",
+      "size": 1061
+    },
+    {
+      "path": "docs/RELEASE_SCOPE.md",
+      "sha256": "4215fbc47c628da3381453cb6f5ee6dadd67b653dbaf22fc68863a0ab6671852",
+      "size": 823
+    },
+    {
+      "path": "fixtures/bluetooth/att.pack.json",
+      "sha256": "5678118cff1af6b4a2eae8a06b24dc1a7b97ceaea7799fcb2beab12c9b2e5597",
+      "size": 559
+    },
+    {
+      "path": "fixtures/bluetooth/att_gatt.causal.json",
+      "sha256": "9afded85ec7097b6ee4985218c6c540e11866d25c979cf7838ae3a958917a0c9",
+      "size": 11729
+    },
+    {
+      "path": "fixtures/bluetooth/avdtp_signaling.pack.json",
+      "sha256": "c305881e405c18541bca05c79c1165c619241345b039bab39e120866308d362e",
+      "size": 556
+    },
+    {
+      "path": "fixtures/bluetooth/cross_profile.composition.json",
+      "sha256": "87ada5dc7f27b52a45eee084e025f60a8a62b0e6e8a494c59b9e34f0b1322f3f",
+      "size": 583
+    },
+    {
+      "path": "fixtures/bluetooth/gatt.pack.json",
+      "sha256": "26a8b80a864bb05dc7bb348152c0f0e98b08da2a15b0e0bb112c1bcda67bb7e8",
+      "size": 495
+    },
+    {
+      "path": "fixtures/bluetooth/hci_core.pack.json",
+      "sha256": "c8464b31495e990dedbc973f769baaa15c05fbd55a054671a22424dca79f1ac5",
+      "size": 1413
+    },
+    {
+      "path": "fixtures/bluetooth/hci_l2cap_avdtp.causal.json",
+      "sha256": "13ab41400824098ecb8ad20892f86b98915d981637e21984bb491f07ad554dcf",
+      "size": 16361
+    },
+    {
+      "path": "fixtures/bluetooth/l2cap_core.pack.json",
+      "sha256": "d4442d6777f0d8aa5b10a4a25b20812c19ade343eb7a92b479ed48cf5479cb5b",
+      "size": 1078
+    },
+    {
+      "path": "fixtures/bluetooth/profile_catalog.json",
+      "sha256": "be85a6f4ae85f57cf8711831b5ffa9f9d4536c8f04d5265dd05a1d56904aaae6",
+      "size": 1713
+    },
+    {
+      "path": "fixtures/bluetooth/sdp.pack.json",
+      "sha256": "1d636ba2ae51969b5271d4486afea75e8876c7aa3202038ff8a32588fc447830",
+      "size": 536
+    },
+    {
+      "path": "fixtures/bluetooth/sdp_service_search_attribute.causal.json",
+      "sha256": "ac940736db6705e4b2d7e1038fa346fc1d3abb5956f4c97adbf0b51ffae3f633",
+      "size": 13074
+    },
+    {
+      "path": "fixtures/deferred_work_driver/Makefile",
+      "sha256": "4c8fe26a1d08c82db927f5d3cafdc0c6ee7af721a863bb460b909abc1375b1eb",
+      "size": 36
+    },
+    {
+      "path": "fixtures/deferred_work_driver/rehostrace_deferred_work.c",
+      "sha256": "2e2586a855198103b8361c1c513313948f11ce1990c289aed315d2cac230ca74",
+      "size": 3120
+    },
+    {
+      "path": "fixtures/platform/async_boundary.causal.json",
+      "sha256": "dc01356ea308ddae04ff541e67382bf4b05f0554a0143527fa2625cd76db77ed",
+      "size": 3884
+    },
+    {
+      "path": "fixtures/platform/causal_order.ablation.json",
+      "sha256": "d72b24c31148821c4b8e0255ca2bde0279c4e1e233392badd884064b2a79aa2d",
+      "size": 1002
+    },
+    {
+      "path": "fixtures/platform/deferred_work.binding.json",
+      "sha256": "f77031abd5c306c3f7f464b78520b24a62f97b4775d12b1759378a6e56d686da",
+      "size": 1236
+    },
+    {
+      "path": "fixtures/platform/deferred_work.causal.json",
+      "sha256": "cae49024a63acd29b73186c3360172a0a569d3575df3cf9185ec4a1688964b14",
+      "size": 1738
+    },
+    {
+      "path": "fixtures/platform/deferred_work.constraints.json",
+      "sha256": "44051df65291c1ea5c2748684d969c706ec3bcc68d35d676ead4c50ec3815955",
+      "size": 1516
+    },
+    {
+      "path": "fixtures/platform/deferred_work.oracle.json",
+      "sha256": "e239bd867ff99c566b17ebac6b47b38c591b85b3836bc4510e8a429f9f112c7d",
+      "size": 846
+    },
+    {
+      "path": "fixtures/platform/deferred_work.schedule.json",
+      "sha256": "b9cae4e42c6bb42fe9dc40d720954149e895b6ececb7805d19e29c55bc413b23",
+      "size": 1392
+    },
+    {
+      "path": "fixtures/platform/lifetime_discovery.expected.json",
+      "sha256": "5a05811983f461b7e4dded06f6569728f9894d4d29e9a0a57b9c6f06d603c80c",
+      "size": 626
+    },
+    {
+      "path": "fixtures/platform/lifetime_discovery.policy.json",
+      "sha256": "560f18477bd847549e4e692e42fa983b5f52eff3a80e6a7eb16607b41f599123",
+      "size": 487
+    },
+    {
+      "path": "fixtures/platform/seeded_boundary.binding.json",
+      "sha256": "0fcb1b0872786fb9d8759f321722fd9be6f5bd033e142c055f1dadb3b97c040b",
+      "size": 1247
+    },
+    {
+      "path": "fixtures/platform/seeded_boundary.nogate.binding.json",
+      "sha256": "40ab9080af2f630ed141246b63219a224c6647cf328e6bc512a51d6e2fd801ca",
+      "size": 1245
+    },
+    {
+      "path": "fixtures/platform/seeded_evidence_transfer.policy.json",
+      "sha256": "17a5b30f52a8ddfe931d256e2cc64138d04f7d05c635afdd87c039474251c18e",
+      "size": 2017
+    },
+    {
+      "path": "fixtures/platform/seeded_lifetime.constraints.json",
+      "sha256": "bb2134e8a69aeeea057af95fa66f3327e7d78bfe0b264faea521a6763740b557",
+      "size": 2342
+    },
+    {
+      "path": "fixtures/platform/seeded_lifetime.nogate.constraints.json",
+      "sha256": "638f9315a667342cfc4102380a90410fe1ae93b2b95b8ab12bf6116757008e86",
+      "size": 2129
+    },
+    {
+      "path": "fixtures/platform/seeded_lifetime.nogate.schedule.json",
+      "sha256": "68d89bb31c236375cfc8706fb97bd171fbbb54531cc2063cb29303479470c1c2",
+      "size": 1962
+    },
+    {
+      "path": "fixtures/platform/seeded_lifetime.oracle.json",
+      "sha256": "fcd03d708a49ce6b557d2f485bc0fe0d5ce28cac1fc51714cae57971d49f6315",
+      "size": 1051
+    },
+    {
+      "path": "fixtures/platform/seeded_lifetime.schedule.json",
+      "sha256": "97451beaf49e76f7ba6d2c3bdc846b67ef412e46f8a1d9b347256fea1d2b2944",
+      "size": 2106
+    },
+    {
+      "path": "fixtures/platform/seeded_observations.jsonl",
+      "sha256": "9102378cf7fc424a398a0e65c1c2ed08fd78d8ea9d8f8403f0c2061c4ef58e15",
+      "size": 756
+    },
+    {
+      "path": "fixtures/seeded_driver/Makefile",
+      "sha256": "b654e837129c18828abc2c2e7b2fb221f41251633c3cf924d7edca8e06d27d03",
+      "size": 77
+    },
+    {
+      "path": "fixtures/seeded_driver/rehostrace_seeded_driver.c",
+      "sha256": "bdda74c08b2c1541a005364a6448224ab230fe82b1a21633a08db0ba8eee39b6",
+      "size": 4163
+    },
+    {
+      "path": "include/rehostrace_schedule.h",
+      "sha256": "5920e36f4511e6ce2811a4bbc834591a4bdd70dd8959a3d8d12ee1356b7d45d5",
+      "size": 581
+    },
+    {
+      "path": "include/rehostrace_seeded.h",
+      "sha256": "ec983085ced50065695b417e4cc20385dcadb4c9ae1e63bb3f3c6ce81441a4c9",
+      "size": 736
+    },
+    {
+      "path": "init/platform_deferred_loader.c",
+      "sha256": "cc6e349b33ad76a016e1ed305081be31804e892140d803af35434016d6850383",
+      "size": 7070
+    },
+    {
+      "path": "init/platform_order_ablation_loader.c",
+      "sha256": "5c34376ea26be3e9ce09c5fa6fb34d7db7c39516eb7e8027e1218e2e041747a1",
+      "size": 8711
+    },
+    {
+      "path": "init/platform_seeded_loader.c",
+      "sha256": "8e3d678e023001ddff667b42ec5e8853e3781053b4eab6a62a14c1882c6775cf",
+      "size": 7092
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "842a47c807e360dc4ce7554aab41a00795cf32d93c9d1fca102ff560e14989a8",
+      "size": 692
+    },
+    {
+      "path": "schemas/bluetooth_protocol_pack.schema.json",
+      "sha256": "e1e59fa74a4019752a4029ebb9b332d7e2385c66c2bdba8666f525221bfa3262",
+      "size": 1221
+    },
+    {
+      "path": "schemas/boundary_binding.schema.json",
+      "sha256": "26371157e7be513a7b6f49d1497057f1d0f3cbe48ca96a6d80fecf8faa370af4",
+      "size": 1836
+    },
+    {
+      "path": "schemas/causal_trace.schema.json",
+      "sha256": "5a33d84d73c22ac81cecda776a766124ed1406a5e30f4a38e0f89187df580cf8",
+      "size": 5661
+    },
+    {
+      "path": "schemas/comparative_evaluation.schema.json",
+      "sha256": "fab39b2d62abb7327970362523f473fda5a654c24bc1a4ba3701fab8f24412c8",
+      "size": 1065
+    },
+    {
+      "path": "schemas/discovery_policy.schema.json",
+      "sha256": "d8241669b961be237110e7119a109d72cca259cabe5e8c4999becd14ea3d7663",
+      "size": 1230
+    },
+    {
+      "path": "schemas/evidence_receipt.schema.json",
+      "sha256": "49d5b8b000838736693b123190ebde9a0cb387906285ac343b3c1ca55633d8ea",
+      "size": 4395
+    },
+    {
+      "path": "schemas/evidence_transfer_bridge.schema.json",
+      "sha256": "77d7a5a8fbbdb8591d6c62b1f3a5df849b96410e45e06bcf904c282376adccc3",
+      "size": 1127
+    },
+    {
+      "path": "schemas/evidence_transfer_policy.schema.json",
+      "sha256": "3d19d6d403247e9fdf34d9145d286edc2c4b5ca5df04c83b1b30f939be69847c",
+      "size": 3085
+    },
+    {
+      "path": "schemas/lifetime_discovery.schema.json",
+      "sha256": "84010bc0b23b1ca08c7d20c818be84f8f97bc631ec1c5bbe8e625816643976e2",
+      "size": 1109
+    },
+    {
+      "path": "schemas/lifetime_oracle.schema.json",
+      "sha256": "807611c2555a5bfade6541c18c3c14f341454f0112c61854a09e05b464df0f2a",
+      "size": 2441
+    },
+    {
+      "path": "schemas/lifetime_schedule.schema.json",
+      "sha256": "70f1722969281bd270f0903427a27ac69013c30c3d3024b9db6ea8aeb28ac1d9",
+      "size": 3475
+    },
+    {
+      "path": "schemas/observer_calibration.schema.json",
+      "sha256": "320fdccafcf296f4ba429683bbbb67810d26c73280d6827b5d9df13841a83c7b",
+      "size": 1206
+    },
+    {
+      "path": "schemas/observer_calibration_policy.schema.json",
+      "sha256": "6bc9f8e0c94f234a60d1cd66ccaa4e3946f57a865eec5e8132289c6bac8f52f2",
+      "size": 2052
+    },
+    {
+      "path": "schemas/replay_ablation.schema.json",
+      "sha256": "136ecc8ba20d40690e478d9e9b95d1f2238e95dbb711c3601af775cfc062bbc4",
+      "size": 1337
+    },
+    {
+      "path": "schemas/replay_ablation_result.schema.json",
+      "sha256": "b88355165529f1a32dc182bc9d5bfba7deeee824819e55380c481130ed3c80d0",
+      "size": 860
+    },
+    {
+      "path": "schemas/schedule_constraints.schema.json",
+      "sha256": "071a616e0ed002b89f79999dd9411334b315a6bbc62c70137b8600a9e1e5f3c3",
+      "size": 2944
+    },
+    {
+      "path": "schemas/schedule_search.schema.json",
+      "sha256": "6d1e945564d251de03e0ff0bbb3d700f02b4d604a459e8b3601e4abeb35b85af",
+      "size": 2132
+    },
+    {
+      "path": "sdk/python/rehostrace/__init__.py",
+      "sha256": "e3a9f33aeba90eae58a45f8f779c4491c9dbdb9b14d9fb7c0980b2096a536b5c",
+      "size": 3218
+    },
+    {
+      "path": "sdk/python/rehostrace/ablation.py",
+      "sha256": "92d061504e50ea665dcb9f3d06b57f6971e1825c61f45e70848fea5e6dc0045d",
+      "size": 8343
+    },
+    {
+      "path": "sdk/python/rehostrace/binding.py",
+      "sha256": "43741287a8cb24048eeb07ca2e74c9f6157d485e44bef23659a3e64ba32de401",
+      "size": 8824
+    },
+    {
+      "path": "sdk/python/rehostrace/bluetooth.py",
+      "sha256": "31726a54de6b23806e2863e2cdd866480a928e267634883012b9a82d1a3a91ca",
+      "size": 47277
+    },
+    {
+      "path": "sdk/python/rehostrace/bluetooth_composition.py",
+      "sha256": "c4accac36bf585dbc8b416751b675754ddc2d4c270c2589f8f9275c6d0294361",
+      "size": 11437
+    },
+    {
+      "path": "sdk/python/rehostrace/capture.py",
+      "sha256": "295e5c34888ebd39ec6ee7d7ccaf435c7e70c0e909bc23d10877cad5d8657460",
+      "size": 5558
+    },
+    {
+      "path": "sdk/python/rehostrace/discovery.py",
+      "sha256": "db06746e9de384ed1212656abd278642547bfa69682de7b79252a0a3b5821a1e",
+      "size": 35904
+    },
+    {
+      "path": "sdk/python/rehostrace/evidence_bridge.py",
+      "sha256": "423503c5dd8fe6641445df1a4e975e19d674b92492d0ed698492ac24f178e486",
+      "size": 16854
+    },
+    {
+      "path": "sdk/python/rehostrace/model.py",
+      "sha256": "da6f869469eb4a3224c29970c6ac22dc1ccfaee9ce65d8a879f46332b97980e3",
+      "size": 12994
+    },
+    {
+      "path": "sdk/python/rehostrace/observer.py",
+      "sha256": "7e83d87c44fefea20dc685dd156e1dac90a87b9f7a2348420bf18bee61b44296",
+      "size": 19841
+    },
+    {
+      "path": "sdk/python/rehostrace/oracle.py",
+      "sha256": "435cc3c5b4e69d55d2ce71153086a28d2925db88c02a39ac9d4ef931217db625",
+      "size": 7557
+    },
+    {
+      "path": "sdk/python/rehostrace/receipt.py",
+      "sha256": "06d9cc98c0f6aceb2206bd93139688097c115a5fe9f3b27cf3347ce8ba86a917",
+      "size": 10098
+    },
+    {
+      "path": "sdk/python/rehostrace/replay.py",
+      "sha256": "6c11b6141572674be9bd228554757a98d814b22eeb67359a4a744ab9049bc0d0",
+      "size": 1993
+    },
+    {
+      "path": "sdk/python/rehostrace/schedule.py",
+      "sha256": "ba8004594407881ae2a37514c2be6e6929234afe257a4e8efae36f8ea209b2c9",
+      "size": 9812
+    },
+    {
+      "path": "sdk/python/rehostrace/search.py",
+      "sha256": "ecb01c4e90c7dca7bf8b8efcfd88e83650cefa870dfa596d0d51bfcc82574aa3",
+      "size": 12783
+    },
+    {
+      "path": "sdk/python/rehostrace/synthesis.py",
+      "sha256": "77c5388d4a3b62d68a0d5752774f5737e78bd09da9aefa9c435e5d6503e570e0",
+      "size": 9727
+    },
+    {
+      "path": "tests/test_bluetooth_profiles_public.py",
+      "sha256": "a178e681c47290dfc0cae998484c16551f3e0eb4e1b51aad3b965514a9f4cec5",
+      "size": 1799
+    },
+    {
+      "path": "tests/test_bluetooth_subsystem.py",
+      "sha256": "35801b108ab831e48a2ab35a69979c30dd8863ba771df817f4270efa574d2603",
+      "size": 4072
+    },
+    {
+      "path": "tests/test_build_newc.py",
+      "sha256": "665f9e0101f51247b9707b164659645b9ae1a771edda26d56c93a3c88046ef6d",
+      "size": 1716
+    },
+    {
+      "path": "tests/test_causal_sdk.py",
+      "sha256": "b59564f5a339076a7ab5fb7245d5fba3d9d6cf91837d9ca551893486dfc69155",
+      "size": 4281
+    },
+    {
+      "path": "tests/test_platform_contracts.py",
+      "sha256": "b68f744af5e6abd3258fa55d4ca367bc3f94243d561d31473fe5341cef957539",
+      "size": 20125
+    },
+    {
+      "path": "tests/test_release_audit.py",
+      "sha256": "234dae30c749022e892707e7fba6085bd554a287f9499050461f24a45dce72f6",
+      "size": 1780
+    },
+    {
+      "path": "tools/audit_framework_release.py",
+      "sha256": "f2c563a899f6822197ca5b3e7be79497bc9f35465ffcdc7f9629061659e71b37",
+      "size": 4880
+    },
+    {
+      "path": "tools/build_newc.py",
+      "sha256": "796ea19a0e3bb65e4063436e709c3e65ef9eef4af4ee0d4da9c75fa8010acc87",
+      "size": 2507
+    },
+    {
+      "path": "tools/generate_release_manifest.py",
+      "sha256": "f9362298f19e7dce899ed41fc5e40db6908a50380be7f73a0d984a60f7679332",
+      "size": 1774
+    },
+    {
+      "path": "tools/rehostrace_cli.py",
+      "sha256": "506e2a118091b98ee933fc814959a4ca4f43cbead4d7cb81c2424d7be6df1bc1",
+      "size": 14168
+    },
+    {
+      "path": "tools/run_bluetooth_profile_demo.py",
+      "sha256": "204e1d2af62b27156936ea2cbd4691ea3449414ced103db00d3a53940efa6672",
+      "size": 8247
+    },
+    {
+      "path": "tools/run_bluetooth_subsystem_demo.py",
+      "sha256": "6ed8edcdf85d9e2a79cb2c550c1afeb5790bc83dc2991c5396d6495d890f3733",
+      "size": 6087
+    },
+    {
+      "path": "tools/run_public_platform_demo.py",
+      "sha256": "fe99935d170c254a29c3f0dbbab7385ac0c60d03081e7e3db1294ebbdc64d51d",
+      "size": 7651
+    }
+  ],
+  "schema_version": "rehostrace.source-manifest/v1"
+}
