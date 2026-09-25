@@ -1,0 +1,8 @@
+{
+  "schema_version": "rehostrace.fuzz-policy/v1",
+  "campaign_id": "public.bluetooth.semantic-parser.v1",
+  "limits": {"executions": 256, "max_input_bytes": 16},
+  "seeds_hex": ["425400"],
+  "dictionary_hex": ["ffff", "1900", "0100"],
+  "stop_on": ["crash"]
+}

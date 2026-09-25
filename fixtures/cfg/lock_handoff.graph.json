@@ -1,0 +1,19 @@
+{
+  "schema_version": "rehostrace.binary-cfg/v1",
+  "binary": {"name": "public_seeded_driver.ko", "sha256": "1111111111111111111111111111111111111111111111111111111111111111", "architecture": "aarch64"},
+  "nodes": [
+    {"id": "rx.reset", "async_entry": true, "operations": [
+      {"kind": "acquire", "lock": "object.lock", "site": "rx+0x10"},
+      {"kind": "release", "lock": "object.lock", "site": "rx+0x20"},
+      {"kind": "acquire", "lock": "global.lock", "site": "rx+0x30"},
+      {"kind": "free", "resource": "session.object", "site": "rx+0x40"},
+      {"kind": "release", "lock": "global.lock", "site": "rx+0x48"}
+    ]},
+    {"id": "tx.timeout", "async_entry": true, "operations": [
+      {"kind": "acquire", "lock": "global.lock", "site": "tx+0x10"},
+      {"kind": "free", "resource": "session.object", "site": "tx+0x20"},
+      {"kind": "release", "lock": "global.lock", "site": "tx+0x28"}
+    ]}
+  ],
+  "edges": [{"from": "rx.reset", "to": "tx.timeout", "kind": "async"}]
+}

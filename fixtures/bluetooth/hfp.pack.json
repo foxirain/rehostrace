@@ -1,0 +1,15 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.hfp.v1",
+  "protocol": "hfp",
+  "layer": "application",
+  "requires": ["public.bluetooth.hci-core.v1", "public.bluetooth.rfcomm.v1"],
+  "selectors": [
+    {"operation": "hfp.slc.open", "required_attributes": ["handle", "session_id", "role", "rfcomm_session_id", "dlci"]},
+    {"operation": "hfp.at.command", "required_attributes": ["handle", "session_id", "command_id", "command"]},
+    {"operation": "hfp.at.response", "required_attributes": ["handle", "session_id", "command_id", "result"]},
+    {"operation": "hfp.audio.connect", "required_attributes": ["handle", "session_id"]},
+    {"operation": "hfp.audio.disconnect", "required_attributes": ["handle", "session_id"]},
+    {"operation": "hfp.slc.close", "required_attributes": ["handle", "session_id"]}
+  ]
+}

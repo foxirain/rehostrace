@@ -1,0 +1,16 @@
+{
+  "schema_version": "rehostrace.harness-plan/v1",
+  "plan_id": "public.controller-firmware.v1",
+  "kind": "controller-firmware",
+  "transport": "qemu-device",
+  "identity": {"target_sha256": "6666666666666666666666666666666666666666666666666666666666666666", "runner_sha256": "7777777777777777777777777777777777777777777777777777777777777777"},
+  "inputs": ["hci-command-stream", "interrupt-schedule"],
+  "outputs": ["coverage-map", "hci-event-stream", "fault-log"],
+  "stages": [
+    {"id": "clean-state", "action": "reset", "timeout_ms": 5000},
+    {"id": "load-image", "action": "load", "timeout_ms": 30000},
+    {"id": "inject-hci", "action": "feed", "timeout_ms": 30000},
+    {"id": "observe-controller", "action": "observe", "timeout_ms": 30000},
+    {"id": "collect-evidence", "action": "collect", "timeout_ms": 10000}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "rehostrace.target-manifest/v1",
+  "target_family": "public.bluetooth.fixture",
+  "version": "2.0",
+  "components": [
+    {"id": "host.driver", "kind": "fixture", "sha256": "2222222222222222222222222222222222222222222222222222222222222222", "abi_id": "abi-v2", "facts": {"symbols": ["open", "reset", "cancel"], "lifetime_candidates": []}},
+    {"id": "host.codec", "kind": "fixture", "sha256": "3333333333333333333333333333333333333333333333333333333333333333", "abi_id": "abi-v1", "facts": {"symbols": ["decode"]}}
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rehostrace.example/schemas/fuzz_campaign.schema.json",
+  "title": "RehostRace deterministic fuzz campaign",
+  "type": "object",
+  "required": ["schema_version", "campaign_id", "policy_sha256", "engine", "executions", "status_counts", "features", "corpus", "findings", "report_sha256"],
+  "properties": {
+    "schema_version": {"const": "rehostrace.fuzz-campaign/v1"},
+    "campaign_id": {"type": "string", "minLength": 1},
+    "policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "engine": {"const": "deterministic-coverage-queue/v1"},
+    "executions": {"type": "integer", "minimum": 1},
+    "status_counts": {"type": "object"},
+    "features": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "corpus": {"type": "array", "items": {"type": "object"}},
+    "findings": {"type": "array", "items": {"type": "object"}},
+    "report_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "additionalProperties": false
+}

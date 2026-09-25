@@ -1,0 +1,22 @@
+{
+  "schema_version": "rehostrace.causal/v2",
+  "trace_id": "public.bluetooth.avrcp-a2dp.control",
+  "disclosure": "public-synthetic",
+  "origin": {"kind": "synthetic", "producer": "rehostrace-avrcp-a2dp-fixture", "redactions": []},
+  "clock_domains": [{"id": "fixture.sequence", "unit": "sequence", "synchronized": true}],
+  "actors": [{"id": "host.stack", "kind": "host"}, {"id": "controller.irq", "kind": "interrupt"}],
+  "resources": [{"id": "connection.classic", "kind": "synthetic-classic-connection", "identity": "logical"}],
+  "events": [
+    {"id": "e00.ready", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.controller.ready", "direction": "target-in"}, "parents": [], "clock": {"domain": "fixture.sequence", "value": 0}, "attributes": {"command_credits": 1}},
+    {"id": "e01.connected", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.connection.complete", "direction": "target-in"}, "parents": ["e00.ready"], "subject": "connection.classic", "clock": {"domain": "fixture.sequence", "value": 1}, "attributes": {"status": 0, "handle": 64, "address_token": "public-peer", "link_type": "acl"}},
+    {"id": "e02.configure", "actor": "host.stack", "kind": "custom", "boundary": {"domain": "bluetooth.host-boundary", "operation": "a2dp.stream.configure", "direction": "internal"}, "parents": ["e01.connected"], "clock": {"domain": "fixture.sequence", "value": 2}, "attributes": {"handle": 64, "stream_id": "audio.1", "codec": "sbc"}},
+    {"id": "e03.open", "actor": "host.stack", "kind": "custom", "boundary": {"domain": "bluetooth.host-boundary", "operation": "a2dp.stream.open", "direction": "internal"}, "parents": ["e02.configure"], "clock": {"domain": "fixture.sequence", "value": 3}, "attributes": {"handle": 64, "stream_id": "audio.1"}},
+    {"id": "e04.start", "actor": "host.stack", "kind": "custom", "boundary": {"domain": "bluetooth.host-boundary", "operation": "a2dp.stream.start", "direction": "internal"}, "parents": ["e03.open"], "clock": {"domain": "fixture.sequence", "value": 4}, "attributes": {"handle": 64, "stream_id": "audio.1"}},
+    {"id": "e05.media", "actor": "host.stack", "kind": "boundary.output", "boundary": {"domain": "bluetooth.host-boundary", "operation": "a2dp.media", "direction": "target-out"}, "parents": ["e04.start"], "clock": {"domain": "fixture.sequence", "value": 5}, "attributes": {"handle": 64, "stream_id": "audio.1", "sequence": 1, "length": 128}},
+    {"id": "e06.command", "actor": "host.stack", "kind": "boundary.output", "boundary": {"domain": "bluetooth.host-boundary", "operation": "avrcp.command", "direction": "target-out"}, "parents": ["e05.media"], "clock": {"domain": "fixture.sequence", "value": 6}, "attributes": {"handle": 64, "transaction_id": "avrcp.1", "pdu": "pause", "direction": "controller-to-target"}},
+    {"id": "e07.response", "actor": "controller.irq", "kind": "boundary.input", "boundary": {"domain": "bluetooth.host-boundary", "operation": "avrcp.response", "direction": "target-in"}, "parents": ["e06.command"], "clock": {"domain": "fixture.sequence", "value": 7}, "attributes": {"handle": 64, "transaction_id": "avrcp.1", "pdu": "pause", "result": "accepted"}},
+    {"id": "e08.suspend", "actor": "host.stack", "kind": "custom", "boundary": {"domain": "bluetooth.host-boundary", "operation": "a2dp.stream.suspend", "direction": "internal"}, "parents": ["e07.response"], "clock": {"domain": "fixture.sequence", "value": 8}, "attributes": {"handle": 64, "stream_id": "audio.1"}},
+    {"id": "e09.close", "actor": "host.stack", "kind": "custom", "boundary": {"domain": "bluetooth.host-boundary", "operation": "a2dp.stream.close", "direction": "internal"}, "parents": ["e08.suspend"], "clock": {"domain": "fixture.sequence", "value": 9}, "attributes": {"handle": 64, "stream_id": "audio.1"}},
+    {"id": "e10.disconnected", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.disconnection.complete", "direction": "target-in"}, "parents": ["e09.close"], "clock": {"domain": "fixture.sequence", "value": 10}, "attributes": {"status": 0, "handle": 64, "reason": 19}}
+  ]
+}

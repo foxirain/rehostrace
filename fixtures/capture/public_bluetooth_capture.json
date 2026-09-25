@@ -1,0 +1,24 @@
+{
+  "schema_version": "rehostrace.capture-bundle/v1",
+  "capture_id": "public.capture.bluetooth-hci.v1",
+  "disclosure": "public-synthetic",
+  "producer": "rehostrace-public-capture-fixture",
+  "redactions": [],
+  "clock_domains": [
+    {"id": "controller.clock", "unit": "ticks", "synchronized": false},
+    {"id": "host.clock", "unit": "ns", "synchronized": false}
+  ],
+  "actors": [
+    {"id": "controller.irq", "kind": "interrupt"},
+    {"id": "host.security", "kind": "thread"}
+  ],
+  "resources": [
+    {"id": "connection.demo", "kind": "synthetic-connection", "identity": "logical"}
+  ],
+  "records": [
+    {"id": "e00.ready", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.controller.ready", "direction": "target-in"}, "clock": {"domain": "controller.clock", "value": 100}, "attributes": {"command_credits": 1}},
+    {"id": "e01.connected", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.connection.complete", "direction": "target-in"}, "subject": "connection.demo", "clock": {"domain": "controller.clock", "value": 101}, "attributes": {"status": 0, "handle": 64, "address_token": "public-peer", "link_type": "acl"}},
+    {"id": "e02.auth", "actor": "host.security", "kind": "boundary.output", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.authentication.complete", "direction": "internal"}, "subject": "connection.demo", "causes": ["e01.connected"], "clock": {"domain": "host.clock", "value": 5}, "attributes": {"status": 0, "handle": 64}},
+    {"id": "e03.disconnected", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.disconnection.complete", "direction": "target-in"}, "subject": "connection.demo", "causes": ["e02.auth"], "clock": {"domain": "controller.clock", "value": 102}, "attributes": {"status": 0, "handle": 64, "reason": 19}}
+  ]
+}

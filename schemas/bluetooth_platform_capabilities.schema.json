@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rehostrace.example/schemas/bluetooth_platform_capabilities.schema.json",
+  "title": "RehostRace Bluetooth platform capability matrix",
+  "type": "object",
+  "required": ["schema_version", "status", "capabilities", "checks", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "rehostrace.bluetooth-platform-capabilities/v1"},
+    "status": {"enum": ["passed", "failed"]},
+    "capabilities": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+    "checks": {"type": "object"},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}

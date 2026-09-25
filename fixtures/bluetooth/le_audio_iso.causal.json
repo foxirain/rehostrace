@@ -1,0 +1,21 @@
+{
+  "schema_version": "rehostrace.causal/v2",
+  "trace_id": "public.bluetooth.le-audio.control",
+  "disclosure": "public-synthetic",
+  "origin": {"kind": "synthetic", "producer": "rehostrace-le-audio-fixture", "redactions": []},
+  "clock_domains": [{"id": "fixture.sequence", "unit": "sequence", "synchronized": true}],
+  "actors": [{"id": "host.stack", "kind": "host"}, {"id": "controller.irq", "kind": "interrupt"}],
+  "resources": [{"id": "connection.le", "kind": "synthetic-le-connection", "identity": "logical"}],
+  "events": [
+    {"id": "e00.ready", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.controller.ready", "direction": "target-in"}, "parents": [], "clock": {"domain": "fixture.sequence", "value": 0}, "attributes": {"command_credits": 1}},
+    {"id": "e01.connected", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.le.connection.complete", "direction": "target-in"}, "parents": ["e00.ready"], "subject": "connection.le", "clock": {"domain": "fixture.sequence", "value": 1}, "attributes": {"status": 0, "handle": 65, "address_token": "public-peer", "role": "central", "peer_address_type": "public", "peer_address_token": "public-peer-address", "peer_address_hex": "020000000001", "connection_interval": 24, "connection_latency": 0, "supervision_timeout": 200, "clock_accuracy": 0}},
+    {"id": "e02.configure", "actor": "host.stack", "kind": "custom", "boundary": {"domain": "bluetooth.host-boundary", "operation": "le_audio.group.configure", "direction": "internal"}, "parents": ["e01.connected"], "clock": {"domain": "fixture.sequence", "value": 2}, "attributes": {"group_id": "group.1", "codec": "lc3"}},
+    {"id": "e03.cis", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "le_audio.cis.establish", "direction": "target-in"}, "parents": ["e02.configure"], "clock": {"domain": "fixture.sequence", "value": 3}, "attributes": {"group_id": "group.1", "stream_id": "cis.1", "handle": 65}},
+    {"id": "e04.start", "actor": "host.stack", "kind": "custom", "boundary": {"domain": "bluetooth.host-boundary", "operation": "le_audio.stream.start", "direction": "internal"}, "parents": ["e03.cis"], "clock": {"domain": "fixture.sequence", "value": 4}, "attributes": {"group_id": "group.1", "stream_id": "cis.1"}},
+    {"id": "e05.iso", "actor": "controller.irq", "kind": "boundary.input", "boundary": {"domain": "bluetooth.host-boundary", "operation": "le_audio.iso.data", "direction": "target-in"}, "parents": ["e04.start"], "clock": {"domain": "fixture.sequence", "value": 5}, "attributes": {"group_id": "group.1", "stream_id": "cis.1", "sequence": 1, "length": 60}},
+    {"id": "e06.stop", "actor": "host.stack", "kind": "custom", "boundary": {"domain": "bluetooth.host-boundary", "operation": "le_audio.stream.stop", "direction": "internal"}, "parents": ["e05.iso"], "clock": {"domain": "fixture.sequence", "value": 6}, "attributes": {"group_id": "group.1", "stream_id": "cis.1"}},
+    {"id": "e07.cis-disconnect", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "le_audio.cis.disconnect", "direction": "target-in"}, "parents": ["e06.stop"], "clock": {"domain": "fixture.sequence", "value": 7}, "attributes": {"group_id": "group.1", "stream_id": "cis.1"}},
+    {"id": "e08.release", "actor": "host.stack", "kind": "custom", "boundary": {"domain": "bluetooth.host-boundary", "operation": "le_audio.group.release", "direction": "internal"}, "parents": ["e07.cis-disconnect"], "clock": {"domain": "fixture.sequence", "value": 8}, "attributes": {"group_id": "group.1"}},
+    {"id": "e09.disconnected", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.disconnection.complete", "direction": "target-in"}, "parents": ["e08.release"], "clock": {"domain": "fixture.sequence", "value": 9}, "attributes": {"status": 0, "handle": 65, "reason": 19}}
+  ]
+}

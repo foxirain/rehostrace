@@ -40,10 +40,23 @@ class PublicBluetoothProfileTests(unittest.TestCase):
             total_events += len(trace.events)
             machines.update(profile["state_machines"])
             transports.add(profile["transport"])
-        self.assertEqual(len(catalog["profiles"]), 3)
+        self.assertEqual(len(catalog["profiles"]), 7)
         self.assertGreater(total_events, 60)
-        self.assertEqual(transports, {"BR/EDR ACL", "LE ACL"})
-        self.assertTrue({"AVDTP", "SDP", "ATT", "GATT"}.issubset(machines))
+        self.assertEqual(transports, {"BR/EDR ACL", "LE ACL", "LE ISO"})
+        self.assertTrue(
+            {
+                "AVDTP",
+                "SDP",
+                "ATT",
+                "GATT",
+                "SMP",
+                "RFCOMM",
+                "HFP",
+                "AVRCP",
+                "A2DP",
+                "LE Audio",
+            }.issubset(machines)
+        )
 
 
 if __name__ == "__main__":

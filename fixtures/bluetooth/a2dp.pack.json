@@ -1,0 +1,15 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.a2dp.v1",
+  "protocol": "a2dp",
+  "layer": "application",
+  "requires": ["public.bluetooth.hci-core.v1"],
+  "selectors": [
+    {"operation": "a2dp.stream.configure", "required_attributes": ["handle", "stream_id", "codec"]},
+    {"operation": "a2dp.stream.open", "required_attributes": ["handle", "stream_id"]},
+    {"operation": "a2dp.stream.start", "required_attributes": ["handle", "stream_id"]},
+    {"operation": "a2dp.media", "required_attributes": ["handle", "stream_id", "sequence", "length"]},
+    {"operation": "a2dp.stream.suspend", "required_attributes": ["handle", "stream_id"]},
+    {"operation": "a2dp.stream.close", "required_attributes": ["handle", "stream_id"]}
+  ]
+}

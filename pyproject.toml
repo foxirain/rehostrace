@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rehostrace"
-version = "0.1.0"
+version = "0.2.0"
 description = "Causality-preserving replay and evidence contracts for asynchronous components"
 readme = "README.md"
 requires-python = ">=3.10"
