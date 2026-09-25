@@ -31,7 +31,7 @@ FORBIDDEN_SUFFIXES = {
 FORBIDDEN_FILENAMES = {"Module.symvers", "modules.order", "Module.markers"}
 TEXT_SUFFIXES = {
     "", ".c", ".h", ".py", ".json", ".jsonl", ".md", ".toml", ".cff",
-    ".gitignore", ".txt", ".yml", ".yaml",
+    ".gitignore", ".txt", ".yml", ".yaml", ".svg",
 }
 
 

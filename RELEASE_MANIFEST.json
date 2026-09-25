@@ -1,5 +1,5 @@
 {
-  "file_count": 160,
+  "file_count": 161,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -38,8 +38,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "8f0232a9529c69e52731048f5fea7d2d64fac63a321204b56732cd9c71294b0b",
-      "size": 5050
+      "sha256": "5763ffc711a97a696e1903ebba97090514f42a178fcc0b1fa95e21143a97a4e7",
+      "size": 5516
     },
     {
       "path": "SECURITY.md",
@@ -100,6 +100,11 @@
       "path": "docs/TARGET_LOWERING.md",
       "sha256": "419e1595a8098a515e6a696e7506dc45fd5394b5ad116ebf20eb2185ac01ba26",
       "size": 4820
+    },
+    {
+      "path": "docs/assets/rehostrace-gw-takedown-banner.svg",
+      "sha256": "7c41c11d52296c2599a107b8cb3cc19424671d66584cb4e77bd1b63bb512ebc5",
+      "size": 6085
     },
     {
       "path": "fixtures/bluetooth/a2dp.pack.json",
@@ -738,8 +743,8 @@
     },
     {
       "path": "tools/audit_framework_release.py",
-      "sha256": "f2c563a899f6822197ca5b3e7be79497bc9f35465ffcdc7f9629061659e71b37",
-      "size": 4880
+      "sha256": "68cec139846604b2669504ff1d7cee912b242394f672ff31a47bb641d2cc0e9a",
+      "size": 4888
     },
     {
       "path": "tools/build_newc.py",
