@@ -103,8 +103,8 @@
     },
     {
       "path": "docs/assets/rehostrace-gw-takedown-banner.svg",
-      "sha256": "7c41c11d52296c2599a107b8cb3cc19424671d66584cb4e77bd1b63bb512ebc5",
-      "size": 6085
+      "sha256": "513100e6017a2ee2fc4edb18a72219d1779944c96d7558b0c6e54c562efc6942",
+      "size": 3873
     },
     {
       "path": "fixtures/bluetooth/a2dp.pack.json",

@@ -1,89 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="title desc">
-  <title id="title">RehostRace within the GW TakeDown research program</title>
-  <desc id="desc">A project banner showing GW TakeDown leading to its Bluetooth research track and then to RehostRace, a causality-preserving rehosting framework.</desc>
-  <defs>
-    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#07101f"/>
-      <stop offset="0.55" stop-color="#0b1627"/>
-      <stop offset="1" stop-color="#111c31"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#5eead4"/>
-      <stop offset="1" stop-color="#60a5fa"/>
-    </linearGradient>
-    <linearGradient id="accent-soft" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#5eead4" stop-opacity="0.2"/>
-      <stop offset="1" stop-color="#60a5fa" stop-opacity="0.09"/>
-    </linearGradient>
-    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M32 0H0V32" fill="none" stroke="#93a4bd" stroke-opacity="0.055"/>
-    </pattern>
-    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="12"/>
-    </filter>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc">
+  <title id="title">RehostRace — Bluetooth research within GW TakeDown</title>
+  <desc id="desc">A restrained technical banner connecting the GW TakeDown project to its Bluetooth research track and RehostRace, with two asynchronous paths converging on a shared object.</desc>
 
-  <rect width="1280" height="420" rx="28" fill="url(#background)"/>
-  <rect width="1280" height="420" rx="28" fill="url(#grid)"/>
-  <circle cx="1140" cy="40" r="180" fill="#2563eb" fill-opacity="0.09" filter="url(#glow)"/>
-  <circle cx="70" cy="390" r="170" fill="#14b8a6" fill-opacity="0.07" filter="url(#glow)"/>
+  <rect width="1280" height="360" fill="#0a0c0f"/>
+  <path d="M0 1H1280M0 359H1280" stroke="#262b31"/>
+  <path d="M48 48V312" stroke="#64e8c8" stroke-width="3"/>
 
-  <g font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
-    <g transform="translate(72 68)">
-      <rect x="0" y="0" width="258" height="34" rx="17" fill="#5eead4" fill-opacity="0.1" stroke="#5eead4" stroke-opacity="0.35"/>
-      <circle cx="19" cy="17" r="5" fill="#5eead4"/>
-      <text x="34" y="22" fill="#bdfcf2" font-size="14" font-weight="600" letter-spacing="2.1">GW TAKEDOWN PROJECT</text>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="82" y="66" fill="#82909f" font-size="13" font-weight="600" letter-spacing="2.2">GW TAKE DOWN  /  BLUETOOTH RESEARCH</text>
+    <text x="82" y="306" fill="#82909f" font-size="12" letter-spacing="1.35">CAPTURE  /  REPLAY  /  SCHEDULE  /  EVIDENCE</text>
+  </g>
 
-      <text x="0" y="108" fill="#f8fafc" font-size="66" font-weight="700" letter-spacing="-2.4">RehostRace</text>
-      <rect x="0" y="127" width="92" height="5" rx="2.5" fill="url(#accent)"/>
-      <text x="0" y="174" fill="#cbd5e1" font-size="25" font-weight="500">Bluetooth rehosting for asynchronous</text>
-      <text x="0" y="207" fill="#cbd5e1" font-size="25" font-weight="500">lifetime and race research</text>
+  <g font-family="Inter, Helvetica Neue, Helvetica, Arial, sans-serif">
+    <text x="78" y="169" fill="#f3f5f7" font-size="76" font-weight="700" letter-spacing="-3.5">Rehost</text>
+    <text x="315" y="169" fill="#64e8c8" font-size="76" font-weight="700" letter-spacing="-3.5">Race</text>
+    <text x="82" y="212" fill="#b2bac4" font-size="20" font-weight="400" letter-spacing="0.1">Causality-preserving rehosting for Bluetooth concurrency</text>
+  </g>
 
-      <g transform="translate(0 252)" font-size="13" font-weight="600" letter-spacing="1.25">
-        <rect width="112" height="38" rx="19" fill="#ffffff" fill-opacity="0.055" stroke="#ffffff" stroke-opacity="0.12"/>
-        <text x="56" y="24" text-anchor="middle" fill="#dbeafe">CAPTURE</text>
-        <path d="M126 19h26" stroke="#64748b" stroke-width="1.5"/>
-        <path d="m147 14 6 5-6 5" fill="none" stroke="#64748b" stroke-width="1.5"/>
-        <rect x="166" width="102" height="38" rx="19" fill="#ffffff" fill-opacity="0.055" stroke="#ffffff" stroke-opacity="0.12"/>
-        <text x="217" y="24" text-anchor="middle" fill="#dbeafe">REPLAY</text>
-        <path d="M282 19h26" stroke="#64748b" stroke-width="1.5"/>
-        <path d="m303 14 6 5-6 5" fill="none" stroke="#64748b" stroke-width="1.5"/>
-        <rect x="322" width="124" height="38" rx="19" fill="#ffffff" fill-opacity="0.055" stroke="#ffffff" stroke-opacity="0.12"/>
-        <text x="384" y="24" text-anchor="middle" fill="#dbeafe">SCHEDULE</text>
-        <path d="M460 19h26" stroke="#64748b" stroke-width="1.5"/>
-        <path d="m481 14 6 5-6 5" fill="none" stroke="#64748b" stroke-width="1.5"/>
-        <rect x="500" width="124" height="38" rx="19" fill="url(#accent-soft)" stroke="#5eead4" stroke-opacity="0.35"/>
-        <text x="562" y="24" text-anchor="middle" fill="#bdfcf2">EVIDENCE</text>
-      </g>
-    </g>
+  <path d="M640 48V312" stroke="#262b31"/>
 
-    <g transform="translate(846 52)">
-      <text x="174" y="16" text-anchor="middle" fill="#71829c" font-size="12" font-weight="600" letter-spacing="2">PROJECT POSITION</text>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="684" y="66" fill="#65717d" font-size="11" font-weight="600" letter-spacing="1.7">PROJECT POSITION</text>
 
-      <rect x="24" y="40" width="300" height="72" rx="18" fill="#ffffff" fill-opacity="0.045" stroke="#94a3b8" stroke-opacity="0.22"/>
-      <circle cx="57" cy="76" r="13" fill="#94a3b8" fill-opacity="0.14" stroke="#94a3b8" stroke-opacity="0.45"/>
-      <path d="M51 76h12M57 70v12" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round"/>
-      <text x="82" y="72" fill="#f1f5f9" font-size="18" font-weight="700">GW TakeDown</text>
-      <text x="82" y="93" fill="#94a3b8" font-size="13">wearable security research program</text>
+    <text x="684" y="105" fill="#d8dde3" font-size="12" font-weight="600" letter-spacing="1.15">GW TAKE DOWN</text>
+    <path d="M792 101H836" stroke="#4b545f"/>
+    <path d="m831 97 5 4-5 4" fill="none" stroke="#4b545f"/>
+    <text x="850" y="105" fill="#d8dde3" font-size="12" font-weight="600" letter-spacing="1.15">BLUETOOTH</text>
+    <path d="M938 101H982" stroke="#4b545f"/>
+    <path d="m977 97 5 4-5 4" fill="none" stroke="#4b545f"/>
+    <text x="996" y="105" fill="#64e8c8" font-size="12" font-weight="700" letter-spacing="1.15">REHOSTRACE</text>
 
-      <path d="M174 112v34" stroke="#52647e" stroke-width="2"/>
-      <circle cx="174" cy="146" r="4" fill="#60a5fa"/>
+    <text x="684" y="160" fill="#687481" font-size="11" letter-spacing="1.4">TX / ASYNC PATH</text>
+    <text x="684" y="275" fill="#687481" font-size="11" letter-spacing="1.4">RX / ASYNC PATH</text>
+    <text x="925" y="289" fill="#82909f" font-size="10" letter-spacing="1.25">SAME OBJECT</text>
+    <text x="1135" y="225" fill="#82909f" font-size="10" letter-spacing="1.25">ORACLE</text>
+  </g>
 
-      <rect x="12" y="150" width="324" height="82" rx="20" fill="url(#accent-soft)" stroke="#60a5fa" stroke-opacity="0.55"/>
-      <circle cx="51" cy="191" r="18" fill="#60a5fa" fill-opacity="0.16" stroke="#60a5fa" stroke-opacity="0.5"/>
-      <path d="m46 182 12 9-12 9v-18Zm12 9h7" fill="none" stroke="#bfdbfe" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      <text x="80" y="186" fill="#dbeafe" font-size="13" font-weight="600" letter-spacing="1.4">BLUETOOTH TRACK</text>
-      <text x="80" y="211" fill="#f8fafc" font-size="19" font-weight="700">Boundary · concurrency · lifetime</text>
+  <g fill="none" stroke-linecap="square" stroke-linejoin="round">
+    <path d="M684 183H808C864 183 888 199 924 222L946 236" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="M684 252H808C864 252 888 247 924 239L946 236" stroke="#64e8c8" stroke-width="2"/>
+    <path d="M982 236H1168" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="m1161 230 7 6-7 6" stroke="#e5e9ed" stroke-width="2"/>
 
-      <path d="M174 232v34" stroke="#3f748e" stroke-width="2"/>
-      <circle cx="174" cy="266" r="4" fill="#5eead4"/>
+    <circle cx="752" cy="183" r="5" fill="#0a0c0f" stroke="#e5e9ed" stroke-width="2"/>
+    <circle cx="834" cy="185" r="5" fill="#0a0c0f" stroke="#e5e9ed" stroke-width="2"/>
+    <circle cx="752" cy="252" r="5" fill="#0a0c0f" stroke="#64e8c8" stroke-width="2"/>
+    <circle cx="834" cy="251" r="5" fill="#0a0c0f" stroke="#64e8c8" stroke-width="2"/>
 
-      <rect x="0" y="270" width="348" height="88" rx="22" fill="#0f2835" stroke="#5eead4" stroke-opacity="0.68"/>
-      <rect x="18" y="289" width="5" height="50" rx="2.5" fill="url(#accent)"/>
-      <text x="42" y="308" fill="#bdfcf2" font-size="12" font-weight="600" letter-spacing="1.8">REHOSTING FRAMEWORK</text>
-      <text x="42" y="337" fill="#ffffff" font-size="26" font-weight="700">RehostRace</text>
-      <text x="288" y="327" text-anchor="middle" fill="#7dd3fc" font-size="12" font-weight="600">CAUSAL</text>
-      <text x="288" y="343" text-anchor="middle" fill="#7dd3fc" font-size="12" font-weight="600">REPLAY</text>
-    </g>
+    <circle cx="964" cy="236" r="18" fill="#0a0c0f" stroke="#64e8c8" stroke-width="2"/>
+    <circle cx="964" cy="236" r="5" fill="#64e8c8" stroke="none"/>
+
+    <path d="M1110 225V247M1118 225V247" stroke="#64e8c8" stroke-width="2"/>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" fill="#59636e" font-size="9" letter-spacing="1">
+    <text x="733" y="202">CAPTURE</text>
+    <text x="818" y="204">GATE</text>
+    <text x="733" y="270">CAPTURE</text>
+    <text x="818" y="270">GATE</text>
   </g>
 </svg>
