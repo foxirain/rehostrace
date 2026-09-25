@@ -1,0 +1,13 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.smp.v1",
+  "protocol": "smp",
+  "layer": "application",
+  "requires": ["public.bluetooth.hci-core.v1"],
+  "selectors": [
+    {"operation": "smp.pairing.start", "required_attributes": ["handle", "session_id", "role", "io_capability", "auth_requirements"]},
+    {"operation": "smp.pairing.confirm", "required_attributes": ["handle", "session_id", "side"]},
+    {"operation": "smp.pairing.random", "required_attributes": ["handle", "session_id", "side"]},
+    {"operation": "smp.pairing.complete", "required_attributes": ["handle", "session_id", "result", "encrypted"]}
+  ]
+}

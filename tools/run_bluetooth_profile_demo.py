@@ -119,10 +119,22 @@ def main() -> int:
 
     state_machines = {state for item in results for state in item["state_machines"]}
     checks = {
-        "three_vertical_slices_passed": len(results) == 3
+        "seven_vertical_slices_passed": len(results) == 7
         and all(item["status"] == "passed" for item in results),
-        "classic_and_le_covered": matrix["transport_families"] == ["BR/EDR ACL", "LE ACL"],
-        "application_state_machines_covered": {"AVDTP", "SDP", "ATT", "GATT"}.issubset(state_machines),
+        "classic_le_acl_and_le_iso_covered": matrix["transport_families"]
+        == ["BR/EDR ACL", "LE ACL", "LE ISO"],
+        "application_state_machines_covered": {
+            "AVDTP",
+            "SDP",
+            "ATT",
+            "GATT",
+            "SMP",
+            "RFCOMM",
+            "HFP",
+            "AVRCP",
+            "A2DP",
+            "LE Audio",
+        }.issubset(state_machines),
     }
     status = "passed" if all(checks.values()) else "failed"
     receipt = build_receipt(
@@ -179,8 +191,8 @@ def main() -> int:
             },
         },
         claim_boundary=(
-            "This receipt demonstrates three public synthetic causal vertical slices across "
-            "Classic and LE host boundaries. It is not a complete Bluetooth stack, controller "
+            "This receipt demonstrates seven public synthetic causal vertical slices across "
+            "Classic, LE ACL, and LE ISO host boundaries. It is not a complete Bluetooth stack, controller "
             "or radio emulator, real-device result, vulnerability finding, or exploitability claim."
         ),
     )

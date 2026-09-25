@@ -1,0 +1,15 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.rfcomm.v1",
+  "protocol": "rfcomm",
+  "layer": "application",
+  "requires": ["public.bluetooth.hci-core.v1"],
+  "selectors": [
+    {"operation": "rfcomm.session.open", "required_attributes": ["handle", "session_id", "role"]},
+    {"operation": "rfcomm.dlc.open", "required_attributes": ["handle", "session_id", "dlci", "initial_credits"]},
+    {"operation": "rfcomm.credit", "required_attributes": ["handle", "session_id", "dlci", "direction", "credits"]},
+    {"operation": "rfcomm.data", "required_attributes": ["handle", "session_id", "dlci", "direction", "length"]},
+    {"operation": "rfcomm.dlc.close", "required_attributes": ["handle", "session_id", "dlci"]},
+    {"operation": "rfcomm.session.close", "required_attributes": ["handle", "session_id"]}
+  ]
+}

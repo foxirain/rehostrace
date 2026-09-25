@@ -1,0 +1,11 @@
+{
+  "schema_version": "rehostrace.fuzz-campaign-set/v1",
+  "campaigns": [
+    {"schema_version": "rehostrace.fuzz-policy/v1", "campaign_id": "public.parser.smp.v1", "protocol": "smp", "limits": {"executions": 96, "max_input_bytes": 80}, "seeds_hex": ["01030001100707"], "dictionary_hex": ["03", "04", "10"], "stop_on": []},
+    {"schema_version": "rehostrace.fuzz-policy/v1", "campaign_id": "public.parser.rfcomm.v1", "protocol": "rfcomm", "limits": {"executions": 96, "max_input_bytes": 64}, "seeds_hex": ["03ef0142"], "dictionary_hex": ["ef", "2f", "63"], "stop_on": []},
+    {"schema_version": "rehostrace.fuzz-policy/v1", "campaign_id": "public.parser.avrcp.v1", "protocol": "avrcp", "limits": {"executions": 96, "max_input_bytes": 64}, "seeds_hex": ["00110e00487c"], "dictionary_hex": ["110e", "7c", "00"], "stop_on": []},
+    {"schema_version": "rehostrace.fuzz-policy/v1", "campaign_id": "public.parser.hfp-at.v1", "protocol": "hfp-at", "limits": {"executions": 96, "max_input_bytes": 128}, "seeds_hex": ["41542b425253463d32300d"], "dictionary_hex": ["4f4b0d", "4552524f520d", "4154"], "stop_on": []},
+    {"schema_version": "rehostrace.fuzz-policy/v1", "campaign_id": "public.parser.a2dp-rtp.v1", "protocol": "a2dp-rtp", "limits": {"executions": 96, "max_input_bytes": 128}, "seeds_hex": ["806000010000000100000002aa"], "dictionary_hex": ["8060", "0001", "ffff"], "stop_on": []},
+    {"schema_version": "rehostrace.fuzz-policy/v1", "campaign_id": "public.parser.le-iso.v1", "protocol": "le-iso", "limits": {"executions": 96, "max_input_bytes": 128}, "seeds_hex": ["0100050001000100aa"], "dictionary_hex": ["0500", "0100", "aa"], "stop_on": []}
+  ]
+}

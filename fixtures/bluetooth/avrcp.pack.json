@@ -1,0 +1,11 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.avrcp.v1",
+  "protocol": "avrcp",
+  "layer": "application",
+  "requires": ["public.bluetooth.hci-core.v1"],
+  "selectors": [
+    {"operation": "avrcp.command", "required_attributes": ["handle", "transaction_id", "pdu", "direction"]},
+    {"operation": "avrcp.response", "required_attributes": ["handle", "transaction_id", "pdu", "result"]}
+  ]
+}

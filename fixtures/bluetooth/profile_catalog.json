@@ -22,14 +22,39 @@
       "trace": "att_gatt.causal.json",
       "packs": ["hci_core.pack.json", "att.pack.json", "gatt.pack.json"],
       "state_machines": ["LE HCI", "ACL reassembly", "ATT", "GATT"]
+    },
+    {
+      "id": "le-smp",
+      "transport": "LE ACL",
+      "trace": "smp_pairing.causal.json",
+      "packs": ["hci_core.pack.json", "smp.pack.json"],
+      "state_machines": ["LE HCI", "SMP"]
+    },
+    {
+      "id": "classic-rfcomm-hfp",
+      "transport": "BR/EDR ACL",
+      "trace": "rfcomm_hfp.causal.json",
+      "packs": ["hci_core.pack.json", "rfcomm.pack.json", "hfp.pack.json"],
+      "state_machines": ["HCI", "RFCOMM", "HFP"]
+    },
+    {
+      "id": "classic-avrcp-a2dp",
+      "transport": "BR/EDR ACL",
+      "trace": "avrcp_a2dp.causal.json",
+      "packs": ["hci_core.pack.json", "avrcp.pack.json", "a2dp.pack.json"],
+      "state_machines": ["HCI", "AVRCP", "A2DP"]
+    },
+    {
+      "id": "le-audio-iso",
+      "transport": "LE ISO",
+      "trace": "le_audio_iso.causal.json",
+      "packs": ["hci_core.pack.json", "le_audio.pack.json"],
+      "state_machines": ["LE HCI", "LE Audio", "ISO lifecycle"]
     }
   ],
   "open_profiles": [
-    {"id": "classic-rfcomm", "reason": "frame/FCS, multiplexer, credit, and DLC lifecycle not implemented"},
-    {"id": "classic-avrcp-a2dp-media", "reason": "AVCTP/AVRCP and AVDTP media/session state not implemented"},
-    {"id": "classic-hfp-hsp", "reason": "RFCOMM AT and synchronous audio state not implemented"},
-    {"id": "le-smp", "reason": "pairing, key distribution, and security state not implemented"},
-    {"id": "le-iso-audio", "reason": "ISO transport and LE Audio profiles not implemented"},
+    {"id": "classic-hsp", "reason": "HSP-specific signaling is not modeled by the HFP lifecycle pack"},
+    {"id": "protocol-wire-decoders", "reason": "new profile packs model semantic lifecycle events, not every wire field, FCS, codec payload, or malformed-packet rule"},
     {"id": "android-host-stack", "reason": "framework, native daemon, and HAL behavior not rehosted"},
     {"id": "controller-rf", "reason": "controller firmware, coexistence, DMA timing, and radio are out of host-driver scope"}
   ]

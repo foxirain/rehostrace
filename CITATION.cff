@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use this research framework, please cite the software artifact."
 title: "RehostRace Framework"
-version: 0.1.0
-date-released: 2026-09-25
+version: 0.2.0
+date-released: 2026-09-26
 type: software
 license: GPL-2.0-only
 authors:

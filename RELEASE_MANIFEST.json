@@ -1,5 +1,5 @@
 {
-  "file_count": 100,
+  "file_count": 150,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -12,8 +12,13 @@
       "size": 328
     },
     {
+      "path": "CHANGELOG.md",
+      "sha256": "14e4e75e02f8bf6e21830e6c827308220a282eb0bdbd819592046d69774386c8",
+      "size": 729
+    },
+    {
       "path": "CITATION.cff",
-      "sha256": "54134c7b7ef34974a0ce67cbc3be13c1adaf1b35b08c4053dd14aa9271d4081c",
+      "sha256": "eff8823bede36b3b83b0a4c5cb5d94ce447a40633a8c557b0c561814705e31cf",
       "size": 361
     },
     {
@@ -28,13 +33,13 @@
     },
     {
       "path": "Makefile",
-      "sha256": "b8d38ea9037d6de3f6c725b646e30de500cb5eeedf4dd49b53a159860d9fabba",
-      "size": 619
+      "sha256": "92e489cc7859125e747e166af883b9841c45db87b75f229ba98db6bff4384570",
+      "size": 1025
     },
     {
       "path": "README.md",
-      "sha256": "772ce01fe80f0d3c39af0c1d6ee28f05f8bd6c04c6725e489f11116028ec5dc3",
-      "size": 3383
+      "sha256": "213eed0ddec506fe30cd17525235a3992af0dfeae6615a6b99e520bfc9c6c7b5",
+      "size": 4698
     },
     {
       "path": "SECURITY.md",
@@ -63,8 +68,8 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "e69c973542e57a2666d0328540e29e2e157ae7b60b80a53a1283736d6bd422bd",
-      "size": 1728
+      "sha256": "655cc8a7bb62695809321f885c818141b05a6b057f3942d847a1f8cb9481c60b",
+      "size": 2903
     },
     {
       "path": "docs/CLAIM_MODEL.md",
@@ -72,9 +77,19 @@
       "size": 1061
     },
     {
+      "path": "docs/FULL_BLUETOOTH_ROADMAP.md",
+      "sha256": "cd3b6e4ac75f1464dd7dc2820dc392c3ec8ea999e4189a3886dc97f7e6847f3e",
+      "size": 7339
+    },
+    {
       "path": "docs/RELEASE_SCOPE.md",
       "sha256": "4215fbc47c628da3381453cb6f5ee6dadd67b653dbaf22fc68863a0ab6671852",
       "size": 823
+    },
+    {
+      "path": "fixtures/bluetooth/a2dp.pack.json",
+      "sha256": "0fca9970ac7709a60c6038e23b788bcf6bd4e3f9b81342554ad6dd2fb93116c5",
+      "size": 770
     },
     {
       "path": "fixtures/bluetooth/att.pack.json",
@@ -90,6 +105,16 @@
       "path": "fixtures/bluetooth/avdtp_signaling.pack.json",
       "sha256": "c305881e405c18541bca05c79c1165c619241345b039bab39e120866308d362e",
       "size": 556
+    },
+    {
+      "path": "fixtures/bluetooth/avrcp.pack.json",
+      "sha256": "340952060ef8fa3d6a04f1c3b41dd12b633069dec3fa06dedea0be794ec23e77",
+      "size": 431
+    },
+    {
+      "path": "fixtures/bluetooth/avrcp_a2dp.causal.json",
+      "sha256": "803249f79afb9dd63c9ca575f66a3e44786c9ec4c58f85960057bb2767034534",
+      "size": 4255
     },
     {
       "path": "fixtures/bluetooth/cross_profile.composition.json",
@@ -112,14 +137,39 @@
       "size": 16361
     },
     {
+      "path": "fixtures/bluetooth/hfp.pack.json",
+      "sha256": "97044a538980675c7ee255f06a1cb8644433d9470209cf583d59de00c6a4ae32",
+      "size": 850
+    },
+    {
       "path": "fixtures/bluetooth/l2cap_core.pack.json",
       "sha256": "d4442d6777f0d8aa5b10a4a25b20812c19ade343eb7a92b479ed48cf5479cb5b",
       "size": 1078
     },
     {
+      "path": "fixtures/bluetooth/le_audio.pack.json",
+      "sha256": "34f2e94064a33c2b93230aa7c06681ed80d6f34063fb85970f89433dac52b633",
+      "size": 896
+    },
+    {
+      "path": "fixtures/bluetooth/le_audio_iso.causal.json",
+      "sha256": "67bfac7299ae28e2e9e21aa5f23f96b6518dab1b20ec504b177457778302174b",
+      "size": 4093
+    },
+    {
       "path": "fixtures/bluetooth/profile_catalog.json",
-      "sha256": "be85a6f4ae85f57cf8711831b5ffa9f9d4536c8f04d5265dd05a1d56904aaae6",
-      "size": 1713
+      "sha256": "6f1b44b617a984301d282047901e45189de72761e0617f64e40167f8814f2751",
+      "size": 2412
+    },
+    {
+      "path": "fixtures/bluetooth/rfcomm.pack.json",
+      "sha256": "8a7d3de89e68762ff5cc308bff181555fa3b9eeb5047b965091719599f4fba3c",
+      "size": 849
+    },
+    {
+      "path": "fixtures/bluetooth/rfcomm_hfp.causal.json",
+      "sha256": "288af8382ab1083396b44fb256cb2b7437bdc33ebdc2314f555c5595cb55a79f",
+      "size": 5402
     },
     {
       "path": "fixtures/bluetooth/sdp.pack.json",
@@ -132,6 +182,26 @@
       "size": 13074
     },
     {
+      "path": "fixtures/bluetooth/smp.pack.json",
+      "sha256": "df0ffa5567cb82b854e182527db1f1417c1e0348e909fbb752977f55b9280dad",
+      "size": 658
+    },
+    {
+      "path": "fixtures/bluetooth/smp_pairing.causal.json",
+      "sha256": "b651fbf125e8a488629dacc782dae73cd1ca34e6bf2e2da5aa206369133d0d53",
+      "size": 4003
+    },
+    {
+      "path": "fixtures/capture/public_bluetooth_capture.json",
+      "sha256": "2abf43589876e728a830a75b2e6ecc8282ef643a1768fd65e9cb5c59774ec256",
+      "size": 1984
+    },
+    {
+      "path": "fixtures/cfg/lock_handoff.graph.json",
+      "sha256": "559a9500026ba023d7c6a3c03d1461eb7cf3531cc4240bbaef8645c3cdc9087a",
+      "size": 990
+    },
+    {
       "path": "fixtures/deferred_work_driver/Makefile",
       "sha256": "4c8fe26a1d08c82db927f5d3cafdc0c6ee7af721a863bb460b909abc1375b1eb",
       "size": 36
@@ -140,6 +210,36 @@
       "path": "fixtures/deferred_work_driver/rehostrace_deferred_work.c",
       "sha256": "2e2586a855198103b8361c1c513313948f11ce1990c289aed315d2cac230ca74",
       "size": 3120
+    },
+    {
+      "path": "fixtures/differential/target_v1.json",
+      "sha256": "481e6b63fd83c93d4552c0b4601ec11ed2daf5c52bc3914c7f97e2a4f9c20780",
+      "size": 379
+    },
+    {
+      "path": "fixtures/differential/target_v2.json",
+      "sha256": "5846cb1def03b4006af810ba43a81777ba8c984a49e21d4a3e659d7a3efdf636",
+      "size": 544
+    },
+    {
+      "path": "fixtures/fuzz/bluetooth_parsers.campaigns.json",
+      "sha256": "ae89ba2d0e0f56354405dd68dccddeeb474ce5f40aa3fa032f6273d400bbaec1",
+      "size": 1658
+    },
+    {
+      "path": "fixtures/fuzz/public_parser.policy.json",
+      "sha256": "472d252e204797d5c341aed91f493caf6ca191ef5be5da03e02e63b404d923c9",
+      "size": 261
+    },
+    {
+      "path": "fixtures/harness/android_native.plan.json",
+      "sha256": "d04896b398d042ad06d66a0a0a8bf75ae994e27dc07cc518eb1d487cf46f4451",
+      "size": 830
+    },
+    {
+      "path": "fixtures/harness/controller_firmware.plan.json",
+      "sha256": "65df7b33e8d881bc513c6ff18c059e1af52e0a9a26ccf4370ee670461f097fa6",
+      "size": 834
     },
     {
       "path": "fixtures/platform/async_boundary.causal.json",
@@ -268,8 +368,18 @@
     },
     {
       "path": "pyproject.toml",
-      "sha256": "842a47c807e360dc4ce7554aab41a00795cf32d93c9d1fca102ff560e14989a8",
+      "sha256": "9886fe5941238e7303df6373c134026492d7507312d7ab29cd6d110233be315d",
       "size": 692
+    },
+    {
+      "path": "schemas/binary_cfg.schema.json",
+      "sha256": "ec7ae130eae2fa841b8c48d50492f5ec371d94cedebf886e874cb1289591ad5e",
+      "size": 479
+    },
+    {
+      "path": "schemas/bluetooth_platform_capabilities.schema.json",
+      "sha256": "0bbdd1d6572d053a659f9dd65be8032523a481ddd1b23c4cbaaa801dde14962b",
+      "size": 683
     },
     {
       "path": "schemas/bluetooth_protocol_pack.schema.json",
@@ -280,6 +390,11 @@
       "path": "schemas/boundary_binding.schema.json",
       "sha256": "26371157e7be513a7b6f49d1497057f1d0f3cbe48ca96a6d80fecf8faa370af4",
       "size": 1836
+    },
+    {
+      "path": "schemas/capture_bundle.schema.json",
+      "sha256": "dedea36e0b051180fd7b19592208c4df9f8f6ae5b277d682ad2a690c3d9a557f",
+      "size": 1013
     },
     {
       "path": "schemas/causal_trace.schema.json",
@@ -310,6 +425,31 @@
       "path": "schemas/evidence_transfer_policy.schema.json",
       "sha256": "3d19d6d403247e9fdf34d9145d286edc2c4b5ca5df04c83b1b30f939be69847c",
       "size": 3085
+    },
+    {
+      "path": "schemas/fuzz_campaign.schema.json",
+      "sha256": "d0f2026a7c692b904085a5c7a9fb3511d5121eb92aa630d84e44b0fc309d8728",
+      "size": 1047
+    },
+    {
+      "path": "schemas/fuzz_policy.schema.json",
+      "sha256": "623eb966fb7896cf562976a3e18df54a12c8291f8f08d470360ba70a9aebada5",
+      "size": 620
+    },
+    {
+      "path": "schemas/harness_execution.schema.json",
+      "sha256": "6d4b7f40ee185310be701d2637cc2a9f48cc140753689855712bb7ce47ecba0c",
+      "size": 920
+    },
+    {
+      "path": "schemas/harness_plan.schema.json",
+      "sha256": "b49613146a9f1c00107ac78b6861e7e868cc8c09bb38928c285779ca4c747ea7",
+      "size": 688
+    },
+    {
+      "path": "schemas/lifetime_candidates.schema.json",
+      "sha256": "fa503b0cad4c829e6fc29c99157ebf0ea0c78956b3121fd769603ea6a0df6f60",
+      "size": 660
     },
     {
       "path": "schemas/lifetime_discovery.schema.json",
@@ -347,6 +487,11 @@
       "size": 860
     },
     {
+      "path": "schemas/schedule_candidates.schema.json",
+      "sha256": "3eff9ccdb9ade3b1e0e77dee61a789b52351f04e44b7ea9d6fe303f1b979ccf2",
+      "size": 499
+    },
+    {
       "path": "schemas/schedule_constraints.schema.json",
       "sha256": "071a616e0ed002b89f79999dd9411334b315a6bbc62c70137b8600a9e1e5f3c3",
       "size": 2944
@@ -357,9 +502,19 @@
       "size": 2132
     },
     {
+      "path": "schemas/target_differential.schema.json",
+      "sha256": "3ecb51be3bdc224f608129350e847c02c05545222cdc76bd4319d0c01d47eb61",
+      "size": 753
+    },
+    {
+      "path": "schemas/target_manifest.schema.json",
+      "sha256": "64ef710bc0e1cd27aba87b2a7e671acce31ad4d2123f8d1d14357e7d8dd5f8ba",
+      "size": 486
+    },
+    {
       "path": "sdk/python/rehostrace/__init__.py",
-      "sha256": "e3a9f33aeba90eae58a45f8f779c4491c9dbdb9b14d9fb7c0980b2096a536b5c",
-      "size": 3218
+      "sha256": "a37bd74a986ed91212a5fa7c3a58e72b01e072499a744a6752acbb8074d8cf7a",
+      "size": 4907
     },
     {
       "path": "sdk/python/rehostrace/ablation.py",
@@ -373,8 +528,8 @@
     },
     {
       "path": "sdk/python/rehostrace/bluetooth.py",
-      "sha256": "31726a54de6b23806e2863e2cdd866480a928e267634883012b9a82d1a3a91ca",
-      "size": 47277
+      "sha256": "1a2a15196ca6bcdebd80737376e146601f8f919ca83f494d2e569290cd227637",
+      "size": 47118
     },
     {
       "path": "sdk/python/rehostrace/bluetooth_composition.py",
@@ -382,9 +537,39 @@
       "size": 11437
     },
     {
+      "path": "sdk/python/rehostrace/bluetooth_parsers.py",
+      "sha256": "464f6f97efe98575f68877323161acab6f1d631f005f48aa3a7bb7c6d9175454",
+      "size": 11055
+    },
+    {
+      "path": "sdk/python/rehostrace/bluetooth_profiles.py",
+      "sha256": "bfcbc06cf0343f10595e0c3b483e2f3bec28eb66d4ec6d5841ef8962ab645c6d",
+      "size": 19932
+    },
+    {
+      "path": "sdk/python/rehostrace/bluetooth_registry.py",
+      "sha256": "6d1208b64338af20b4e095b6203cab993aa439742dd07231b9ccebde724c6428",
+      "size": 2672
+    },
+    {
       "path": "sdk/python/rehostrace/capture.py",
       "sha256": "295e5c34888ebd39ec6ee7d7ccaf435c7e70c0e909bc23d10877cad5d8657460",
       "size": 5558
+    },
+    {
+      "path": "sdk/python/rehostrace/capture_bundle.py",
+      "sha256": "6677790e1f3caf36f4691d042f26586ccef9d9de7f04ecc1fe9c027f9b93bbeb",
+      "size": 6000
+    },
+    {
+      "path": "sdk/python/rehostrace/cfg.py",
+      "sha256": "6d96a9b7771a33d19e36b40b4d34a565e511238f5905b2af72c0452d5939e8be",
+      "size": 8228
+    },
+    {
+      "path": "sdk/python/rehostrace/differential.py",
+      "sha256": "2bbb460baf7b1440ac648575f020006beb1b8b7fc7a87c7722cd92cc13270392",
+      "size": 4412
     },
     {
       "path": "sdk/python/rehostrace/discovery.py",
@@ -395,6 +580,16 @@
       "path": "sdk/python/rehostrace/evidence_bridge.py",
       "sha256": "423503c5dd8fe6641445df1a4e975e19d674b92492d0ed698492ac24f178e486",
       "size": 16854
+    },
+    {
+      "path": "sdk/python/rehostrace/fuzz.py",
+      "sha256": "e2f519598b807fa348bedeac50563178a03b70a7613fba09663af1e508f45921",
+      "size": 8689
+    },
+    {
+      "path": "sdk/python/rehostrace/harness.py",
+      "sha256": "cc754d0aef37b71788d9408df8658b685e2722d9f72380f2a00376f7ce663be6",
+      "size": 3042
     },
     {
       "path": "sdk/python/rehostrace/model.py",
@@ -437,9 +632,29 @@
       "size": 9727
     },
     {
+      "path": "tests/test_analysis_pipeline.py",
+      "sha256": "7a349f5d188c964cc30cd1167c30120871299dfc9f8a6900084b4e8055f4f325",
+      "size": 2107
+    },
+    {
+      "path": "tests/test_bluetooth_extended_profiles.py",
+      "sha256": "d0543f2422ea9ca2dbb143cb3d0e2b3318a64d935036bc34f9506b2cf8ffde65",
+      "size": 3632
+    },
+    {
+      "path": "tests/test_bluetooth_packet_parsers.py",
+      "sha256": "b2335bf82c0c29cac86f972bf9bf82ef8cab061dd3a48783a1c265b83ec88d41",
+      "size": 2020
+    },
+    {
+      "path": "tests/test_bluetooth_parser_fuzz.py",
+      "sha256": "ddc2e3a7e3bbb97f2fe50f5f5465277adcae448b36e1d32b1561ec38fdaef347",
+      "size": 871
+    },
+    {
       "path": "tests/test_bluetooth_profiles_public.py",
-      "sha256": "a178e681c47290dfc0cae998484c16551f3e0eb4e1b51aad3b965514a9f4cec5",
-      "size": 1799
+      "sha256": "1d5d1308316332eb954a25ee08c454534e3f912deaa3b6d81e2481d29ebbb6e6",
+      "size": 2059
     },
     {
       "path": "tests/test_bluetooth_subsystem.py",
@@ -452,9 +667,19 @@
       "size": 1716
     },
     {
+      "path": "tests/test_capture_bundle.py",
+      "sha256": "31b4243c50dad0c6ee198b72975c7d7cc54d4685126bcfd2b0eace216b24a1de",
+      "size": 1356
+    },
+    {
       "path": "tests/test_causal_sdk.py",
       "sha256": "b59564f5a339076a7ab5fb7245d5fba3d9d6cf91837d9ca551893486dfc69155",
       "size": 4281
+    },
+    {
+      "path": "tests/test_fuzz_campaign.py",
+      "sha256": "b60d578e09853e634e8308af5797488df14f0474c93e35da70d6f854cb0ff11f",
+      "size": 1201
     },
     {
       "path": "tests/test_platform_contracts.py",
@@ -487,14 +712,39 @@
       "size": 14168
     },
     {
+      "path": "tools/run_analysis_pipeline_demo.py",
+      "sha256": "eb1bf178074ee3272574cc5bb6a3d55734eb9f7176437a2adfb7c3383b651b51",
+      "size": 2135
+    },
+    {
+      "path": "tools/run_bluetooth_parser_fuzz_demo.py",
+      "sha256": "2f3b8f13979a8a6da862f97601b0cb01017ee3e20f4cb5531b9617ba51618c2d",
+      "size": 3066
+    },
+    {
       "path": "tools/run_bluetooth_profile_demo.py",
-      "sha256": "204e1d2af62b27156936ea2cbd4691ea3449414ced103db00d3a53940efa6672",
-      "size": 8247
+      "sha256": "5f9fd46e1aa6915d3c2044fc3c7d82cf80b318b8bd9d83c4016fc2ba248683ab",
+      "size": 8473
     },
     {
       "path": "tools/run_bluetooth_subsystem_demo.py",
       "sha256": "6ed8edcdf85d9e2a79cb2c550c1afeb5790bc83dc2991c5396d6495d890f3733",
       "size": 6087
+    },
+    {
+      "path": "tools/run_capture_replay_demo.py",
+      "sha256": "443c77725c071dbbffa01033d821997784c6f4bdbda3675ca57abdafce63c6ca",
+      "size": 1737
+    },
+    {
+      "path": "tools/run_full_bluetooth_platform_demo.py",
+      "sha256": "fd0a2a5a04b824d8850209bd0f832e7ff6c628fe67972f13ea0be846abfd5bc4",
+      "size": 6807
+    },
+    {
+      "path": "tools/run_public_fuzz_demo.py",
+      "sha256": "9b7ecc7a0c9741fc920b32d4ad935cd0dc65a6e732e9d4cf15192bc7aea9258d",
+      "size": 1696
     },
     {
       "path": "tools/run_public_platform_demo.py",

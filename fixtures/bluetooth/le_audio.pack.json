@@ -1,0 +1,16 @@
+{
+  "schema_version": "rehostrace.bluetooth-pack/v1",
+  "pack_id": "public.bluetooth.le-audio.v1",
+  "protocol": "le-audio",
+  "layer": "application",
+  "requires": ["public.bluetooth.hci-core.v1"],
+  "selectors": [
+    {"operation": "le_audio.group.configure", "required_attributes": ["group_id", "codec"]},
+    {"operation": "le_audio.cis.establish", "required_attributes": ["group_id", "stream_id", "handle"]},
+    {"operation": "le_audio.stream.start", "required_attributes": ["group_id", "stream_id"]},
+    {"operation": "le_audio.iso.data", "required_attributes": ["group_id", "stream_id", "sequence", "length"]},
+    {"operation": "le_audio.stream.stop", "required_attributes": ["group_id", "stream_id"]},
+    {"operation": "le_audio.cis.disconnect", "required_attributes": ["group_id", "stream_id"]},
+    {"operation": "le_audio.group.release", "required_attributes": ["group_id"]}
+  ]
+}

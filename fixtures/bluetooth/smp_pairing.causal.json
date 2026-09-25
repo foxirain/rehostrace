@@ -1,0 +1,20 @@
+{
+  "schema_version": "rehostrace.causal/v2",
+  "trace_id": "public.bluetooth.smp-pairing.control",
+  "disclosure": "public-synthetic",
+  "origin": {"kind": "synthetic", "producer": "rehostrace-smp-fixture", "redactions": []},
+  "clock_domains": [{"id": "fixture.sequence", "unit": "sequence", "synchronized": true}],
+  "actors": [{"id": "host.stack", "kind": "host"}, {"id": "controller.irq", "kind": "interrupt"}],
+  "resources": [{"id": "connection.le", "kind": "synthetic-le-connection", "identity": "logical"}],
+  "events": [
+    {"id": "e00.ready", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.controller.ready", "direction": "target-in"}, "parents": [], "clock": {"domain": "fixture.sequence", "value": 0}, "attributes": {"command_credits": 1}},
+    {"id": "e01.connected", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.le.connection.complete", "direction": "target-in"}, "parents": ["e00.ready"], "subject": "connection.le", "clock": {"domain": "fixture.sequence", "value": 1}, "attributes": {"status": 0, "handle": 65, "address_token": "public-peer", "role": "central", "peer_address_type": "public", "peer_address_token": "public-peer-address", "peer_address_hex": "020000000001", "connection_interval": 24, "connection_latency": 0, "supervision_timeout": 200, "clock_accuracy": 0}},
+    {"id": "e02.start", "actor": "host.stack", "kind": "custom", "boundary": {"domain": "bluetooth.host-boundary", "operation": "smp.pairing.start", "direction": "target-out"}, "parents": ["e01.connected"], "subject": "connection.le", "clock": {"domain": "fixture.sequence", "value": 2}, "attributes": {"handle": 65, "session_id": "pairing.1", "role": "initiator", "io_capability": "display-yes-no", "auth_requirements": "bonding-mitm"}},
+    {"id": "e03.local-confirm", "actor": "host.stack", "kind": "boundary.output", "boundary": {"domain": "bluetooth.host-boundary", "operation": "smp.pairing.confirm", "direction": "target-out"}, "parents": ["e02.start"], "clock": {"domain": "fixture.sequence", "value": 3}, "attributes": {"handle": 65, "session_id": "pairing.1", "side": "local"}},
+    {"id": "e04.peer-confirm", "actor": "controller.irq", "kind": "boundary.input", "boundary": {"domain": "bluetooth.host-boundary", "operation": "smp.pairing.confirm", "direction": "target-in"}, "parents": ["e03.local-confirm"], "clock": {"domain": "fixture.sequence", "value": 4}, "attributes": {"handle": 65, "session_id": "pairing.1", "side": "peer"}},
+    {"id": "e05.local-random", "actor": "host.stack", "kind": "boundary.output", "boundary": {"domain": "bluetooth.host-boundary", "operation": "smp.pairing.random", "direction": "target-out"}, "parents": ["e04.peer-confirm"], "clock": {"domain": "fixture.sequence", "value": 5}, "attributes": {"handle": 65, "session_id": "pairing.1", "side": "local"}},
+    {"id": "e06.peer-random", "actor": "controller.irq", "kind": "boundary.input", "boundary": {"domain": "bluetooth.host-boundary", "operation": "smp.pairing.random", "direction": "target-in"}, "parents": ["e05.local-random"], "clock": {"domain": "fixture.sequence", "value": 6}, "attributes": {"handle": 65, "session_id": "pairing.1", "side": "peer"}},
+    {"id": "e07.complete", "actor": "host.stack", "kind": "custom", "boundary": {"domain": "bluetooth.host-boundary", "operation": "smp.pairing.complete", "direction": "internal"}, "parents": ["e06.peer-random"], "clock": {"domain": "fixture.sequence", "value": 7}, "attributes": {"handle": 65, "session_id": "pairing.1", "result": "success", "encrypted": true}},
+    {"id": "e08.disconnected", "actor": "controller.irq", "kind": "link.state", "boundary": {"domain": "bluetooth.host-boundary", "operation": "hci.disconnection.complete", "direction": "target-in"}, "parents": ["e07.complete"], "clock": {"domain": "fixture.sequence", "value": 8}, "attributes": {"status": 0, "handle": 65, "reason": 19}}
+  ]
+}

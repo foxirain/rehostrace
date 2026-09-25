@@ -1,0 +1,8 @@
+{
+  "schema_version": "rehostrace.target-manifest/v1",
+  "target_family": "public.bluetooth.fixture",
+  "version": "1.0",
+  "components": [
+    {"id": "host.driver", "kind": "fixture", "sha256": "1111111111111111111111111111111111111111111111111111111111111111", "abi_id": "abi-v1", "facts": {"symbols": ["open", "reset"], "lifetime_candidates": ["session.object:rx:tx"]}}
+  ]
+}

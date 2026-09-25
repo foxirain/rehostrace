@@ -18,7 +18,7 @@ Python 3.10 or newer is sufficient for the portable reference path:
 make verify
 ```
 
-This runs the unit tests, the generic lifetime pipeline, the stateful HCI/ACL/L2CAP/AVDTP example, the Classic/LE profile matrix, a fail-closed release audit, and a reproducible file manifest. Generated evidence is written under `out/` and is not release material.
+This runs the unit tests, the generic lifetime pipeline, the seven-slice Bluetooth profile matrix, the deterministic parser-fuzzing fixture, capture-to-replay compilation, CFG lifetime analysis, version differential analysis, a fail-closed release audit, and a reproducible file manifest. Generated evidence is written under `out/` and is not release material.
 
 The package may also be installed locally:
 
@@ -33,12 +33,19 @@ python3 -m pip install -e .
 - declarative schedule synthesis and boundary binding;
 - same-object lifetime oracles over public observations;
 - exhaustive gate-subset planning and result summarization;
-- stateful Bluetooth host-boundary models for HCI, ACL, L2CAP, AVDTP, SDP, ATT, and GATT;
+- stateful Bluetooth host-boundary models for HCI, ACL, L2CAP, AVDTP, SDP, ATT, GATT, SMP, RFCOMM, AVRCP, HFP, A2DP, and LE Audio lifecycle events;
+- a trusted protocol-pack registry: data manifests select only handlers explicitly registered by the application;
+- bounded byte-level parsers for representative SMP, RFCOMM, AVRCP/AVCTP, HFP AT, A2DP RTP, and LE ISO framing;
+- deterministic offline coverage-guided fuzzing with content-addressed corpus and findings;
+- capture-bundle compilation that preserves actor order and explicit cross-actor causes without ordering unsynchronised clocks;
+- normalized binary-CFG lifetime candidate discovery and schedule candidate synthesis;
+- hash-pinned semantic differential analysis across target versions;
+- data-only execution contracts for native host-stack and controller-firmware backends;
 - evidence receipts that hash inputs and state allowed and forbidden claim transfer.
 
 ## What is not demonstrated
 
-The public fixtures do not establish whole-system fidelity, controller or radio behavior, execution of a proprietary binary, reachability on a stock device, a vulnerability, exploitability, or code execution. A receipt is evidence for only the dimensions and claims it states.
+The public fixtures do not establish whole-system fidelity, controller or radio behavior, execution of a proprietary binary, reachability on a stock device, a vulnerability, exploitability, or code execution. The new profile packs are semantic lifecycle models, not complete wire decoders. The native-stack and controller plans are validated contracts; no backend execution is claimed. A receipt is evidence for only the dimensions and claims it states.
 
 ## Layout
 
@@ -46,12 +53,15 @@ The public fixtures do not establish whole-system fidelity, controller or radio 
 - `schemas/` — machine-readable contracts;
 - `fixtures/platform/` — generic lifetime and deferred-work examples;
 - `fixtures/bluetooth/` — public protocol packs and causal traces;
+- `fixtures/capture/` — public boundary-capture input;
+- `fixtures/cfg/` and `fixtures/differential/` — public analysis inputs;
+- `fixtures/fuzz/` and `fixtures/harness/` — deterministic fuzz policy and backend contracts;
 - `fixtures/*_driver/` — intentionally seeded Linux module fixtures;
 - `controllers/` and `include/` — deterministic scheduling reference code;
 - `tools/` — runnable demos, CLI, release audit, and manifest generator;
 - `tests/` — contract, negative, and end-to-end tests.
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/CLAIM_MODEL.md](docs/CLAIM_MODEL.md), and [docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md) before adapting the framework to a new target.
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/FULL_BLUETOOTH_ROADMAP.md](docs/FULL_BLUETOOTH_ROADMAP.md), [docs/CLAIM_MODEL.md](docs/CLAIM_MODEL.md), and [docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md) before adapting the framework to a new target.
 
 ## Research status
 

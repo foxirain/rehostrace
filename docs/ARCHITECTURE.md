@@ -3,7 +3,10 @@
 RehostRace treats a rehosting result as a chain of independently checkable contracts.
 
 ```text
-boundary capture -> causal trace -> binding -> schedule -> replay -> oracle -> receipt
+passive records -> causal trace -> protocol pack -> replay -> oracle -> receipt
+                         |               ^
+binary CFG -> candidate schedule --------+
+version manifests -> semantic differential
 ```
 
 ## Causal trace
@@ -25,3 +28,26 @@ A receipt hashes inputs, records the executor and event order, embeds oracle res
 ## Extension point
 
 A target integration belongs outside the framework core until it can be represented through public interfaces. It should provide a capture adapter, action adapter, observation extractor, oracle, and fidelity policy. Proprietary inputs and unpublished schedules stay in a separate, access-controlled workspace.
+
+## Bluetooth layers
+
+The Bluetooth subsystem deliberately separates five interfaces:
+
+1. a data-only protocol-pack manifest;
+2. an explicitly trusted handler registry;
+3. a semantic lifecycle model;
+4. an optional byte-parser harness used by the offline fuzzer; and
+5. a target adapter that projects accepted events into a concrete runtime.
+
+The public profile handlers validate lifecycle state. They do not parse every
+wire field and do not emulate a controller or radio. Native host-stack and
+controller execution plans are separately hash-pinned so that adding either
+backend does not silently promote the fidelity of portable-model evidence.
+
+## Automated analysis boundary
+
+The normalized CFG analyzer finds asynchronous paths that share lifetime
+sinks and produces candidate schedules with an explicit same-identity oracle.
+This is automated after CFG normalization. The existing relocatable-object
+reader supplies one extraction path; arbitrary stripped-binary recovery is an
+open extractor problem and is not implied by the candidate analysis.

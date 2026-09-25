@@ -157,6 +157,9 @@ class BluetoothProtocolPack(Protocol):
     def apply(self, model: "BluetoothCoreAdapter", event: dict) -> dict:
         """Apply one event after manifest and causal-order validation."""
 
+    def finalize(self, model: "BluetoothCoreAdapter") -> dict:
+        """Return pack summary or reject incomplete terminal state."""
+
 
 @dataclass
 class _PackRegistration:
@@ -756,6 +759,7 @@ class BluetoothCoreAdapter:
         self.att_mtu: dict[tuple[int, int], int] = {}
         self.gatt_procedures: dict[tuple[int, int], dict] = {}
         self.gatt_history: list[dict] = []
+        self.extension_state: dict[str, dict] = {}
         self.event_count = 0
 
     def _required_attributes(self, operation: str) -> list[str]:
@@ -886,6 +890,11 @@ class BluetoothCoreAdapter:
             raise BluetoothStateError("replay ended with outstanding ATT transactions")
         if self.gatt_procedures:
             raise BluetoothStateError("replay ended with active GATT procedures")
+        extension_summaries = {}
+        for pack_id, registration in sorted(self.registrations.items()):
+            finalize = getattr(registration.handler, "finalize", None)
+            if finalize is not None:
+                extension_summaries[pack_id] = finalize(self)
         return {
             "status": "passed",
             "event_count": self.event_count,
@@ -918,6 +927,7 @@ class BluetoothCoreAdapter:
                 "completed_transactions": copy.deepcopy(self.att_completed),
             },
             "gatt_history": copy.deepcopy(self.gatt_history),
+            "extensions": extension_summaries,
             "protocol_packs": {
                 pack_id: registration.validation["canonical_sha256"]
                 for pack_id, registration in sorted(self.registrations.items())
@@ -926,19 +936,6 @@ class BluetoothCoreAdapter:
 
 
 def default_bluetooth_registrations(manifests: list[dict]) -> list[tuple[BluetoothProtocolPack, dict]]:
-    handlers: dict[str, BluetoothProtocolPack] = {
-        HciProtocolPack.pack_id: HciProtocolPack(),
-        L2capProtocolPack.pack_id: L2capProtocolPack(),
-        AvdtpProtocolPack.pack_id: AvdtpProtocolPack(),
-        SdpProtocolPack.pack_id: SdpProtocolPack(),
-        AttProtocolPack.pack_id: AttProtocolPack(),
-        GattProtocolPack.pack_id: GattProtocolPack(),
-    }
-    registrations: list[tuple[BluetoothProtocolPack, dict]] = []
-    for manifest in manifests:
-        pack_id = manifest.get("pack_id") if isinstance(manifest, dict) else None
-        handler = handlers.get(pack_id)
-        if handler is None:
-            raise ValueError(f"no built-in handler for protocol-pack manifest: {pack_id!r}")
-        registrations.append((handler, manifest))
-    return registrations
+    from .bluetooth_registry import built_in_bluetooth_registry
+
+    return built_in_bluetooth_registry().resolve(manifests)
