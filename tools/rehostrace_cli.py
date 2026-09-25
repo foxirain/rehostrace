@@ -17,18 +17,22 @@ from rehostrace import (  # noqa: E402
     CausalTrace,
     RecordingAdapter,
     ReplayEngine,
+    analyze_lifetime_cfg,
     compile_ablation,
     compile_binding,
     compile_evidence_transfer_bridge,
     compile_observer_calibration,
     compile_schedule,
+    compile_target_controller,
     default_bluetooth_registrations,
     evaluate_oracle,
     plan_exhaustive_search,
     render_c_header,
+    render_target_controller_header,
     render_ablation_header,
     render_binding_header,
     synthesize_schedule,
+    synthesize_lifetime_schedules,
     summarize_search,
     validate_receipt,
     validate_trace,
@@ -88,6 +92,15 @@ def main() -> int:
         type=Path,
         help="fail unless the synthesized document equals this checked-in schedule",
     )
+
+    lowering_parser = subparsers.add_parser("lower-controller")
+    lowering_parser.add_argument("cfg", type=Path)
+    lowering_parser.add_argument("schedule", type=Path)
+    lowering_parser.add_argument("target", type=Path)
+    lowering_parser.add_argument("--analysis", required=True, type=Path)
+    lowering_parser.add_argument("--candidates", required=True, type=Path)
+    lowering_parser.add_argument("--plan", required=True, type=Path)
+    lowering_parser.add_argument("--header", required=True, type=Path)
 
     search_parser = subparsers.add_parser("plan-schedule-search")
     search_parser.add_argument("constraints", type=Path)
@@ -187,6 +200,32 @@ def main() -> int:
                     "schedule": str(args.output),
                     "report": str(args.report),
                     "schedule_sha256": report["schedule_sha256"],
+                },
+                sort_keys=True,
+            )
+        )
+    elif args.command == "lower-controller":
+        analysis = analyze_lifetime_cfg(load_json(args.cfg))
+        candidates = synthesize_lifetime_schedules(analysis)
+        plan = compile_target_controller(
+            analysis,
+            candidates,
+            load_json(args.schedule),
+            load_json(args.target),
+        )
+        write_json(args.analysis, analysis)
+        write_json(args.candidates, candidates)
+        write_json(args.plan, plan)
+        args.header.parent.mkdir(parents=True, exist_ok=True)
+        args.header.write_text(render_target_controller_header(plan), encoding="utf-8")
+        print(
+            json.dumps(
+                {
+                    "status": "passed",
+                    "candidate_id": plan["source"]["candidate_id"],
+                    "plan_sha256": plan["plan_sha256"],
+                    "plan": str(args.plan),
+                    "header": str(args.header),
                 },
                 sort_keys=True,
             )

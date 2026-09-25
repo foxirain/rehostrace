@@ -1,12 +1,13 @@
 # RehostRace
 
-RehostRace is an experimental framework for preserving causal relationships while replaying asynchronous component boundaries. It separates five contracts that are often mixed together in rehosting prototypes:
+RehostRace is an experimental framework for preserving causal relationships while replaying asynchronous component boundaries. It separates six contracts that are often mixed together in rehosting prototypes:
 
 1. a canonical partial-order event trace;
 2. a boundary-to-action binding;
-3. a deterministic lifetime schedule;
-4. an explicit oracle over object identity and sinks; and
-5. a machine-readable evidence receipt with a claim boundary.
+3. a hash-bound candidate-to-target lowering;
+4. a deterministic lifetime schedule;
+5. an explicit oracle over object identity and sinks; and
+6. a machine-readable evidence receipt with a claim boundary.
 
 The repository is intentionally a framework and public fixture suite. It contains no proprietary binaries, firmware, device captures, link keys, product manifests, unpublished vulnerability schedules, or claims about a commercial target.
 
@@ -39,6 +40,7 @@ python3 -m pip install -e .
 - deterministic offline coverage-guided fuzzing with content-addressed corpus and findings;
 - capture-bundle compilation that preserves actor order and explicit cross-actor causes without ordering unsynchronised clocks;
 - normalized binary-CFG lifetime candidate discovery and schedule candidate synthesis;
+- fail-closed lowering of a candidate, schedule, and target fact manifest into a data-only controller plan and C header;
 - hash-pinned semantic differential analysis across target versions;
 - data-only execution contracts for native host-stack and controller-firmware backends;
 - evidence receipts that hash inputs and state allowed and forbidden claim transfer.
@@ -55,13 +57,14 @@ The public fixtures do not establish whole-system fidelity, controller or radio 
 - `fixtures/bluetooth/` — public protocol packs and causal traces;
 - `fixtures/capture/` — public boundary-capture input;
 - `fixtures/cfg/` and `fixtures/differential/` — public analysis inputs;
+- `fixtures/lowering/` — synthetic target-fact mappings for CFG-to-controller lowering;
 - `fixtures/fuzz/` and `fixtures/harness/` — deterministic fuzz policy and backend contracts;
 - `fixtures/*_driver/` — intentionally seeded Linux module fixtures;
-- `controllers/` and `include/` — deterministic scheduling reference code;
+- `controllers/` and `include/` — deterministic scheduling reference code and the generic lowered-plan kprobe backend;
 - `tools/` — runnable demos, CLI, release audit, and manifest generator;
 - `tests/` — contract, negative, and end-to-end tests.
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/FULL_BLUETOOTH_ROADMAP.md](docs/FULL_BLUETOOTH_ROADMAP.md), [docs/CLAIM_MODEL.md](docs/CLAIM_MODEL.md), and [docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md) before adapting the framework to a new target.
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/TARGET_LOWERING.md](docs/TARGET_LOWERING.md), [docs/FULL_BLUETOOTH_ROADMAP.md](docs/FULL_BLUETOOTH_ROADMAP.md), [docs/CLAIM_MODEL.md](docs/CLAIM_MODEL.md), and [docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md) before adapting the framework to a new target.
 
 ## Research status
 

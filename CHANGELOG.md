@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 — 2026-09-26
+
+- Add fail-closed lowering from normalized lifetime candidates and detailed schedules to hash-bound target controller plans.
+- Add declarative target mappings for runtime roles, predicates, hook selectors, identity captures, counters, observers, and symbol relations.
+- Add a generic Linux kprobe backend that consumes generated controller-plan headers and reports the executing plan identity.
+- Add public synthetic lowering fixtures, input/output JSON schemas, CLI support, negative tests, and architecture documentation.
+- Preserve the evidence boundary between automated lowering and target-specific binary fact extraction and verification.
+
 ## 0.2.0 — 2026-09-26
 
 - Add trusted semantic protocol packs for SMP, RFCOMM, AVRCP, HFP, A2DP and LE Audio.

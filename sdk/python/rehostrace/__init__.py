@@ -60,6 +60,11 @@ from .evidence_bridge import (
 )
 from .fuzz import CoverageGuidedFuzzer, FuzzOutcome, validate_fuzz_policy
 from .harness import compile_harness_plan, validate_harness_plan
+from .lowering import (
+    compile_target_controller,
+    render_target_controller_header,
+    validate_target_lowering,
+)
 from .model import CausalTrace, canonical_sha256, validate_trace
 from .observer import (
     compile_observer_calibration,
@@ -114,6 +119,7 @@ __all__ = [
     "compile_binding",
     "compile_capture_bundle",
     "compile_harness_plan",
+    "compile_target_controller",
     "compile_evidence_transfer_bridge",
     "compile_observer_calibration",
     "compile_schedule",
@@ -136,6 +142,7 @@ __all__ = [
     "render_ablation_header",
     "render_binding_header",
     "render_c_header",
+    "render_target_controller_header",
     "summarize_search",
     "synthesize_schedule",
     "synthesize_lifetime_schedules",
@@ -160,5 +167,6 @@ __all__ = [
     "validate_search_manifest",
     "validate_trace",
     "validate_target_manifest",
+    "validate_target_lowering",
     "verify_receipt_artifacts",
 ]

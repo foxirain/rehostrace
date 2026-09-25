@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:controller-plan:v1",
+  "title": "RehostRace lowered controller plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "lowering_id", "lowering_sha256", "source", "target",
+    "identity", "timeout_ms", "signals", "counters", "roles", "points",
+    "observers", "symbol_relations", "claim_boundary", "plan_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "rehostrace.controller-plan/v1"},
+    "lowering_id": {"$ref": "#/$defs/id"},
+    "lowering_sha256": {"$ref": "#/$defs/sha256"},
+    "source": {"$ref": "#/$defs/source"},
+    "target": {"$ref": "#/$defs/target"},
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capture", "policy"],
+      "properties": {
+        "capture": {"type": "string", "minLength": 1},
+        "policy": {"enum": ["same-across-points", "per-point", "none"]}
+      }
+    },
+    "timeout_ms": {"type": "integer", "minimum": 1},
+    "signals": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 31}
+    },
+    "counters": {"type": "array", "items": {"$ref": "#/$defs/counter"}},
+    "roles": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/role"}},
+    "points": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/point"}},
+    "observers": {"type": "array", "items": {"$ref": "#/$defs/observer"}},
+    "symbol_relations": {"type": "array", "items": {"$ref": "#/$defs/relation"}},
+    "claim_boundary": {"type": "string", "minLength": 1},
+    "plan_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "symbol": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_.$]*$"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["analysis_sha256", "schedule_candidates_sha256", "candidate_id", "schedule_candidate_id", "detailed_schedule_sha256"],
+      "properties": {
+        "analysis_sha256": {"$ref": "#/$defs/sha256"},
+        "schedule_candidates_sha256": {"$ref": "#/$defs/sha256"},
+        "candidate_id": {"$ref": "#/$defs/id"},
+        "schedule_candidate_id": {"$ref": "#/$defs/id"},
+        "detailed_schedule_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "binary_sha256", "architecture", "module", "backend"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "binary_sha256": {"$ref": "#/$defs/sha256"},
+        "architecture": {"enum": ["aarch64", "x86_64", "um"]},
+        "module": {"$ref": "#/$defs/symbol"},
+        "backend": {"const": "linux-kprobe"}
+      }
+    },
+    "selector": {
+      "oneOf": [
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["kind", "symbol", "offset"],
+          "properties": {
+            "kind": {"const": "symbol"}, "symbol": {"$ref": "#/$defs/symbol"},
+            "offset": {"const": 0}
+          }
+        },
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["kind", "symbol", "offset", "expected_bytes_sha256"],
+          "properties": {
+            "kind": {"const": "symbol-offset"}, "symbol": {"$ref": "#/$defs/symbol"},
+            "offset": {"type": "integer", "minimum": 0},
+            "expected_bytes_sha256": {"$ref": "#/$defs/sha256"}
+          }
+        }
+      ]
+    },
+    "capture": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "index"],
+      "properties": {
+        "kind": {"enum": ["argument", "register"]},
+        "index": {"type": "integer", "minimum": 0, "maximum": 30}
+      }
+    },
+    "predicate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "argument", "offset", "value"],
+      "properties": {
+        "kind": {"enum": ["arg-eq", "arg-ge", "memory-u8-eq", "memory-u16le-eq"]},
+        "argument": {"type": "integer", "minimum": 0, "maximum": 7},
+        "offset": {"type": "integer", "minimum": 0},
+        "value": {"type": "integer", "minimum": 0}
+      }
+    },
+    "counter": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "threshold", "threshold_mask"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "threshold": {"type": "integer", "minimum": 1},
+        "threshold_mask": {"type": "integer", "minimum": 1}
+      }
+    },
+    "role": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "path", "selector", "predicates"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "path": {"$ref": "#/$defs/id"},
+        "selector": {"$ref": "#/$defs/selector"},
+        "predicates": {"type": "array", "items": {"$ref": "#/$defs/predicate"}}
+      }
+    },
+    "point": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "selector", "role", "role_index", "identity_capture", "enter_mask", "wait_mask", "release_mask", "counter_index"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "selector": {"$ref": "#/$defs/selector"},
+        "role": {"$ref": "#/$defs/id"}, "role_index": {"type": "integer", "minimum": -1},
+        "identity_capture": {"$ref": "#/$defs/capture"},
+        "enter_mask": {"type": "integer", "minimum": 0},
+        "wait_mask": {"type": "integer", "minimum": 0},
+        "release_mask": {"type": "integer", "minimum": 0},
+        "counter_index": {"type": "integer", "minimum": -1}
+      }
+    },
+    "observer": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "role", "selector", "identity_capture"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "role": {"$ref": "#/$defs/id"},
+        "selector": {"$ref": "#/$defs/selector"},
+        "identity_capture": {"anyOf": [{"$ref": "#/$defs/capture"}, {"type": "null"}]}
+      }
+    },
+    "relation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["left", "right", "delta"],
+      "properties": {
+        "left": {"$ref": "#/$defs/symbol"}, "right": {"$ref": "#/$defs/symbol"},
+        "delta": {"type": "integer"}
+      }
+    }
+  }
+}

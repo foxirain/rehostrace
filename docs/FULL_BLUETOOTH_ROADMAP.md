@@ -18,6 +18,7 @@ finding on a physical target.
 | Passive capture to replay | Executed compiler and replay | Public capture bundle to HCI replay | Target collectors and protocol-specific normalization |
 | CFG lifetime analysis | Executed normalized analysis | Public lock-handoff multi-free candidate | More binary front ends, alias analysis and interprocedural recovery |
 | Schedule synthesis | Executed structural candidate synthesis | Same-resource identity oracle requirement | Runtime feedback, minimal-gate search and probabilistic ranking |
+| Candidate-to-target lowering | Executed plan/header generation; generic kprobe consumer present | Synthetic hash-bound roles, points, captures and relations | Automated target-fact extraction and public runtime integration |
 | Version differential | Executed hash/ABI/fact comparison | Two public target manifests | Automated extraction for every supported artifact kind |
 | Native host stack | Validated execution contract only | Hash-pinned plan | A backend that builds, boots, instruments and attests the stack |
 | Controller firmware | Validated execution contract only | Hash-pinned plan | Architecture-specific loader, peripherals, interrupts and coverage |
@@ -69,6 +70,13 @@ operations, lifetime resources and sites. It finds same-resource multi-free and
 free/use overlaps, records lock handoffs, and synthesizes a deterministic
 candidate schedule. Every candidate is labeled structural until runtime replay
 shows the same object identity at the required sinks.
+
+The target-lowering compiler maps a selected candidate and detailed schedule
+to concrete classifiers, selectors, captures, counters, and symbol relations.
+It emits a content-addressed plan consumed by the generic kprobe backend. This
+removes handwritten controller constants, but it does not remove the need to
+extract and verify target-specific binary facts. Automated fact extraction and
+ranking remain research work.
 
 ### 6. Stock boundary capture and offline replay
 

@@ -1,0 +1,136 @@
+{
+  "schema_version": "rehostrace.target-lowering/v1",
+  "lowering_id": "public.seeded.lock-handoff.aarch64",
+  "source": {
+    "analysis_sha256": "806f973a388ad793a8c8733de0534f5bbbaf0ee4672e064351429ccc72962cc6",
+    "schedule_candidates_sha256": "7060f0343dd781cbe5958b9358f15242cb1c4912a6186bc6daa7bb7807c98e97",
+    "candidate_id": "double-free:session.object:rx.reset:tx.timeout",
+    "schedule_candidate_id": "schedule:double-free:session.object:rx.reset:tx.timeout",
+    "detailed_schedule_sha256": "605a918376288ddab1ced8392bfaf07f43abcd828c0dd44bf8458013c8e86f2e"
+  },
+  "target": {
+    "id": "public.seeded.aarch64",
+    "binary_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "architecture": "aarch64",
+    "module": "public_seeded_driver",
+    "backend": "linux-kprobe"
+  },
+  "roles": [
+    {
+      "id": "actor.a",
+      "path": "rx.reset",
+      "classifier": {
+        "kind": "symbol",
+        "symbol": "public_seed_rx_entry"
+      },
+      "predicates": [
+        {
+          "kind": "arg-eq",
+          "argument": 1,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": "actor.b",
+      "path": "tx.timeout",
+      "classifier": {
+        "kind": "symbol",
+        "symbol": "public_seed_tx_entry"
+      },
+      "predicates": []
+    }
+  ],
+  "point_bindings": [
+    {
+      "point_id": "a.object-released",
+      "role": "actor.a",
+      "selector": {
+        "kind": "symbol-offset",
+        "symbol": "public_seed_rx_reset",
+        "offset": 32,
+        "expected_bytes_sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "identity_capture": {
+        "kind": "register",
+        "index": 19
+      }
+    },
+    {
+      "point_id": "b.object-lock-pre",
+      "role": "actor.b",
+      "selector": {
+        "kind": "symbol-offset",
+        "symbol": "public_seed_tx_timeout",
+        "offset": 16,
+        "expected_bytes_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      "identity_capture": {
+        "kind": "register",
+        "index": 19
+      }
+    },
+    {
+      "point_id": "b.object-held",
+      "role": "actor.b",
+      "selector": {
+        "kind": "symbol-offset",
+        "symbol": "public_seed_tx_timeout",
+        "offset": 32,
+        "expected_bytes_sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+      },
+      "identity_capture": {
+        "kind": "register",
+        "index": 19
+      }
+    },
+    {
+      "point_id": "a.list-held",
+      "role": "actor.a",
+      "selector": {
+        "kind": "symbol-offset",
+        "symbol": "public_seed_rx_reset",
+        "offset": 48,
+        "expected_bytes_sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+      },
+      "identity_capture": {
+        "kind": "register",
+        "index": 19
+      }
+    },
+    {
+      "point_id": "free.pre",
+      "role": "any",
+      "selector": {
+        "kind": "symbol",
+        "symbol": "public_seed_free"
+      },
+      "identity_capture": {
+        "kind": "argument",
+        "index": 0
+      }
+    }
+  ],
+  "observers": [
+    {
+      "id": "reset.entry",
+      "role": "any",
+      "selector": {
+        "kind": "symbol",
+        "symbol": "public_seed_reset"
+      },
+      "identity_capture": {
+        "kind": "argument",
+        "index": 0
+      }
+    }
+  ],
+  "symbol_relations": [
+    {
+      "left": "public_seed_rx_entry",
+      "right": "public_seed_tx_entry",
+      "delta": 128
+    }
+  ],
+  "claim_boundary": "This public lowering maps a synthetic structural candidate to synthetic kprobe selectors. It does not identify or execute a commercial target."
+}

@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-.PHONY: test demo bluetooth-demo bluetooth-profiles fuzz-demo bluetooth-parser-fuzz capture-replay analysis-demo bluetooth-platform audit manifest verify clean
+.PHONY: test demo bluetooth-demo bluetooth-profiles fuzz-demo bluetooth-parser-fuzz capture-replay analysis-demo target-lowering bluetooth-platform audit manifest verify clean
 
 test:
 	$(PYTHON) -m unittest discover -s tests -v
@@ -26,6 +26,9 @@ capture-replay:
 analysis-demo:
 	$(PYTHON) tools/run_analysis_pipeline_demo.py
 
+target-lowering:
+	$(PYTHON) tools/run_target_lowering_demo.py
+
 bluetooth-platform:
 	$(PYTHON) tools/run_full_bluetooth_platform_demo.py
 
@@ -35,7 +38,7 @@ audit:
 manifest:
 	$(PYTHON) tools/generate_release_manifest.py . RELEASE_MANIFEST.json
 
-verify: test demo bluetooth-demo bluetooth-platform audit manifest
+verify: test demo bluetooth-demo bluetooth-platform target-lowering audit manifest
 
 clean:
 	$(PYTHON) -c 'import shutil; shutil.rmtree("out", ignore_errors=True)'

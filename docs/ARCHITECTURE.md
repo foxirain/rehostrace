@@ -4,8 +4,10 @@ RehostRace treats a rehosting result as a chain of independently checkable contr
 
 ```text
 passive records -> causal trace -> protocol pack -> replay -> oracle -> receipt
-                         |               ^
-binary CFG -> candidate schedule --------+
+                         |                                  ^
+binary CFG -> candidate -> target lowering -> controller --+
+                         |                    ^
+                         +-> detailed schedule+
 version manifests -> semantic differential
 ```
 
@@ -51,3 +53,13 @@ sinks and produces candidate schedules with an explicit same-identity oracle.
 This is automated after CFG normalization. The existing relocatable-object
 reader supplies one extraction path; arbitrary stripped-binary recovery is an
 open extractor problem and is not implied by the candidate analysis.
+
+The lowering compiler begins after candidate discovery. It checks that the
+analysis, candidate set, detailed schedule, declared target binary identity,
+role classifiers, hook selectors, expected instruction hashes, object
+captures, and symbol relations are internally consistent. It then emits a content-addressed controller plan and a
+data-only C header. Target-specific symbol and register recovery remains an
+explicit fact-producing step; the compiler does not pretend to infer facts it
+was not given. The integration layer must compare the declared binary and
+instruction hashes with the actual artifact. See
+[TARGET_LOWERING.md](TARGET_LOWERING.md).
