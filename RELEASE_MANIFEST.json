@@ -108,8 +108,8 @@
     },
     {
       "path": "docs/assets/rehostrace-watch-system-map.svg",
-      "sha256": "a08785458954cd87915217063beb30964378803b6a2cee5bd6850ce4e260e8c3",
-      "size": 5896
+      "sha256": "f94f284ea5f65fd5e0e5c360285e2d9dc864ffec544b13f261d8e7cbdf931e8d",
+      "size": 10161
     },
     {
       "path": "fixtures/bluetooth/a2dp.pack.json",
