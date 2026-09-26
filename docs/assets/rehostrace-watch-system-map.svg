@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="560" viewBox="0 0 1280 560" role="img" aria-labelledby="title desc">
+  <title id="title">RehostRace watch system responsibility map</title>
+  <desc id="desc">A technical map of a wearable device. RehostRace focuses on Bluetooth host boundaries and asynchronous vendor-kernel component lifetime behavior, while applications, controller firmware, radio hardware, and the remote peer are shown as context or integration boundaries.</desc>
+
+  <rect width="1280" height="560" fill="#0a0c0f"/>
+  <path d="M0 1H1280M0 559H1280" stroke="#262b31"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="48" y="52" fill="#64e8c8" font-size="13" font-weight="700" letter-spacing="2.2">WATCH SYSTEM MAP</text>
+    <text x="262" y="52" fill="#82909f" font-size="11" letter-spacing="1.35">/  WHERE REHOSTRACE SITS</text>
+
+    <path d="M867 46H895" stroke="#64e8c8" stroke-width="3"/>
+    <text x="907" y="51" fill="#9aa5b1" font-size="11" letter-spacing="1.1">CORE SCOPE</text>
+    <path d="M1009 46H1037" stroke="#e5e9ed" stroke-width="2"/>
+    <text x="1049" y="51" fill="#9aa5b1" font-size="11" letter-spacing="1.1">BOUNDARY</text>
+    <path d="M1150 46H1178" stroke="#59636e" stroke-dasharray="5 5"/>
+    <text x="1190" y="51" fill="#9aa5b1" font-size="11" letter-spacing="1.1">CONTEXT</text>
+  </g>
+
+  <path d="M48 102H1232" stroke="#262b31"/>
+
+  <!-- Wearable outline -->
+  <g fill="none" stroke-linejoin="round">
+    <path d="M158 119V91C158 77 169 66 183 66H281C295 66 306 77 306 91V119" stroke="#4b545f" stroke-width="2"/>
+    <path d="M158 441V469C158 483 169 494 183 494H281C295 494 306 483 306 469V441" stroke="#4b545f" stroke-width="2"/>
+    <rect x="86" y="119" width="292" height="322" rx="72" stroke="#d8dde3" stroke-width="2"/>
+    <rect x="108" y="141" width="248" height="278" rx="52" stroke="#30363d" stroke-width="2"/>
+    <path d="M378 212H390V270H378" stroke="#d8dde3" stroke-width="2"/>
+  </g>
+
+  <!-- Layers inside the watch -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <path d="M128 206H336" stroke="#30363d"/>
+    <path d="M128 274H336" stroke="#30363d"/>
+    <path d="M128 350H336" stroke="#30363d"/>
+
+    <text x="132" y="174" fill="#65717d" font-size="10" letter-spacing="1.5">01 / CONTEXT</text>
+    <text x="132" y="194" fill="#aab3bc" font-size="13" font-weight="600" letter-spacing="0.7">APPS + SERVICES</text>
+
+    <text x="132" y="231" fill="#82909f" font-size="10" letter-spacing="1.5">02 / HOST BOUNDARY</text>
+    <text x="132" y="254" fill="#e5e9ed" font-size="13" font-weight="600" letter-spacing="0.7">BLUETOOTH STACK</text>
+
+    <rect x="120" y="286" width="224" height="52" fill="#101815" stroke="#64e8c8" stroke-width="2"/>
+    <text x="132" y="307" fill="#64e8c8" font-size="10" font-weight="700" letter-spacing="1.5">03 / CORE</text>
+    <text x="132" y="327" fill="#f3f5f7" font-size="13" font-weight="700" letter-spacing="0.65">KERNEL BT COMPONENT</text>
+
+    <text x="132" y="378" fill="#65717d" font-size="10" letter-spacing="1.5">04 / INPUT CONTRACT</text>
+    <text x="132" y="400" fill="#aab3bc" font-size="13" font-weight="600" letter-spacing="0.7">CONTROLLER + RADIO</text>
+  </g>
+
+  <!-- Focus bracket and connectors -->
+  <g fill="none" stroke-linecap="square">
+    <path d="M398 212H416V339H398" stroke="#64e8c8" stroke-width="2"/>
+    <path d="M416 240H488" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="M416 312H488" stroke="#64e8c8" stroke-width="2"/>
+    <path d="M356 385H488" stroke="#59636e" stroke-dasharray="5 5"/>
+  </g>
+
+  <text transform="translate(500 339) rotate(-90)" fill="#64e8c8" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="10" font-weight="700" letter-spacing="1.35">REHOSTRACE / CONTROLLED REPLAY</text>
+
+  <!-- Responsibility explanation -->
+  <path d="M512 119V441" stroke="#262b31"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="552" y="142" fill="#65717d" font-size="11" font-weight="600" letter-spacing="1.7">RESPONSIBILITY</text>
+
+    <text x="552" y="190" fill="#e5e9ed" font-size="12" font-weight="700" letter-spacing="1.15">CAPTURE + REPLAY</text>
+    <text x="552" y="215" fill="#9aa5b1" font-size="14">Translate boundary events into deterministic component actions.</text>
+    <path d="M552 239H1198" stroke="#262b31"/>
+
+    <text x="552" y="278" fill="#64e8c8" font-size="12" font-weight="700" letter-spacing="1.15">SCHEDULE + LIFETIME ORACLE</text>
+    <text x="552" y="303" fill="#d8dde3" font-size="14">Control asynchronous interleavings; verify object identity and free sinks.</text>
+    <path d="M552 327H1198" stroke="#262b31"/>
+
+    <text x="552" y="366" fill="#8b96a2" font-size="12" font-weight="700" letter-spacing="1.15">CONTROLLER / FIRMWARE / RADIO</text>
+    <text x="552" y="391" fill="#717c88" font-size="14">Represented as an input contract — not claimed as whole-hardware emulation.</text>
+  </g>
+
+  <!-- External peer and signal -->
+  <g fill="none" stroke-linecap="round">
+    <circle cx="1146" cy="458" r="6" fill="#e5e9ed" stroke="none"/>
+    <path d="M1129 441C1138 432 1154 432 1163 441M1118 430C1133 414 1159 414 1175 430" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="M1146 464V493M1134 478H1158" stroke="#e5e9ed" stroke-width="2"/>
+    <path d="M378 403C615 505 845 506 1112 462" stroke="#59636e" stroke-dasharray="6 7"/>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+    <text x="1030" y="520" fill="#82909f" font-size="11" font-weight="600" letter-spacing="1.35">REMOTE PEER / TRACE SOURCE</text>
+    <text x="48" y="526" fill="#65717d" font-size="11" letter-spacing="1.35">FOCUS  /  ASYNCHRONOUS BOUNDARIES  →  CONCURRENCY SCHEDULES  →  EVIDENCE RECEIPTS</text>
+  </g>
+</svg>

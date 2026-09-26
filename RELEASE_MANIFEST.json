@@ -1,5 +1,5 @@
 {
-  "file_count": 161,
+  "file_count": 162,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -38,8 +38,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "5763ffc711a97a696e1903ebba97090514f42a178fcc0b1fa95e21143a97a4e7",
-      "size": 5516
+      "sha256": "bc62b73702a024b2ded8c3d689b4c11289b011b4144cf9643ba7363f4ac0a313",
+      "size": 5719
     },
     {
       "path": "SECURITY.md",
@@ -103,8 +103,13 @@
     },
     {
       "path": "docs/assets/rehostrace-gw-takedown-banner.svg",
-      "sha256": "513100e6017a2ee2fc4edb18a72219d1779944c96d7558b0c6e54c562efc6942",
-      "size": 3873
+      "sha256": "6d0c2b17de11d495d2b11a13fa6c792a0213cbba74822328498334799671a82a",
+      "size": 3566
+    },
+    {
+      "path": "docs/assets/rehostrace-watch-system-map.svg",
+      "sha256": "a08785458954cd87915217063beb30964378803b6a2cee5bd6850ce4e260e8c3",
+      "size": 5896
     },
     {
       "path": "fixtures/bluetooth/a2dp.pack.json",

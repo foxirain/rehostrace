@@ -30,10 +30,10 @@
     <path d="m977 97 5 4-5 4" fill="none" stroke="#4b545f"/>
     <text x="996" y="105" fill="#64e8c8" font-size="12" font-weight="700" letter-spacing="1.15">REHOSTRACE</text>
 
-    <text x="684" y="160" fill="#687481" font-size="11" letter-spacing="1.4">TX / ASYNC PATH</text>
-    <text x="684" y="275" fill="#687481" font-size="11" letter-spacing="1.4">RX / ASYNC PATH</text>
-    <text x="925" y="289" fill="#82909f" font-size="10" letter-spacing="1.25">SAME OBJECT</text>
-    <text x="1135" y="225" fill="#82909f" font-size="10" letter-spacing="1.25">ORACLE</text>
+    <text x="684" y="154" fill="#687481" font-size="11" letter-spacing="1.4">PATH A / TX</text>
+    <text x="684" y="286" fill="#687481" font-size="11" letter-spacing="1.4">PATH B / RX</text>
+    <text x="914" y="207" fill="#82909f" font-size="10" letter-spacing="1.25">SAME OBJECT</text>
+    <text x="1108" y="207" fill="#82909f" font-size="10" letter-spacing="1.25">ORACLE</text>
   </g>
 
   <g fill="none" stroke-linecap="square" stroke-linejoin="round">
@@ -51,12 +51,5 @@
     <circle cx="964" cy="236" r="5" fill="#64e8c8" stroke="none"/>
 
     <path d="M1110 225V247M1118 225V247" stroke="#64e8c8" stroke-width="2"/>
-  </g>
-
-  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" fill="#59636e" font-size="9" letter-spacing="1">
-    <text x="733" y="202">CAPTURE</text>
-    <text x="818" y="204">GATE</text>
-    <text x="733" y="270">CAPTURE</text>
-    <text x="818" y="270">GATE</text>
   </g>
 </svg>

@@ -2,6 +2,10 @@
   <img src="docs/assets/rehostrace-gw-takedown-banner.svg" alt="RehostRace — the Bluetooth rehosting track of the GW TakeDown research program" width="100%">
 </p>
 
+<p align="center">
+  <img src="docs/assets/rehostrace-watch-system-map.svg" alt="Watch system map showing the Bluetooth boundaries and kernel concurrency scope covered by RehostRace" width="100%">
+</p>
+
 # RehostRace
 
 RehostRace is the **Bluetooth rehosting and asynchronous-concurrency research track of GW TakeDown**. This public repository extracts that work into a target-neutral framework for causal capture, offline replay, deterministic lifetime scheduling, and evidence-bounded validation.
