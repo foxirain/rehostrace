@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:causal-case-study:v1",
+  "title": "RehostRace causal-order case study",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "case_id",
+    "sources",
+    "projected_pair",
+    "causal_dag",
+    "naive_timestamp",
+    "finding",
+    "claim_boundary",
+    "integrity"
+  ],
+  "properties": {
+    "schema_version": {"const": "rehostrace.causal-case-study/v1"},
+    "case_id": {"type": "string", "minLength": 1},
+    "sources": {
+      "type": "object",
+      "required": [
+        "trace_id",
+        "trace_sha256",
+        "ablation_id",
+        "ablation_sha256",
+        "binding_id",
+        "binding_sha256"
+      ]
+    },
+    "projected_pair": {
+      "type": "object",
+      "required": ["relation", "events"],
+      "properties": {
+        "relation": {"const": "concurrent"},
+        "events": {"type": "array", "minItems": 2, "maxItems": 2}
+      }
+    },
+    "causal_dag": {
+      "type": "object",
+      "required": [
+        "preserves_concurrency",
+        "candidate_action_orders",
+        "candidate_order_count"
+      ],
+      "properties": {
+        "preserves_concurrency": {"const": true},
+        "candidate_order_count": {"type": "integer", "minimum": 2}
+      }
+    },
+    "naive_timestamp": {
+      "type": "object",
+      "required": [
+        "cross_domain_comparison",
+        "selected_action_order",
+        "candidate_order_count",
+        "discarded_legal_orders",
+        "discarded_order_count",
+        "warning"
+      ],
+      "properties": {
+        "cross_domain_comparison": {"const": true},
+        "candidate_order_count": {"const": 1},
+        "discarded_order_count": {"type": "integer", "minimum": 1}
+      }
+    },
+    "finding": {"type": "string", "minLength": 1},
+    "claim_boundary": {"type": "string", "minLength": 1},
+    "integrity": {
+      "type": "object",
+      "required": ["content_sha256"],
+      "properties": {
+        "content_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

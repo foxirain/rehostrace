@@ -10,6 +10,25 @@
 
 RehostRace is the **Bluetooth rehosting and asynchronous-concurrency research track of GW TakeDown**. This public repository extracts that work into a target-neutral framework for causal capture, offline replay, deterministic lifetime scheduling, and evidence-bounded validation.
 
+## One case: preserving a race before searching it
+
+The public case study begins with two boundary actions that share one session but descend from independent asynchronous branches:
+
+```text
+session.ready
+├─ timeout ───────────────→ disconnect.request  [host.monotonic = 3200]  A
+└─ link-loss IRQ  [device.sequence = 9] ───────→ reset work             B
+```
+
+The values `9` and `3200` belong to unsynchronised clock domains, so comparing them does not establish a happens-before relation. The checked-in ablation computes the consequence instead of treating this as a documentation-only claim:
+
+| Replay input | Relationship retained | Candidate orders entering schedule search | Information discarded |
+| --- | --- | ---: | ---: |
+| Causal DAG | `A ∥ B` | 2 (`A→B`, `B→A`) | 0 |
+| Naive raw timestamp | forces `B→A` from `9 < 3200` | 1 | 1 legal order |
+
+Run `make case-study` to regenerate the hash-bound result at `out/causal_case_study/case-study.json`. This demonstrates search-space preservation, not a vulnerability or product reachability claim; deterministic scheduling and the lifetime oracle operate only after the competing order has survived projection.
+
 RehostRace is an experimental framework for preserving causal relationships while replaying asynchronous component boundaries. It separates six contracts that are often mixed together in rehosting prototypes:
 
 1. a canonical partial-order event trace;
@@ -29,13 +48,17 @@ Python 3.10 or newer is sufficient for the portable reference path:
 make verify
 ```
 
-This runs the unit tests, the generic lifetime pipeline, the seven-slice Bluetooth profile matrix, the deterministic parser-fuzzing fixture, capture-to-replay compilation, CFG lifetime analysis, version differential analysis, a fail-closed release audit, and a reproducible file manifest. Generated evidence is written under `out/` and is not release material.
+This runs the unit tests, the causal-order case study, the generic lifetime pipeline, the seven-slice Bluetooth profile matrix, the deterministic parser-fuzzing fixture, capture-to-replay compilation, CFG lifetime analysis, version differential analysis, a fail-closed release audit, and a reproducible file manifest. Generated evidence is written under `out/` and is not release material.
 
 The package may also be installed locally:
 
 ```bash
 python3 -m pip install -e .
 ```
+
+### Verification scope
+
+Passing `make verify` means that the checked-in public contracts and fixtures completed; it does not mean that every possible adapter, target, or environmental claim was exercised. Dedicated contract suites execute the exported paths in `observer`, `evidence_bridge`, `discovery`, and `bluetooth_composition`, including held-out calibration, evidence and claim binding, a generated minimal AArch64 ELF discovery path, cross-profile composition, deterministic linearization, integrity drift, and fail-closed inputs. The release audit separately checks that the public tree contains no private target material.
 
 ## What is demonstrated
 

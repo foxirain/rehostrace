@@ -1,5 +1,5 @@
 {
-  "file_count": 162,
+  "file_count": 169,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -33,13 +33,13 @@
     },
     {
       "path": "Makefile",
-      "sha256": "58bece52931b78c8a7a43ec199f75f3c579dbf7dcd93ed63a70b2ee80e52efaa",
-      "size": 1120
+      "sha256": "705b4a8d066a5d61a6999283c48c9dbc985296b42127f619c45246fcd050b387",
+      "size": 1197
     },
     {
       "path": "README.md",
-      "sha256": "bc62b73702a024b2ded8c3d689b4c11289b011b4144cf9643ba7363f4ac0a313",
-      "size": 5719
+      "sha256": "f3a7b5aa97215a1cacec767b1e33619748055db93c1ddee040804f10e5e0aa4d",
+      "size": 7614
     },
     {
       "path": "SECURITY.md",
@@ -432,6 +432,11 @@
       "size": 1013
     },
     {
+      "path": "schemas/causal_case_study.schema.json",
+      "sha256": "dd99bcbab2b4fa09ce575613288bc6cca6b7c83babb9630266f9a55152c38615",
+      "size": 2098
+    },
+    {
       "path": "schemas/causal_trace.schema.json",
       "sha256": "5a33d84d73c22ac81cecda776a766124ed1406a5e30f4a38e0f89187df580cf8",
       "size": 5661
@@ -687,6 +692,11 @@
       "size": 2107
     },
     {
+      "path": "tests/test_bluetooth_composition.py",
+      "sha256": "9ee310fd6c56e6d050f8d2088c35e154f319739a74c7c9c31c9444f4879b4b14",
+      "size": 5939
+    },
+    {
       "path": "tests/test_bluetooth_extended_profiles.py",
       "sha256": "d0543f2422ea9ca2dbb143cb3d0e2b3318a64d935036bc34f9506b2cf8ffde65",
       "size": 3632
@@ -722,9 +732,24 @@
       "size": 1356
     },
     {
+      "path": "tests/test_causal_case_study.py",
+      "sha256": "984db62da84411d8b033c865d07100e04f3c28667dbeee76e48e45c6febd3f92",
+      "size": 1459
+    },
+    {
       "path": "tests/test_causal_sdk.py",
       "sha256": "b59564f5a339076a7ab5fb7245d5fba3d9d6cf91837d9ca551893486dfc69155",
       "size": 4281
+    },
+    {
+      "path": "tests/test_discovery_contracts.py",
+      "sha256": "d0005825c621719e54ddd38ad62777707373c65881d6607b2196615cdfe1ddb3",
+      "size": 11577
+    },
+    {
+      "path": "tests/test_evidence_bridge_contracts.py",
+      "sha256": "97f6e217c8a5f86d3f419a18d3a85536a8f68d0e7533be168ab3c383915f5da6",
+      "size": 10615
     },
     {
       "path": "tests/test_fuzz_campaign.py",
@@ -732,9 +757,14 @@
       "size": 1201
     },
     {
+      "path": "tests/test_observer_contracts.py",
+      "sha256": "bfa7c0497d33ffe009f97f202eae1117370c1cc79785df6c64238e1baf14980d",
+      "size": 6584
+    },
+    {
       "path": "tests/test_platform_contracts.py",
-      "sha256": "b68f744af5e6abd3258fa55d4ca367bc3f94243d561d31473fe5341cef957539",
-      "size": 20125
+      "sha256": "2426c30d83cd7061aa0d1cb46b29ecb2f1792e0bc87b4941103c1e800191b254",
+      "size": 20170
     },
     {
       "path": "tests/test_release_audit.py",
@@ -790,6 +820,11 @@
       "path": "tools/run_capture_replay_demo.py",
       "sha256": "443c77725c071dbbffa01033d821997784c6f4bdbda3675ca57abdafce63c6ca",
       "size": 1737
+    },
+    {
+      "path": "tools/run_causal_case_study.py",
+      "sha256": "2d3cdae9bbd13fdb84814a8ba93796e1d0771b8dcffe85dbbafff946c7bd00ce",
+      "size": 5378
     },
     {
       "path": "tools/run_full_bluetooth_platform_demo.py",

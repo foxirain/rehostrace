@@ -471,6 +471,7 @@ class PlatformContractTests(unittest.TestCase):
             "schedule_search.schema.json",
             "replay_ablation.schema.json",
             "replay_ablation_result.schema.json",
+            "causal_case_study.schema.json",
             "lifetime_schedule.schema.json",
             "lifetime_oracle.schema.json",
             "evidence_receipt.schema.json",
