@@ -6,6 +6,7 @@ Included:
 
 - framework source and schemas;
 - synthetic protocol and lifetime fixtures;
+- synthetic allocation-provenance and foreign-owner-free fixtures;
 - intentionally seeded open drivers;
 - portable demos, tests, and release tooling.
 

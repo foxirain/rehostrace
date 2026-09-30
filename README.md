@@ -66,6 +66,8 @@ Passing `make verify` means that the checked-in public contracts and fixtures co
 - capture with explicit actors, resources, clocks, and payload disclosure rules;
 - declarative schedule synthesis and boundary binding;
 - same-object lifetime oracles over public observations;
+- target-owned same-address reclaim, allocation-provenance, read-to-write, and
+  foreign-owner-free oracles with fail-closed missing evidence;
 - exhaustive gate-subset planning and result summarization;
 - stateful Bluetooth host-boundary models for HCI, ACL, L2CAP, AVDTP, SDP, ATT, GATT, SMP, RFCOMM, AVRCP, HFP, A2DP, and LE Audio lifecycle events;
 - a trusted protocol-pack registry: data manifests select only handlers explicitly registered by the application;
@@ -97,7 +99,7 @@ The public fixtures do not establish whole-system fidelity, controller or radio 
 - `tools/` — runnable demos, CLI, release audit, and manifest generator;
 - `tests/` — contract, negative, and end-to-end tests.
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/TARGET_LOWERING.md](docs/TARGET_LOWERING.md), [docs/FULL_BLUETOOTH_ROADMAP.md](docs/FULL_BLUETOOTH_ROADMAP.md), [docs/CLAIM_MODEL.md](docs/CLAIM_MODEL.md), and [docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md) before adapting the framework to a new target.
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/RECLAIM_PROVENANCE.md](docs/RECLAIM_PROVENANCE.md), [docs/TARGET_LOWERING.md](docs/TARGET_LOWERING.md), [docs/FULL_BLUETOOTH_ROADMAP.md](docs/FULL_BLUETOOTH_ROADMAP.md), [docs/CLAIM_MODEL.md](docs/CLAIM_MODEL.md), and [docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md) before adapting the framework to a new target.
 
 ## Research status
 

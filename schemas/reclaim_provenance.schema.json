@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:reclaim-provenance:v1",
+  "title": "RehostRace target-owned reclaim provenance oracle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "oracle_id",
+    "disclosure",
+    "roles",
+    "required_sequence",
+    "provenance",
+    "ownership",
+    "effects",
+    "forbidden_events",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "rehostrace.reclaim-oracle/v1"},
+    "oracle_id": {"$ref": "#/$defs/id"},
+    "disclosure": {
+      "enum": ["public-synthetic", "private-product", "vendor-approved"]
+    },
+    "roles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "original_free",
+        "boundary_input",
+        "replacement_alloc",
+        "stale_read",
+        "list_write",
+        "foreign_free"
+      ],
+      "properties": {
+        "original_free": {"$ref": "#/$defs/id"},
+        "boundary_input": {"$ref": "#/$defs/id"},
+        "replacement_alloc": {"$ref": "#/$defs/id"},
+        "stale_read": {"$ref": "#/$defs/id"},
+        "list_write": {"$ref": "#/$defs/id"},
+        "foreign_free": {"$ref": "#/$defs/id"},
+        "post_free_alias": {"$ref": "#/$defs/id"}
+      }
+    },
+    "required_sequence": {
+      "oneOf": [
+        {
+          "prefixItems": [
+            {"const": "original_free"},
+            {"const": "boundary_input"},
+            {"const": "replacement_alloc"},
+            {"const": "stale_read"},
+            {"const": "list_write"},
+            {"const": "foreign_free"}
+          ],
+          "items": false,
+          "minItems": 6,
+          "maxItems": 6
+        },
+        {
+          "prefixItems": [
+            {"const": "original_free"},
+            {"const": "boundary_input"},
+            {"const": "replacement_alloc"},
+            {"const": "stale_read"},
+            {"const": "list_write"},
+            {"const": "foreign_free"},
+            {"const": "post_free_alias"}
+          ],
+          "items": false,
+          "minItems": 7,
+          "maxItems": 7
+        }
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "replacement_producer",
+        "forbidden_producers",
+        "origin_event",
+        "origin_operation",
+        "size_class",
+        "allocation_callsite"
+      ],
+      "properties": {
+        "replacement_producer": {"$ref": "#/$defs/id"},
+        "forbidden_producers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/id"}
+        },
+        "origin_event": {"$ref": "#/$defs/id"},
+        "origin_operation": {"$ref": "#/$defs/id"},
+        "size_class": {"type": "integer", "minimum": 1},
+        "allocation_callsite": {"$ref": "#/$defs/id"}
+      }
+    },
+    "ownership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["original_owner", "replacement_owner", "stale_actor"],
+      "properties": {
+        "original_owner": {"$ref": "#/$defs/id"},
+        "replacement_owner": {"$ref": "#/$defs/id"},
+        "stale_actor": {"$ref": "#/$defs/id"}
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stale_read_offset", "list_write_target", "value_relation"],
+      "properties": {
+        "stale_read_offset": {"type": "integer", "minimum": 0},
+        "list_write_target": {"$ref": "#/$defs/id"},
+        "value_relation": {"const": "read-to-write"}
+      }
+    },
+    "forbidden_events": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/id"}
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"
+    }
+  }
+}

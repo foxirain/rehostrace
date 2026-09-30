@@ -17,3 +17,11 @@ Every evidence receipt contains:
 - a prose `claim_boundary` for readers.
 
 Missing evidence must produce `inconclusive`, `not-run`, or `not-applicable`; it must not be converted to a pass. If instrumentation changes timing or scheduling, record that observer effect as a fidelity limitation or a separately measured calibration.
+
+`finding.same-object-lifetime` states that the named sinks shared an object
+identity under the bound execution. `mechanism.allocation-provenance` additionally
+states that the declared input, producer, allocation site, size class, and object
+generation were observed. `finding.foreign-owner-free` additionally states that
+a stale actor freed the replacement owner's generation. None of these claims
+alone establish stock reachability, harmful consequence, exploitability, or code
+execution.

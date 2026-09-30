@@ -1,0 +1,44 @@
+{
+  "schema_version": "rehostrace.reclaim-oracle/v1",
+  "oracle_id": "public.target-owned-reclaim.v1",
+  "disclosure": "public-synthetic",
+  "roles": {
+    "original_free": "obs.original-free",
+    "boundary_input": "obs.reclaim-request",
+    "replacement_alloc": "obs.replacement-alloc",
+    "stale_read": "obs.stale-read",
+    "list_write": "obs.list-write",
+    "foreign_free": "obs.foreign-free",
+    "post_free_alias": "obs.post-free-alias"
+  },
+  "required_sequence": [
+    "original_free",
+    "boundary_input",
+    "replacement_alloc",
+    "stale_read",
+    "list_write",
+    "foreign_free",
+    "post_free_alias"
+  ],
+  "provenance": {
+    "replacement_producer": "target",
+    "forbidden_producers": ["controller"],
+    "origin_event": "event.reclaim-request",
+    "origin_operation": "session.allocate",
+    "size_class": 128,
+    "allocation_callsite": "target.find-or-create"
+  },
+  "ownership": {
+    "original_owner": "session.original",
+    "replacement_owner": "session.replacement",
+    "stale_actor": "path.stale"
+  },
+  "effects": {
+    "stale_read_offset": 112,
+    "list_write_target": "target.global-list-link",
+    "value_relation": "read-to-write"
+  },
+  "forbidden_events": ["controller.direct-allocation"],
+  "claim_boundary": "A positive result demonstrates target-owned same-address reuse and a foreign-owner free only for the bound synthetic observations."
+}
+

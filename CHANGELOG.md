@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0 — 2026-10-01
+
+- Add a fail-closed target-owned reclaim oracle that distinguishes address reuse from object generation and allocation provenance.
+- Bind boundary input, target producer, allocation callsite, size class, stale read, read-to-write propagation, replacement ownership, and foreign-owner free in one evidence contract.
+- Add an optional post-free alias check, public synthetic fixture, CLI command, reproducible demo, receipt claim classes, JSON schema, and negative tests.
+- Preserve opaque address tokens and explicit non-claims for product reachability, harmful stock consequences, exploitability, and code execution.
+
 ## 0.3.0 — 2026-09-26
 
 - Add fail-closed lowering from normalized lifetime candidates and detailed schedules to hash-bound target controller plans.

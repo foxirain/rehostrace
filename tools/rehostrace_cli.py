@@ -26,6 +26,7 @@ from rehostrace import (  # noqa: E402
     compile_target_controller,
     default_bluetooth_registrations,
     evaluate_oracle,
+    evaluate_reclaim_oracle,
     plan_exhaustive_search,
     render_c_header,
     render_target_controller_header,
@@ -135,6 +136,11 @@ def main() -> int:
     oracle_parser.add_argument("oracle", type=Path)
     oracle_parser.add_argument("observations", type=Path)
     oracle_parser.add_argument("--output", type=Path)
+
+    reclaim_parser = subparsers.add_parser("evaluate-reclaim")
+    reclaim_parser.add_argument("oracle", type=Path)
+    reclaim_parser.add_argument("observations", type=Path)
+    reclaim_parser.add_argument("--output", type=Path)
 
     receipt_parser = subparsers.add_parser("validate-receipt")
     receipt_parser.add_argument("receipt", type=Path)
@@ -304,6 +310,11 @@ def main() -> int:
         )
     elif args.command == "evaluate-oracle":
         write_json(args.output, evaluate_oracle(load_json(args.oracle), load_jsonl(args.observations)))
+    elif args.command == "evaluate-reclaim":
+        write_json(
+            args.output,
+            evaluate_reclaim_oracle(load_json(args.oracle), load_jsonl(args.observations)),
+        )
     elif args.command == "validate-receipt":
         write_json(None, validate_receipt(load_json(args.receipt)))
     elif args.command == "verify-receipt":

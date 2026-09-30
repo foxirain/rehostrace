@@ -23,6 +23,13 @@ A binding maps selected boundary events to adapter actions and is hash-bound to 
 
 Replay accepts only a valid linear extension of the causal graph. Adapters implement boundary semantics and maintain state. Oracles consume observations and distinguish positive, negative, and inconclusive results. A lifetime claim requires identity equality at the relevant sinks, not merely two similar log lines.
 
+The allocation-provenance oracle extends that identity contract across object
+generations. It binds a boundary input to a replacement allocation by a declared
+producer and callsite, then checks that a stale actor reads, propagates a value,
+and frees the new owner's object. This prevents a controller-created replacement
+from being reported as target-owned reuse. See
+[RECLAIM_PROVENANCE.md](RECLAIM_PROVENANCE.md).
+
 ## Evidence receipt
 
 A receipt hashes inputs, records the executor and event order, embeds oracle results, labels fidelity dimensions, and lists which claims may or may not transfer. Receipts are evidence envelopes, not automatic proof that two environments are equivalent.

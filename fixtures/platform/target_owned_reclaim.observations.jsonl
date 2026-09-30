@@ -1,0 +1,8 @@
+{"id":"obs.original-free","type":"lifetime.free","sequence":10,"object":"slot.07","generation":"gen.original","actor":"path.winner","owner":"session.original"}
+{"id":"obs.reclaim-request","type":"boundary.input","sequence":20,"event_id":"event.reclaim-request","operation":"session.allocate","actor":"peer.synthetic"}
+{"id":"obs.replacement-alloc","type":"lifetime.alloc","sequence":30,"object":"slot.07","generation":"gen.replacement","actor":"target.allocator","owner":"session.replacement","producer":"target","origin_event":"event.reclaim-request","origin_operation":"session.allocate","size_class":128,"callsite":"target.find-or-create"}
+{"id":"obs.stale-read","type":"memory.read","sequence":40,"object":"slot.07","generation":"gen.replacement","actor":"path.stale","owner":"session.replacement","offset":112,"value":"pointer.safe-next"}
+{"id":"obs.list-write","type":"memory.write","sequence":50,"actor":"path.stale","target":"target.global-list-link","value":"pointer.safe-next","source_observation":"obs.stale-read"}
+{"id":"obs.foreign-free","type":"lifetime.free","sequence":60,"object":"slot.07","generation":"gen.replacement","actor":"path.stale","owner":"session.replacement"}
+{"id":"obs.post-free-alias","type":"lifetime.alloc","sequence":70,"object":"slot.07","generation":"gen.alias","actor":"target.allocator","owner":"session.alias","producer":"target","origin_event":"event.alias-request","origin_operation":"session.allocate","size_class":128,"callsite":"target.find-or-create"}
+

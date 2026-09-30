@@ -73,6 +73,7 @@ from .observer import (
 )
 from .oracle import evaluate_oracle, validate_oracle
 from .receipt import build_receipt, validate_receipt, verify_receipt_artifacts
+from .reclaim import evaluate_reclaim_oracle, validate_reclaim_oracle
 from .replay import RecordingAdapter, ReplayEngine, ReplayError
 from .schedule import compile_schedule, render_c_header, validate_schedule
 from .search import (
@@ -128,6 +129,7 @@ __all__ = [
     "default_bluetooth_registrations",
     "discover_lifetime_candidates",
     "evaluate_oracle",
+    "evaluate_reclaim_oracle",
     "gate_key",
     "generate_bluetooth_linearizations",
     "linearization_pair_coverage",
@@ -163,6 +165,7 @@ __all__ = [
     "validate_profile_catalog",
     "validate_protocol_pack",
     "validate_receipt",
+    "validate_reclaim_oracle",
     "validate_schedule",
     "validate_search_manifest",
     "validate_trace",
