@@ -62,3 +62,38 @@ or code execution.
 Target integrations should keep private offsets, binaries, traces, and schedules
 outside the public framework. They can use the same schema and SDK while binding
 their own evidence under an appropriate disclosure class.
+
+## Repeated campaigns
+
+A single positive run establishes one witnessed causal chain; it does not show
+repeatability or distinguish contradictions from missing evidence. The
+`rehostrace.oracle-campaign/v1` policy aggregates repeated oracle results while
+keeping all three verdicts separate:
+
+- `positive` — every required check is present and true;
+- `negative` — complete evidence contradicts at least one check;
+- `inconclusive` — required evidence is absent or malformed.
+
+The aggregator also requires a stable set of declared artifact digests, rejects
+duplicate run identities and undeclared outcome tags, reports Wilson 95%
+uncertainty for the positive proportion, and can summarize a target-neutral
+effort metric such as allocation attempts. Artifact drift is a hard failure;
+missing runs or an unmet positive threshold are inconclusive.
+
+Run the synthetic five-trial fixture with:
+
+```bash
+make campaign-demo
+```
+
+or use the CLI directly:
+
+```bash
+python3 tools/rehostrace_cli.py summarize-oracle-campaign \
+  fixtures/platform/target_owned_reclaim.campaign.json \
+  fixtures/platform/target_owned_reclaim.campaign.runs.jsonl
+```
+
+The reported confidence interval characterizes only the declared experiment.
+It must not be transferred to natural device timing, remote reliability, or
+exploitability unless a separate evidence policy justifies that transfer.

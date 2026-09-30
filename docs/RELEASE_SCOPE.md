@@ -7,6 +7,7 @@ Included:
 - framework source and schemas;
 - synthetic protocol and lifetime fixtures;
 - synthetic allocation-provenance and foreign-owner-free fixtures;
+- synthetic repeated-oracle campaign policies, trials, and uncertainty output;
 - intentionally seeded open drivers;
 - portable demos, tests, and release tooling.
 

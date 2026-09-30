@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rehostrace:schema:oracle-campaign:v1",
+  "title": "RehostRace repeated oracle campaign policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "campaign_id",
+    "oracle_id",
+    "expected_runs",
+    "minimum_positive_runs",
+    "required_artifacts",
+    "allowed_tags",
+    "effort_metric",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "rehostrace.oracle-campaign/v1"},
+    "campaign_id": {"$ref": "#/$defs/id"},
+    "oracle_id": {"$ref": "#/$defs/id"},
+    "expected_runs": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000000
+    },
+    "minimum_positive_runs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "required_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/id"}
+    },
+    "allowed_tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/id"}
+    },
+    "effort_metric": {
+      "oneOf": [
+        {"$ref": "#/$defs/id"},
+        {"type": "null"}
+      ]
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "rehostrace.oracle-campaign/v1",
+  "campaign_id": "public.target-owned-reclaim.campaign.v1",
+  "oracle_id": "public.target-owned-reclaim.v1",
+  "expected_runs": 5,
+  "minimum_positive_runs": 1,
+  "required_artifacts": [
+    "target",
+    "boundary-adapter",
+    "controller"
+  ],
+  "allowed_tags": [
+    "outcome.target-owned",
+    "outcome.contradiction",
+    "outcome.bounded-exhaustion"
+  ],
+  "effort_metric": "allocation-attempts",
+  "claim_boundary": "The synthetic campaign demonstrates fail-closed aggregation, stable artifact identity, and uncertainty reporting. It does not establish product reachability, a vulnerability, or exploitability."
+}

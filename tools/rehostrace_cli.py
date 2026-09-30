@@ -35,6 +35,7 @@ from rehostrace import (  # noqa: E402
     synthesize_schedule,
     synthesize_lifetime_schedules,
     summarize_search,
+    summarize_oracle_campaign,
     validate_receipt,
     validate_trace,
     verify_receipt_artifacts,
@@ -141,6 +142,11 @@ def main() -> int:
     reclaim_parser.add_argument("oracle", type=Path)
     reclaim_parser.add_argument("observations", type=Path)
     reclaim_parser.add_argument("--output", type=Path)
+
+    campaign_parser = subparsers.add_parser("summarize-oracle-campaign")
+    campaign_parser.add_argument("policy", type=Path)
+    campaign_parser.add_argument("trials", type=Path)
+    campaign_parser.add_argument("--output", type=Path)
 
     receipt_parser = subparsers.add_parser("validate-receipt")
     receipt_parser.add_argument("receipt", type=Path)
@@ -314,6 +320,11 @@ def main() -> int:
         write_json(
             args.output,
             evaluate_reclaim_oracle(load_json(args.oracle), load_jsonl(args.observations)),
+        )
+    elif args.command == "summarize-oracle-campaign":
+        write_json(
+            args.output,
+            summarize_oracle_campaign(load_json(args.policy), load_jsonl(args.trials)),
         )
     elif args.command == "validate-receipt":
         write_json(None, validate_receipt(load_json(args.receipt)))

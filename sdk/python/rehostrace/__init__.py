@@ -44,6 +44,11 @@ from .bluetooth_profiles import (
 from .bluetooth_registry import BluetoothPackRegistry, built_in_bluetooth_registry
 from .capture import CaptureSession
 from .capture_bundle import compile_capture_bundle, validate_capture_bundle
+from .campaign import (
+    summarize_oracle_campaign,
+    validate_oracle_campaign_policy,
+    wilson_interval,
+)
 from .cfg import analyze_lifetime_cfg, synthesize_lifetime_schedules, validate_binary_cfg
 from .differential import compare_target_manifests, validate_target_manifest
 from .discovery import (
@@ -146,6 +151,7 @@ __all__ = [
     "render_c_header",
     "render_target_controller_header",
     "summarize_search",
+    "summarize_oracle_campaign",
     "synthesize_schedule",
     "synthesize_lifetime_schedules",
     "validate_binding",
@@ -161,6 +167,7 @@ __all__ = [
     "validate_harness_plan",
     "validate_observer_calibration",
     "validate_observer_calibration_policy",
+    "validate_oracle_campaign_policy",
     "validate_oracle",
     "validate_profile_catalog",
     "validate_protocol_pack",
@@ -172,4 +179,5 @@ __all__ = [
     "validate_target_manifest",
     "validate_target_lowering",
     "verify_receipt_artifacts",
+    "wilson_interval",
 ]

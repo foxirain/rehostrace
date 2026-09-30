@@ -25,3 +25,8 @@ generation were observed. `finding.foreign-owner-free` additionally states that
 a stale actor freed the replacement owner's generation. None of these claims
 alone establish stock reachability, harmful consequence, exploitability, or code
 execution.
+
+An `oracle-campaign` result adds repeatability and uncertainty evidence for the
+same declared experiment. A stable positive proportion is not a device trigger
+probability unless the campaign policy and a separate transfer argument bind
+the tested scheduler, inputs, artifacts, and environment to that device claim.

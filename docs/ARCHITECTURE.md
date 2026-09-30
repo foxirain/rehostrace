@@ -30,6 +30,12 @@ and frees the new owner's object. This prevents a controller-created replacement
 from being reported as target-owned reuse. See
 [RECLAIM_PROVENANCE.md](RECLAIM_PROVENANCE.md).
 
+Repeated oracle executions pass through a separate campaign contract. It keeps
+positive, negative, and inconclusive outcomes distinct, binds every run to the
+same declared artifact identities, and reports uncertainty plus effort
+distributions. Campaign statistics describe only the bound experiment; they do
+not promote mechanism evidence into target reachability or impact.
+
 ## Evidence receipt
 
 A receipt hashes inputs, records the executor and event order, embeds oracle results, labels fidelity dimensions, and lists which claims may or may not transfer. Receipts are evidence envelopes, not automatic proof that two environments are equivalent.

@@ -68,6 +68,9 @@ Passing `make verify` means that the checked-in public contracts and fixtures co
 - same-object lifetime oracles over public observations;
 - target-owned same-address reclaim, allocation-provenance, read-to-write, and
   foreign-owner-free oracles with fail-closed missing evidence;
+- repeated-oracle campaign aggregation that preserves positive, negative, and
+  inconclusive outcomes, enforces artifact identity, and reports Wilson 95%
+  uncertainty without transferring it beyond the experiment;
 - exhaustive gate-subset planning and result summarization;
 - stateful Bluetooth host-boundary models for HCI, ACL, L2CAP, AVDTP, SDP, ATT, GATT, SMP, RFCOMM, AVRCP, HFP, A2DP, and LE Audio lifecycle events;
 - a trusted protocol-pack registry: data manifests select only handlers explicitly registered by the application;

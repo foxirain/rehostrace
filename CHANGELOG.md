@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 — 2026-10-01
+
+- Add a generic repeated-oracle campaign policy and SDK aggregator that preserves positive, negative, and inconclusive outcomes.
+- Fail closed on duplicate runs, contradictory positive results, undeclared tags, invalid digests, excess trials, and artifact-identity drift.
+- Report Wilson 95% uncertainty, stable artifact variants, declared outcome tags, and all-run versus positive-run effort distributions.
+- Add a public five-run target-owned-reclaim campaign fixture, CLI command, one-command demo, JSON schema, documentation, and negative tests.
+- Keep campaign statistics bounded to the declared experiment and explicitly forbid silent transfer to device reachability, natural race probability, or exploitability.
+
 ## 0.4.0 — 2026-10-01
 
 - Add a fail-closed target-owned reclaim oracle that distinguishes address reuse from object generation and allocation provenance.
